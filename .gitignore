@@ -2,27 +2,69 @@
 *.slo
 *.lo
 *.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
 
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
-
-# Fortran module files
-*.mod
 
 # Compiled Static libraries
 *.lai
 *.la
 *.a
-*.lib
 
-# Executables
-*.exe
-*.out
-*.app
+*.*.swp
+CMakeFiles/
+CMakeFiles/*
+build/
+bulid/*
+src/.deps/*
+src/.deps/
+src/**/.deps/
+src/**/.libs/
+autom4te.cache/*
+autom4te.cache/
+build-aux/*
+build-aux/
+src/.deps/*
+src/.deps/
+src/.libs/*
+src/.libs/
+src/threadsyncocl/.deps/*
+src/threadsyncocl/.deps/
+src/bin/tsyncocl
+src/ocl/Makefile
+src/thread/Makefile
+Makefile
+Makefile.in
+aclocal.m4
+config.h
+config.h.in
+config.log
+config.status
+configure
+libtool
+stamp-h1
+!*.cpp
+!*.hpp
+!*.am
+!*.ac
+!*.sh
+log/*
+log/logger_main.log
+log/
+src/rules/.deps/*
+src/rules/.deps/
+tmp/
+tmp/*
+*.cpp~
+*.hpp~
+*.Po
+src/test/.deps/*
+src/test/.deps/
+src/test/test_suite
+
+/src/internet/test_server/test_server
+/src/internet/test_client/test_client
+/src/internet/test_security/test_security
+
+/src/bin/tracethreat_mat
