@@ -29,11 +29,6 @@ src/.deps/*
 src/.deps/
 src/.libs/*
 src/.libs/
-src/threadsyncocl/.deps/*
-src/threadsyncocl/.deps/
-src/bin/tsyncocl
-src/ocl/Makefile
-src/thread/Makefile
 Makefile
 Makefile.in
 aclocal.m4
@@ -49,22 +44,17 @@ stamp-h1
 !*.am
 !*.ac
 !*.sh
-log/*
-log/logger_main.log
-log/
-src/rules/.deps/*
-src/rules/.deps/
 tmp/
 tmp/*
 *.cpp~
 *.hpp~
 *.Po
-src/test/.deps/*
-src/test/.deps/
-src/test/test_suite
 
-/src/internet/test_server/test_server
-/src/internet/test_client/test_client
-/src/internet/test_security/test_security
+m4/
+m4/*
 
-/src/bin/tracethreat_mat
+bin/tracethreat_nrml
+
+src/services/test_service
+
+
