@@ -57,4 +57,10 @@ bin/tracethreat_nrml
 
 src/services/test_service
 
+NEWS
+ltmain.sh
+install-sh
+depcomp
+configure
+config.log
 
