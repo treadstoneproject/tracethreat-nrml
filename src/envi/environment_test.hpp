@@ -27,16 +27,16 @@ class SystemTestingEnvironment : public testing::Environment
 {
 
 
-    public:
+public:
 
-        explicit SystemTestingEnvironment(int argc, char **argv) {
+	explicit SystemTestingEnvironment(int argc, char **argv) {
 
-            //intial log path write file for test case.
-						gflags::ParseCommandLineFlags(&argc, &argv, true);
+		//intial log path write file for test case.
+		gflags::ParseCommandLineFlags(&argc, &argv, true);
 
-						LOG(INFO)<<"Initial log file : "<< utils::loggingPath();
-					   
-        }//explicit SystemTestingEnvironment
+		LOG(INFO)<<"Initial log file : "<< utils::loggingPath();
+
+	}//explicit SystemTestingEnvironment
 
 
 };

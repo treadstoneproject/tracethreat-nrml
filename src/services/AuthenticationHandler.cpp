@@ -18,6 +18,7 @@
 /*  Titles			                                          Authors	         Date
  * - Login from webapplication user                       R.Chatsiri       18/07/2015
  */
+//#define GLOG_NO_ABBREVIATED_SEVERITIES
 
 #include "glog/logging.h"
 
@@ -27,45 +28,46 @@ namespace services
 {
 
 
-    /**
-    * @brief Ping data from client. (Certificate information ID)
-    *
-    * @param genNum Certificate Information ID
-    *
-    * @return True, If data correct in system.
-    */
-    bool AuthenticationHandler::pingActive(const int32_t genNum)
-    {
+	/**
+	* @brief Ping data from client. (Certificate information ID)
+	*
+	* @param genNum Certificate Information ID
+	*
+	* @return True, If data correct in system.
+	*/
+	bool AuthenticationHandler::pingActive(const int32_t genNum)
+	{
 
-			LOG(INFO)<<"Ping active service.";
+		LOG(INFO) << "Ping active service.";
+		return true;
 
-    }//pingActive
+	}//pingActive
 
-    /**
-    * @brief Login with User struct of Thrift-DL
-    *
-    * @param user
-    *
-    * @return
-    */
-    bool AuthenticationHandler::login(const authentication::User& user)
-    {
+	/**
+	* @brief Login with User struct of Thrift-DL
+	*
+	* @param user
+	*
+	* @return
+	*/
+	bool AuthenticationHandler::login(const authentication::User& user)
+	{
+	   LOG(INFO) << "Login user start service...";
+		return true;
+	}//login
 
-
-    }//login
-
-    /**
-    * @brief Logout from server.
-    *
-    * @param user
-    *
-    * @return
-    */
-    bool AuthenticationHandler::logout(const authentication::User& user)
-    {
-
-
-    }//logout
+	/**
+	* @brief Logout from server.
+	*
+	* @param user
+	*
+	* @return
+	*/
+	bool AuthenticationHandler::logout(const authentication::User& user)
+	{
+		LOG(INFO) << "Logout user service...";
+		return true;
+	}//logout
 
 
 
