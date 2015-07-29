@@ -1,5 +1,5 @@
-#ifndef CONNECTOR_ROCKSDB_CONNECTOR
-#define CONNECTOR_ROCKSDB_CONNECTOR
+#ifndef CONNECTOR_ROCKSDBCONNECTOR_HPP
+#define CONNECTOR_ROCKSDBCONNECTOR_HPP
 
 /*
 * Copyright 2014 Chatsiri Rattana.
@@ -25,23 +25,35 @@
 #include <rocksdb/slice.h>
 #include <rocksdb/options.h>
 
+
+using namespace rocksdb;
+
 namespace connector
 {
 
-    class RocksDBConnector
-    {
+	class RocksDBConnector
+	{
 
-        public:
+	public:
 
-            bool kDBPath(const char *path);
+		RocksDBConnector(){ }
+		 
+		bool kDBPath(const char *path); 
+		
+		rocksdb::Status  RocksDBConnector::connection();
+		 
+		rocksdb::Options & RocksDBConnector::option();
 
-            bool connection(rocks::Options& options);
+		rocksdb::DB *getDB();
+		
 
-        private:
-
-            const char *path;
-
-    };
+	private:  
+		
+		rocksdb::DB* db;
+		rocksdb::Options options;
+		rocksdb::Status status;
+		const char *path_;
+	};
 
 }
 

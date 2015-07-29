@@ -1,29 +1,41 @@
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
+#include "gflags/gflags.h"
+#include "utils/Flags.hpp"
+#include "connector/RocksDBConnector.hpp"
 
-
-class RocksDBConnectTest : public ::testing::test
+class RocksDBConnectTest : public ::testing::Test
 {
 
 
-    public:
+protected:
 
+	virtual void SetUp(){
+		dbPath = &utils::rocksDBPath();
 
-		protected:
-	
-			virtual void SetUp(){
+	}
 
-			dbPath = rocksDBPath();
-
-
-			}
-
-			const std::string * dbPath;
-	
+	const std::string * dbPath;
+	connector::RocksDBConnector rocksdbConnector;
 };
 
 
 TEST_F(RocksDBConnectTest, connectionCheck){
 
-	utils::RocksDBConnector rocksdbConnector;	
+
+	EXPECT_EQ(rocksdbConnector.kDBPath(dbPath->c_str()), true);
+
+	rocksdbConnector.option();
+	rocksdb::Status status = rocksdbConnector.connection();
+	EXPECT_EQ(status.ok(), true);
+
+	// Put key-value
+	rocksdb::DB * db = rocksdbConnector.getDB();
+	status = db->Put(WriteOptions(), "key1", "value");
+	EXPECT_EQ(status.ok(), true);
+	std::string value;
+	// get value
+	status = db->Get(ReadOptions(), "key1", &value);
+	EXPECT_EQ(status.ok(), true);
+	EXPECT_EQ(value, "value");
 
 }

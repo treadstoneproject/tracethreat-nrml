@@ -6,13 +6,13 @@
 namespace utils
 {
 
-    DECLARE_string(nrml_rocksdbpath);
+	DECLARE_string(nrml_rocksdbpath);
 
-		DECLARE_string(nrml_loggingpath);
+	DECLARE_string(nrml_loggingpath);
 
-    const std::string& rocksDBPath();
+	const std::string& rocksDBPath();
 
-		const std::string& loggingPath();
+	const std::string& loggingPath();
 
 }
 
