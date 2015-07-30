@@ -22,6 +22,8 @@
 
 #include <glog/logging.h>
 
+#include "utils/flags.hpp"
+
 #include "services/AuthenticationHandler.hpp"
 
 namespace services
@@ -36,9 +38,9 @@ namespace services
 	* @return True, If data correct in system.
 	*/
 	bool AuthenticationHandler::pingActive(const int32_t genNum)
-	{
-
+	{ 
 		LOG(INFO) << "Ping active service.";
+
 		return true;
 
 	}//pingActive
@@ -53,7 +55,36 @@ namespace services
 	bool AuthenticationHandler::login(const authentication::User& user)
 	{
 	   LOG(INFO) << "Login user start service...";
-		return true;
+
+	   //Get path
+	   dbPath = utils::rocksDBPath();
+	   if (dbPath.empty())
+		   return false;
+
+	   rocksdbConnector.kDBPath(dbPath.c_str());
+
+	   //Set simple options.
+	   rocksdbConnector.option();
+	   rocksdb::Status status = rocksdbConnector.connection();
+
+	   if (!status.ok()){
+		   LOG(INFO) << " Login cannot connection to database";
+		   return false;
+	   } 
+
+	   rocksdb::DB * db = rocksdbConnector.getDB();
+	   std::string userName;
+	   std::string password;
+
+	   // get user & pwd.
+	   status = db->Get(ReadOptions(), std::string("user-authen-").append(user.userName), &userName);
+
+	   status = db->Get(ReadOptions(), std::string("pwd-authen-").append(user.password), &password);
+	  
+	   if (user.userName.compare(userName) || user.password.compare(password))
+		   return true;
+	    
+		return false;
 	}//login
 
 	/**
@@ -68,7 +99,6 @@ namespace services
 		LOG(INFO) << "Logout user service...";
 		return true;
 	}//logout
-
-
+	 
 
 }

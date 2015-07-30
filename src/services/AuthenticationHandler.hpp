@@ -22,25 +22,32 @@
 
 #include "msg/gen-cpp/Authentication.h"
 
+#include "connector/RocksDBConnector.hpp"
+
 namespace services
 {
 
-    class AuthenticationHandler : public authentication::AuthenticationIf
-    {
+	class AuthenticationHandler : public authentication::AuthenticationIf
+	{
 
-        public:
-						
-						AuthenticationHandler(){ }
+	public:
 
-            bool pingActive(const int32_t genNum);
+		AuthenticationHandler(){ 
+		
+		} 
 
-            bool login(const authentication::User& user);
+		bool pingActive(const int32_t genNum);
 
-            bool logout(const authentication::User& user);
+		bool login(const authentication::User& user);
 
-        private:
-            const authentication::User *user;
-    };
+		bool logout(const authentication::User& user);
+
+	private:
+		const authentication::User *user;
+
+		std::string   dbPath; 
+		connector::RocksDBConnector rocksdbConnector;
+	};
 
 }
 
