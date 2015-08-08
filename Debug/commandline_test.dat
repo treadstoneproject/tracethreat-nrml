@@ -1,2 +1,0 @@
-$command = '.\test_core.exe  --nrml_loggingpath=E:\workspacecpp\tracethreat-nrml\log  --nrml_rocksdbpath=E:\workspacecpp\tracethreat-nrml\db'
-& $command
