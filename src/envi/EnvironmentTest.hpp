@@ -1,6 +1,3 @@
-#ifndef CONNECTOR_ROCKSDBCONNECTOR_HPP
-#define CONNECTOR_ROCKSDBCONNECTOR_HPP
-
 /*
 * Copyright 2014 Chatsiri Rattana.
 *
@@ -18,43 +15,31 @@
 */
 
 /*  Titles			                                          Authors	         Date
- * - Support rocksDB                                      R.Chatsiri
+ * -Support all test case.
  */
 
-#include <rocksdb/db.h>
-#include <rocksdb/slice.h>
-#include <rocksdb/options.h>
+#include "glog/logging.h"
 
+#include "utils/flags.hpp"
 
-using namespace rocksdb;
+#include "connector/RocksDBConnector.hpp"
 
-namespace connector
+class SystemTestingEnvironment : public testing::Environment
 {
 
-	class RocksDBConnector
-	{
 
-	public:
+public:
 
-		RocksDBConnector(){ }
-		 
-		bool kDBPath(const char *path); 
-		
-		//rocksdb::Status  RocksDBConnector::connection();
-		 
-		//rocksdb::Options & RocksDBConnector::option();
+	explicit SystemTestingEnvironment(int argc, char **argv) {
 
-		//rocksdb::DB *getDB();
-		
+		//intial log path write file for test case.
+		gflags::ParseCommandLineFlags(&argc, &argv, true);
 
-	private:  
-		
-		rocksdb::DB* db;
-		rocksdb::Options options;
-		rocksdb::Status status;
-		const char *path_;
-	};
+		LOG(INFO)<<"Initial log file : "<< utils::loggingPath();  
 
-}
+		LOG(INFO)<< "Initial db path : "<< utils::rocksDBPath(); 
 
-#endif /* CONNECTOR_ROCKSDB_CONNECTOR */
+	}//explicit SystemTestingEnvironment
+
+
+};

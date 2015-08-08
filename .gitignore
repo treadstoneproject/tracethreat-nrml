@@ -63,4 +63,15 @@ install-sh
 depcomp
 configure
 config.log
-
+log/
+log/*
+db/
+db/*
+tracethreat-nrml.sdf
+*.sdf
+Debug/
+Debug/*
+/tracethreat-nrml/Debug/
+/tracethreat-nrml/Debug/*
+test_core/Debug/
+test_core/Debug/*
