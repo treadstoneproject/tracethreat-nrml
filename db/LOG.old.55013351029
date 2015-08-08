@@ -1,0 +1,55 @@
+2015/08/08-15:23:20.887720 3334 [WARN] RocksDB version: 3.13.0
+2015/08/08-15:23:20.887720 3334 [WARN] Git sha rocksdb_build_git_sha:6a82fba75f39f53b58c52ed3971d90a9bce7bd37
+2015/08/08-15:23:20.887720 3334 [WARN] Compile date Jul 29 2015
+2015/08/08-15:23:20.887720 3334 [WARN] DB SUMMARY
+2015/08/08-15:23:20.895720 3334 [WARN] CURRENT file:  CURRENT
+2015/08/08-15:23:20.895720 3334 [WARN] IDENTITY file:  IDENTITY
+2015/08/08-15:23:20.895720 3334 [WARN] MANIFEST file:  MANIFEST-000209 size: 200 Bytes
+2015/08/08-15:23:20.895720 3334 [WARN] SST files in E:\workspacecpp\tracethreat-nrml\db dir, Total Num: 3, files: 000004.sst 000007.sst 000010.sst 
+2015/08/08-15:23:20.895720 3334 [WARN] Write Ahead Log file in E:\workspacecpp\tracethreat-nrml\db: 000210.log size: 0 ; 
+2015/08/08-15:23:20.895720 3334 [WARN]          Options.error_if_exists: 0
+2015/08/08-15:23:20.895720 3334 [WARN]        Options.create_if_missing: 1
+2015/08/08-15:23:20.895720 3334 [WARN]          Options.paranoid_checks: 1
+2015/08/08-15:23:20.895720 3334 [WARN]                      Options.env: 005D34A0
+2015/08/08-15:23:20.895720 3334 [WARN]                 Options.info_log: 005FB618
+2015/08/08-15:23:20.895720 3334 [WARN]           Options.max_open_files: 5000
+2015/08/08-15:23:20.895720 3334 [WARN]       Options.max_total_wal_size: 0
+2015/08/08-15:23:20.895720 3334 [WARN]        Options.disableDataSync: 0
+2015/08/08-15:23:20.895720 3334 [WARN]              Options.use_fsync: 0
+2015/08/08-15:23:20.895720 3334 [WARN]      Options.max_log_file_size: 0
+2015/08/08-15:23:20.895720 3334 [WARN] Options.max_manifest_file_size: 18446744073709551615
+2015/08/08-15:23:20.895720 3334 [WARN]      Options.log_file_time_to_roll: 0
+2015/08/08-15:23:20.895720 3334 [WARN]      Options.keep_log_file_num: 1000
+2015/08/08-15:23:20.895720 3334 [WARN]        Options.allow_os_buffer: 1
+2015/08/08-15:23:20.895720 3334 [WARN]       Options.allow_mmap_reads: 0
+2015/08/08-15:23:20.895720 3334 [WARN]      Options.allow_mmap_writes: 0
+2015/08/08-15:23:20.895720 3334 [WARN]          Options.create_missing_column_families: 0
+2015/08/08-15:23:20.895720 3334 [WARN]                              Options.db_log_dir: 
+2015/08/08-15:23:20.895720 3334 [WARN]                                 Options.wal_dir: E:\workspacecpp\tracethreat-nrml\db
+2015/08/08-15:23:20.895720 3334 [WARN]                Options.table_cache_numshardbits: 4
+2015/08/08-15:23:20.895720 3334 [WARN]     Options.delete_obsolete_files_period_micros: 125163520
+2015/08/08-15:23:20.895720 3334 [WARN]              Options.max_background_compactions: 1
+2015/08/08-15:23:20.895720 3334 [WARN]                  Options.max_background_flushes: 1
+2015/08/08-15:23:20.895720 3334 [WARN]                         Options.WAL_ttl_seconds: 0
+2015/08/08-15:23:20.895720 3334 [WARN]                       Options.WAL_size_limit_MB: 0
+2015/08/08-15:23:20.895720 3334 [WARN]             Options.manifest_preallocation_size: 4194304
+2015/08/08-15:23:20.895720 3334 [WARN]                          Options.allow_os_buffer: 1
+2015/08/08-15:23:20.895720 3334 [WARN]                         Options.allow_mmap_reads: 0
+2015/08/08-15:23:20.895720 3334 [WARN]                        Options.allow_mmap_writes: 0
+2015/08/08-15:23:20.895720 3334 [WARN]                      Options.is_fd_close_on_exec: 1
+2015/08/08-15:23:20.895720 3334 [WARN]                    Options.stats_dump_period_sec: 600
+2015/08/08-15:23:20.895720 3334 [WARN]                    Options.advise_random_on_open: 1
+2015/08/08-15:23:20.895720 3334 [WARN]                     Options.db_write_buffer_size: 0d
+2015/08/08-15:23:20.895720 3334 [WARN]          Options.access_hint_on_compaction_start: NORMAL
+2015/08/08-15:23:20.895720 3334 [WARN]                       Options.use_adaptive_mutex: 0
+2015/08/08-15:23:20.895720 3334 [WARN]                             Options.rate_limiter: 00000000
+2015/08/08-15:23:20.895720 3334 [WARN]                           Options.bytes_per_sync: 0
+2015/08/08-15:23:20.895720 3334 [WARN]                       Options.wal_bytes_per_sync: 0
+2015/08/08-15:23:20.895720 3334 [WARN]                   Options.enable_thread_tracking: 0
+2015/08/08-15:23:20.895720 3334 [WARN]                                Options.row_cache: None
+2015/08/08-15:23:20.895720 3334 Compression algorithms supported:
+2015/08/08-15:23:20.895720 3334 	Snappy supported: 0
+2015/08/08-15:23:20.895720 3334 	Zlib supported: 0
+2015/08/08-15:23:20.895720 3334 	Bzip supported: 0
+2015/08/08-15:23:20.895720 3334 	LZ4 supported: 0
+2015/08/08-15:23:20.895720 3334 Fast CRC32 supported: 0
