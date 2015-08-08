@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\services">
+      <UniqueIdentifier>{14349583-0547-45a0-9fb8-fc0012b07ce2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{fb64c7d1-247a-453f-bd5d-a75d62c8b0b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\msg">
+      <UniqueIdentifier>{764984f3-8f85-480d-85d1-5fd7fd566397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mr">
+      <UniqueIdentifier>{bf8f3954-202c-45f4-bb2d-eef4077c227e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\connector">
+      <UniqueIdentifier>{56a99297-537a-4fdf-b96d-ff54a79b3ac9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\msg\gen-cpp">
+      <UniqueIdentifier>{1a40aea6-51a3-45c3-8621-515210f3c6c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\envi">
+      <UniqueIdentifier>{571122fe-35c4-48c7-80e5-31d34312d481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{0a15890d-b26e-4ad4-993d-af399af72d9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\controller">
+      <UniqueIdentifier>{4cdcf779-35b2-4879-bd4d-bfd12d193987}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\msg\gen-cpp\authenication_constants.h">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\msg\gen-cpp\authenication_types.h">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\msg\gen-cpp\Authentication.h">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\services\AuthenticationHandler.hpp">
+      <Filter>Source Files\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\services\MailHandler.hpp">
+      <Filter>Source Files\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\connector\RocksDBConnector.hpp">
+      <Filter>Source Files\connector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\utils\Flags.hpp">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\envi\EnvironmentTest.hpp">
+      <Filter>Source Files\envi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\controller\CredentialAccess.hpp">
+      <Filter>Source Files\controller</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tracethreat-nrml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\msg\gen-cpp\authenication_constants.cpp">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\msg\gen-cpp\authenication_types.cpp">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\msg\gen-cpp\Authentication.cpp">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\services\AuthenticationHandler.cpp">
+      <Filter>Source Files\services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\utils\Flags.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\utils\TestUtils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\envi\TestCore.cpp">
+      <Filter>Source Files\envi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\connector\RocksDBConnector.cpp">
+      <Filter>Source Files\connector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\common\RocksDBActivator.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\controller\CredentialAccess.cpp">
+      <Filter>Source Files\controller</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\msg\authenication.thrift">
+      <Filter>Source Files\msg</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="RREADME.md" />
+  </ItemGroup>
+</Project>

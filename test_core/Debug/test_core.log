@@ -1,0 +1,31 @@
+﻿Build started 8/8/2558 15:48:34.
+     1>Project "E:\workspacecpp\tracethreat-nrml\test_core\test_core.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\test_core.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         E:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"E:\workspacecpp\tracethreat-nrml\src" /I"E:\workspacecpp\gtest-1.7.0_vcpp13\gtest-1.7.0\include" /IE:\workspacecpp\boost_1_55_0\boost_1_55_0 /IE:\workspacecpp\thrift\lib\cpp\src\ /IE:\workspacecpp\thrift\lib\cpp\Debug /IE:\workspacecpp\gflags\build\include /IE:\workspacecpp\glog\src\windows /IF:\workspacecpp\rocksdb\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D GOOGLE_GLOG_DLL_DECL= /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\connector\TestRocksDBConnector.cpp
+         TestRocksDBConnector.cpp
+       Link:
+         E:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\workspacecpp\tracethreat-nrml\Debug\test_core.exe" /INCREMENTAL /NOLOGO /LIBPATH:"E:\workspacecpp\tracethreat-nrml\Debug" /LIBPATH:"E:\workspacecpp\gtest-1.7.0_vcpp13\gtest-1.7.0\msvc\gtest\Release" /LIBPATH:E:\workspacecpp\boost_1_55_0\boost_1_55_0\stage\lib /LIBPATH:E:\workspacecpp\glog\vsprojects\libglog\Release\ /LIBPATH:E:\workspacecpp\thrift\lib\cpp\Debug /LIBPATH:"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib" /LIBPATH:E:\workspacecpp\gflags\build\lib\Release /LIBPATH:F:\workspacecpp\rocksdb\buildwin\Debug gtest.lib gtest_main.lib libthrift.lib libglog.lib gflags.lib Rpcrt4.lib ShLwApi.lib "tracethreat-nrml.lib" rocksdb.lib rocksdblib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\workspacecpp\tracethreat-nrml\Debug\test_core.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\workspacecpp\tracethreat-nrml\Debug\test_core.lib" /MACHINE:X86 Debug\TestRocksDBConnector.obj
+         Debug\TestCore.obj
+         Debug\AuthenticationSimpleServiceTest.obj
+         Debug\stdafx.obj
+         libglog.lib(logging.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
+     1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+     1>TestRocksDBConnector.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+            Creating library E:\workspacecpp\tracethreat-nrml\Debug\test_core.lib and object E:\workspacecpp\tracethreat-nrml\Debug\test_core.exp
+         Generating code
+     1>e:\workspacecpp\glog\src\windows\glog\logging.h(1577): warning C4722: 'google::NullStreamFatal::~NullStreamFatal' : destructor never returns, potential memory leak
+         Finished generating code
+     1>tracethreat-nrml.lib(AuthenticationHandler.obj) : warning LNK4049: locally defined symbol ??0LogMessage@google@@QAE@PBDH@Z (public: __thiscall google::LogMessage::LogMessage(char const *,int)) imported
+     1>tracethreat-nrml.lib(AuthenticationHandler.obj) : warning LNK4049: locally defined symbol ??1LogMessage@google@@QAE@XZ (public: __thiscall google::LogMessage::~LogMessage(void)) imported
+     1>tracethreat-nrml.lib(AuthenticationHandler.obj) : warning LNK4049: locally defined symbol ?stream@LogMessage@google@@QAEAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@XZ (public: class std::basic_ostream<char,struct std::char_traits<char> > & __thiscall google::LogMessage::stream(void)) imported
+         test_core.vcxproj -> E:\workspacecpp\tracethreat-nrml\Debug\test_core.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\test_core.tlog\unsuccessfulbuild".
+         Touching "Debug\test_core.tlog\test_core.lastbuildstate".
+     1>Done Building Project "E:\workspacecpp\tracethreat-nrml\test_core\test_core.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:13.88

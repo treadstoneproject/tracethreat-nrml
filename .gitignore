@@ -63,4 +63,8 @@ install-sh
 depcomp
 configure
 config.log
+log/
+log/*
+db/
+db/*
 
