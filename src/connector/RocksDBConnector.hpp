@@ -26,7 +26,6 @@
 #include <rocksdb/options.h>
 
 
-using namespace rocksdb;
 
 namespace connector
 {
@@ -40,11 +39,11 @@ namespace connector
 		 
 		bool kDBPath(const char *path); 
 		
-		//rocksdb::Status  RocksDBConnector::connection();
+		rocksdb::Status  RocksDBConnector::connection();
 		 
 		//rocksdb::Options & RocksDBConnector::option();
 
-		//rocksdb::DB *getDB();
+		rocksdb::DB *getDB();
 		
 
 	private:  

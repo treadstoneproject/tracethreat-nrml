@@ -18,7 +18,6 @@ class AuthenticationIf {
   virtual bool pingActive(const int32_t genNum) = 0;
   virtual bool login(const User& user) = 0;
   virtual bool logout(const User& user) = 0;
-  virtual void getMailboxTTMAT(MailboxTTMAT& _return, const User& user, const std::string& date) = 0;
 };
 
 class AuthenticationIfFactory {
@@ -59,9 +58,6 @@ class AuthenticationNull : virtual public AuthenticationIf {
   bool logout(const User& /* user */) {
     bool _return = false;
     return _return;
-  }
-  void getMailboxTTMAT(MailboxTTMAT& /* _return */, const User& /* user */, const std::string& /* date */) {
-    return;
   }
 };
 
@@ -445,145 +441,6 @@ class Authentication_logout_presult {
 
 };
 
-typedef struct _Authentication_getMailboxTTMAT_args__isset {
-  _Authentication_getMailboxTTMAT_args__isset() : user(false), date(false) {}
-  bool user;
-  bool date;
-} _Authentication_getMailboxTTMAT_args__isset;
-
-class Authentication_getMailboxTTMAT_args {
- public:
-
-  static const char* ascii_fingerprint; // = "1ADFA84B8DAB42EBCBE507E260DC6587";
-  static const uint8_t binary_fingerprint[16]; // = {0x1A,0xDF,0xA8,0x4B,0x8D,0xAB,0x42,0xEB,0xCB,0xE5,0x07,0xE2,0x60,0xDC,0x65,0x87};
-
-  Authentication_getMailboxTTMAT_args() : date() {
-  }
-
-  virtual ~Authentication_getMailboxTTMAT_args() throw() {}
-
-  User user;
-  std::string date;
-
-  _Authentication_getMailboxTTMAT_args__isset __isset;
-
-  void __set_user(const User& val) {
-    user = val;
-  }
-
-  void __set_date(const std::string& val) {
-    date = val;
-  }
-
-  bool operator == (const Authentication_getMailboxTTMAT_args & rhs) const
-  {
-    if (!(user == rhs.user))
-      return false;
-    if (!(date == rhs.date))
-      return false;
-    return true;
-  }
-  bool operator != (const Authentication_getMailboxTTMAT_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const Authentication_getMailboxTTMAT_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class Authentication_getMailboxTTMAT_pargs {
- public:
-
-  static const char* ascii_fingerprint; // = "1ADFA84B8DAB42EBCBE507E260DC6587";
-  static const uint8_t binary_fingerprint[16]; // = {0x1A,0xDF,0xA8,0x4B,0x8D,0xAB,0x42,0xEB,0xCB,0xE5,0x07,0xE2,0x60,0xDC,0x65,0x87};
-
-
-  virtual ~Authentication_getMailboxTTMAT_pargs() throw() {}
-
-  const User* user;
-  const std::string* date;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _Authentication_getMailboxTTMAT_result__isset {
-  _Authentication_getMailboxTTMAT_result__isset() : success(false), ouch(false) {}
-  bool success;
-  bool ouch;
-} _Authentication_getMailboxTTMAT_result__isset;
-
-class Authentication_getMailboxTTMAT_result {
- public:
-
-  static const char* ascii_fingerprint; // = "58987141EAE74F4CBCE220505061C964";
-  static const uint8_t binary_fingerprint[16]; // = {0x58,0x98,0x71,0x41,0xEA,0xE7,0x4F,0x4C,0xBC,0xE2,0x20,0x50,0x50,0x61,0xC9,0x64};
-
-  Authentication_getMailboxTTMAT_result() {
-  }
-
-  virtual ~Authentication_getMailboxTTMAT_result() throw() {}
-
-  MailboxTTMAT success;
-  InvalidOperation ouch;
-
-  _Authentication_getMailboxTTMAT_result__isset __isset;
-
-  void __set_success(const MailboxTTMAT& val) {
-    success = val;
-  }
-
-  void __set_ouch(const InvalidOperation& val) {
-    ouch = val;
-  }
-
-  bool operator == (const Authentication_getMailboxTTMAT_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    if (!(ouch == rhs.ouch))
-      return false;
-    return true;
-  }
-  bool operator != (const Authentication_getMailboxTTMAT_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const Authentication_getMailboxTTMAT_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _Authentication_getMailboxTTMAT_presult__isset {
-  _Authentication_getMailboxTTMAT_presult__isset() : success(false), ouch(false) {}
-  bool success;
-  bool ouch;
-} _Authentication_getMailboxTTMAT_presult__isset;
-
-class Authentication_getMailboxTTMAT_presult {
- public:
-
-  static const char* ascii_fingerprint; // = "58987141EAE74F4CBCE220505061C964";
-  static const uint8_t binary_fingerprint[16]; // = {0x58,0x98,0x71,0x41,0xEA,0xE7,0x4F,0x4C,0xBC,0xE2,0x20,0x50,0x50,0x61,0xC9,0x64};
-
-
-  virtual ~Authentication_getMailboxTTMAT_presult() throw() {}
-
-  MailboxTTMAT* success;
-  InvalidOperation ouch;
-
-  _Authentication_getMailboxTTMAT_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
 class AuthenticationClient : virtual public AuthenticationIf {
  public:
   AuthenticationClient(boost::shared_ptr< ::apache::thrift::protocol::TProtocol> prot) {
@@ -618,9 +475,6 @@ class AuthenticationClient : virtual public AuthenticationIf {
   bool logout(const User& user);
   void send_logout(const User& user);
   bool recv_logout();
-  void getMailboxTTMAT(MailboxTTMAT& _return, const User& user, const std::string& date);
-  void send_getMailboxTTMAT(const User& user, const std::string& date);
-  void recv_getMailboxTTMAT(MailboxTTMAT& _return);
  protected:
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> piprot_;
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> poprot_;
@@ -639,14 +493,12 @@ class AuthenticationProcessor : public ::apache::thrift::TDispatchProcessor {
   void process_pingActive(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_login(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_logout(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
-  void process_getMailboxTTMAT(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
  public:
   AuthenticationProcessor(boost::shared_ptr<AuthenticationIf> iface) :
     iface_(iface) {
     processMap_["pingActive"] = &AuthenticationProcessor::process_pingActive;
     processMap_["login"] = &AuthenticationProcessor::process_login;
     processMap_["logout"] = &AuthenticationProcessor::process_logout;
-    processMap_["getMailboxTTMAT"] = &AuthenticationProcessor::process_getMailboxTTMAT;
   }
 
   virtual ~AuthenticationProcessor() {}
@@ -700,16 +552,6 @@ class AuthenticationMultiface : virtual public AuthenticationIf {
       ifaces_[i]->logout(user);
     }
     return ifaces_[i]->logout(user);
-  }
-
-  void getMailboxTTMAT(MailboxTTMAT& _return, const User& user, const std::string& date) {
-    size_t sz = ifaces_.size();
-    size_t i = 0;
-    for (; i < (sz - 1); ++i) {
-      ifaces_[i]->getMailboxTTMAT(_return, user, date);
-    }
-    ifaces_[i]->getMailboxTTMAT(_return, user, date);
-    return;
   }
 
 };

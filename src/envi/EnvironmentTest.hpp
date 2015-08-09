@@ -22,7 +22,6 @@
 
 #include "utils/flags.hpp"
 
-#include "connector/RocksDBConnector.hpp"
 
 class SystemTestingEnvironment : public testing::Environment
 {

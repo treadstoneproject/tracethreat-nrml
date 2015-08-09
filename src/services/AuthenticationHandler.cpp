@@ -61,7 +61,7 @@ namespace services
 	   if (dbPath.empty())
 		   return false;
 
-	   rocksdbConnector.kDBPath(dbPath.c_str());
+	   //rocksdbConnector.kDBPath(dbPath.c_str());
 	    
 
 	   rocksdb::Options options;
@@ -83,9 +83,9 @@ namespace services
 	   LOG(INFO) << "User login  : " << user.userName << ", Pwd : " << user.password;
 
 	   // get user & pwd.
-	   status = db->Get(ReadOptions(), std::string("user-authen"), &userName);
+	   status = db->Get(rocksdb::ReadOptions(), std::string("user-authen"), &userName);
 
-	   status = db->Get(ReadOptions(), std::string("pwd-authen"), &password);
+	   status = db->Get(rocksdb::ReadOptions(), std::string("pwd-authen"), &password);
 
 	 
 	  
@@ -111,47 +111,6 @@ namespace services
 	{
 		LOG(INFO) << "Logout user service...";
 		return true;
-	}//logout
-
-
-	void AuthenticationHandler::getMailboxTTMAT(authentication::MailboxTTMAT & mailboxTTMAL,
-		const authentication::User& user,
-		const std::string& date){
-			LOG(INFO) << "Get message from TT-MAT...";
-			//Get path
-			dbPath = utils::rocksDBPath();
-			if (dbPath.empty())
-				//return false;
-
-			rocksdbConnector.kDBPath(dbPath.c_str());
-
-
-			rocksdb::Options options;
-			options.create_if_missing = true;
-
-			rocksdb::DB * db;
-
-			rocksdb::Status status = rocksdb::DB::Open(options, dbPath, &db);
-
-			if (!status.ok()){
-				LOG(INFO) << " Login cannot connection to database";
-				LOG(INFO) << " Status result : " << status.code();
-				//return false;
-			} 
-
-			std::string * ttmatMessageError;
-			// get user & pwd.
-			status = db->Get(ReadOptions(), 
-				std::string("ttmat-message-error-")
-				.append(user.userName) //User name
-				.append("-")
-				.append(date),//Date (Not include time)
-				ttmatMessageError);
-			                                      
-			//[-] Convert message to json.
-		    //[-] Convert message to struct.
-			
-	}
-	 
+	}//logout 
 
 }

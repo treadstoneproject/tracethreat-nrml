@@ -75,6 +75,18 @@
     <ClInclude Include="..\src\controller\CredentialAccess.hpp">
       <Filter>Source Files\controller</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\msg\gen-cpp\ttmat_internal_constants.h">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\msg\gen-cpp\ttmat_internal_types.h">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\msg\gen-cpp\TTMATSystemService.h">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\services\TTMATServiceHandler.hpp">
+      <Filter>Source Files\services</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -113,9 +125,24 @@
     <ClCompile Include="..\src\controller\CredentialAccess.cpp">
       <Filter>Source Files\controller</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\msg\gen-cpp\ttmat_internal_constants.cpp">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\msg\gen-cpp\ttmat_internal_types.cpp">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\msg\gen-cpp\TTMATSystemService.cpp">
+      <Filter>Source Files\msg\gen-cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\services\TTMATServiceHandler.cpp">
+      <Filter>Source Files\services</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\msg\authenication.thrift">
+      <Filter>Source Files\msg</Filter>
+    </None>
+    <None Include="..\src\msg\ttmat_internal.thrift">
       <Filter>Source Files\msg</Filter>
     </None>
   </ItemGroup>

@@ -1,5 +1,6 @@
-#ifndef SERVICES_AUTHENTICATION_HANDLER
-#define SERVICES_AUTHENTICATION_HANDLER
+#ifndef SERVICE_TTMATSERVICE_HANDLER_HPP
+#define SERVICE_TTMATSERVICE_HANDLER_HPP
+
 /*
 * Copyright 2015 Chatsiri Rattana.
 *
@@ -17,39 +18,28 @@
 */
 
 /*  Titles			                                          Authors	         Date
- * - Login from webapplication user                       R.Chatsiri       18/07/2015
- */
+* - Get Message from TT-MAT                                   R.Chatsiri       
+*/
 
-#include "msg/gen-cpp/Authentication.h"
-
+#include "msg/gen-cpp/TTMATSystemService.h"
+ 
 #include "connector/RocksDBConnector.hpp"
+ 
+namespace service{
 
-namespace services
-{
-
-	class AuthenticationHandler : public authentication::AuthenticationIf
-	{
-
+	class TTMATServiceHandler : public ttmat::TTMATSystemServiceIf{
 	public:
-
-		AuthenticationHandler(){ 
-		
-		} 
-
-		bool pingActive(const int32_t genNum);
-		/* Login user to system.*/
-		bool login(const authentication::User& user);
-		 
-		/* Logout user from system*/
-		bool logout(const authentication::User& user);
-
+		/* vitual class from TTMATSystemServiceIf*/
+		void getMailboxTTMAT(ttmat::MailboxTTMAT& mbTTMATReturn,
+			const  ::authentication::User& user, 
+			const std::string& date);
 	private:
-		const authentication::User *user;
 
-		std::string   dbPath; 
-		connector::RocksDBConnector rocksdbConnector;
+		std::string   dbPath;
+		connector::RocksDBConnector  rocksDBConnector;
 	};
 
 }
 
-#endif /* SERVICES_AUTHENTICATION_HANDLER */
+
+#endif /* SERVICE_TTMATSERVICE_HANDLER_HPP */

@@ -41,5 +41,8 @@
     <ClCompile Include="..\src\services\AuthenticationSimpleServiceTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\services\TTMATSystemServiceTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

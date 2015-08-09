@@ -15,19 +15,20 @@ namespace connector{
 	}
 	/*
 	rocksdb::Options & RocksDBConnector::option(){
-		rocksdb::Options options;
-		options.create_if_missing = true;
+		
 		return options;
 	}*/
 
-	/*
+	
 	rocksdb::Status  RocksDBConnector::connection(){
+		rocksdb::Options options;
+		options.create_if_missing = true;
 		return  rocksdb::DB::Open(options, path_, &db);
-	}*/
+	}
 
-	/*
+	
 	rocksdb::DB * RocksDBConnector::getDB(){
 		return db;
-	}*/
+	}
 	
 }

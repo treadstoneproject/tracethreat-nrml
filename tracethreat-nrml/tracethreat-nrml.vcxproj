@@ -93,8 +93,12 @@
     <ClInclude Include="..\src\msg\gen-cpp\authenication_constants.h" />
     <ClInclude Include="..\src\msg\gen-cpp\authenication_types.h" />
     <ClInclude Include="..\src\msg\gen-cpp\Authentication.h" />
+    <ClInclude Include="..\src\msg\gen-cpp\TTMATSystemService.h" />
+    <ClInclude Include="..\src\msg\gen-cpp\ttmat_internal_constants.h" />
+    <ClInclude Include="..\src\msg\gen-cpp\ttmat_internal_types.h" />
     <ClInclude Include="..\src\services\AuthenticationHandler.hpp" />
     <ClInclude Include="..\src\services\MailHandler.hpp" />
+    <ClInclude Include="..\src\services\TTMATServiceHandler.hpp" />
     <ClInclude Include="..\src\utils\Flags.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -107,7 +111,11 @@
     <ClCompile Include="..\src\msg\gen-cpp\authenication_constants.cpp" />
     <ClCompile Include="..\src\msg\gen-cpp\authenication_types.cpp" />
     <ClCompile Include="..\src\msg\gen-cpp\Authentication.cpp" />
+    <ClCompile Include="..\src\msg\gen-cpp\TTMATSystemService.cpp" />
+    <ClCompile Include="..\src\msg\gen-cpp\ttmat_internal_constants.cpp" />
+    <ClCompile Include="..\src\msg\gen-cpp\ttmat_internal_types.cpp" />
     <ClCompile Include="..\src\services\AuthenticationHandler.cpp" />
+    <ClCompile Include="..\src\services\TTMATServiceHandler.cpp" />
     <ClCompile Include="..\src\utils\Flags.cpp" />
     <ClCompile Include="..\src\utils\TestUtils.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -115,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\msg\authenication.thrift" />
+    <None Include="..\src\msg\ttmat_internal.thrift" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
