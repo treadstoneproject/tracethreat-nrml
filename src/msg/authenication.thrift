@@ -26,6 +26,7 @@ struct User{
 	  2: string password; 
 }
 
+<<<<<<< HEAD
 struct MessageTTMAT{
 	1: string subject;
 	2: string detail;
@@ -42,6 +43,9 @@ struct MailboxTTMAT{
 
 
 
+=======
+  
+>>>>>>> dev_win32
 /* For throw and error from member function */
 exception InvalidOperation{
 	1: i32 what,
@@ -58,10 +62,14 @@ service Authentication{
 		bool  login(1:User user) throws(1:InvalidOperation ouch), 
 
 		/* Logout user check */
+<<<<<<< HEAD
 		bool  logout(1:User user) throws(1:InvalidOperation ouch),
 
 		/* get data from TT-MAT mailbox */
 		MailboxTTMAT getMailboxTTMAT(1:User user, 2:string date) throws(1:InvalidOperation ouch)
+=======
+		bool  logout(1:User user) throws(1:InvalidOperation ouch)
+>>>>>>> dev_win32
 
 }
 

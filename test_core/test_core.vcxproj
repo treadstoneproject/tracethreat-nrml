@@ -98,6 +98,10 @@
     <ClCompile Include="..\src\connector\TestRocksDBConnector.cpp" />
     <ClCompile Include="..\src\envi\TestCore.cpp" />
     <ClCompile Include="..\src\services\AuthenticationSimpleServiceTest.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="..\src\services\TTMATSystemServiceTest.cpp" />
+>>>>>>> dev_win32
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

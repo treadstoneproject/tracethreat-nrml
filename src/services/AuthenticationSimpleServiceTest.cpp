@@ -38,8 +38,13 @@ TEST(AuthenitcationServer, TestServicesSimple){
 
 	//shared_ptr<TJSONProtocol> jsonProtocol = boost::make_shared<TJSONProtocol>(serverTransport->accept());
 
+<<<<<<< HEAD
 	TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory); 
 	server.serve();
+=======
+	//TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory); 
+	//server.serve();
+>>>>>>> dev_win32
 	
 	
 }

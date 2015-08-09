@@ -61,14 +61,24 @@ namespace services
 	   if (dbPath.empty())
 		   return false;
 
+<<<<<<< HEAD
 	   rocksdbConnector.kDBPath(dbPath.c_str());
+=======
+	   //rocksdbConnector.kDBPath(dbPath.c_str());
+>>>>>>> dev_win32
 	    
 
 	   rocksdb::Options options;
 	   options.create_if_missing = true;
+<<<<<<< HEAD
 
 	   rocksdb::DB * db;
 
+=======
+
+	   rocksdb::DB * db;
+
+>>>>>>> dev_win32
 	   rocksdb::Status status = rocksdb::DB::Open(options, dbPath, &db); 
 
 	   if (!status.ok()){
@@ -83,10 +93,17 @@ namespace services
 	   LOG(INFO) << "User login  : " << user.userName << ", Pwd : " << user.password;
 
 	   // get user & pwd.
+<<<<<<< HEAD
 	   status = db->Get(ReadOptions(), std::string("user-authen"), &userName);
 
 	   status = db->Get(ReadOptions(), std::string("pwd-authen"), &password);
 
+=======
+	   status = db->Get(rocksdb::ReadOptions(), std::string("user-authen"), &userName);
+
+	   status = db->Get(rocksdb::ReadOptions(), std::string("pwd-authen"), &password);
+
+>>>>>>> dev_win32
 	 
 	  
 	   if ( (user.userName.compare(userName) == 0) && 
@@ -111,6 +128,7 @@ namespace services
 	{
 		LOG(INFO) << "Logout user service...";
 		return true;
+<<<<<<< HEAD
 	}//logout
 
 
@@ -153,5 +171,8 @@ namespace services
 			
 	}
 	 
+=======
+	}//logout 
+>>>>>>> dev_win32
 
 }

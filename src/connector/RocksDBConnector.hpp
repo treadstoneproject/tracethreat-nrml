@@ -26,7 +26,6 @@
 #include <rocksdb/options.h>
 
 
-using namespace rocksdb;
 
 namespace connector
 {

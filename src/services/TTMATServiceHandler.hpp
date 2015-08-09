@@ -1,5 +1,8 @@
+#ifndef SERVICE_TTMATSERVICE_HANDLER_HPP
+#define SERVICE_TTMATSERVICE_HANDLER_HPP
+
 /*
-* Copyright 2014 Chatsiri Rattana.
+* Copyright 2015 Chatsiri Rattana.
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -15,34 +18,28 @@
 */
 
 /*  Titles			                                          Authors	         Date
- * -Support all test case.
- */
+* - Get Message from TT-MAT                                   R.Chatsiri       
+*/
 
-#include "glog/logging.h"
-
-#include "utils/flags.hpp"
-
-<<<<<<< HEAD
+#include "msg/gen-cpp/TTMATSystemService.h"
+ 
 #include "connector/RocksDBConnector.hpp"
-=======
->>>>>>> dev_win32
+ 
+namespace service{
 
-class SystemTestingEnvironment : public testing::Environment
-{
+	class TTMATServiceHandler : public ttmat::TTMATSystemServiceIf{
+	public:
+		/* vitual class from TTMATSystemServiceIf*/
+		void getMailboxTTMAT(ttmat::MailboxTTMAT& mbTTMATReturn,
+			const  ::authentication::User& user, 
+			const std::string& date);
+	private:
 
+		std::string   dbPath;
+		connector::RocksDBConnector  rocksDBConnector;
+	};
 
-public:
-
-	explicit SystemTestingEnvironment(int argc, char **argv) {
-
-		//intial log path write file for test case.
-		gflags::ParseCommandLineFlags(&argc, &argv, true);
-
-		LOG(INFO)<<"Initial log file : "<< utils::loggingPath();  
-
-		LOG(INFO)<< "Initial db path : "<< utils::rocksDBPath(); 
-
-	}//explicit SystemTestingEnvironment
+}
 
 
-};
+#endif /* SERVICE_TTMATSERVICE_HANDLER_HPP */
