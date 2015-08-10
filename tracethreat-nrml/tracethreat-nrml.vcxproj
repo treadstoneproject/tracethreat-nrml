@@ -50,7 +50,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>E:\workspacecpp\thrift\lib\cpp\src;E:\workspacecpp\glog\src\windows;E:\workspacecpp\gflags\build\include;E:\workspacecpp\gtest-1.7.0_vcpp13\gtest-1.7.0\include;E:\workspacecpp\boost_1_55_0\boost_1_55_0;E:\workspacecpp\tracethreat-nrml\src;F:\workspacecpp\rocksdb\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\workspacecpp\thrift\lib\cpp\src;E:\workspacecpp\glog\src\windows;E:\workspacecpp\gflags\build\include;E:\workspacecpp\gtest-1.7.0_vcpp13\gtest-1.7.0\include;E:\workspacecpp\boost_1_55_0\boost_1_55_0;E:\workspacecpp\tracethreat-nrml\src;F:\workspacecpp\rocksdb\include;E:\workspacecpp\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <UndefinePreprocessorDefinitions>%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
@@ -62,8 +62,8 @@
       <AdditionalDependencies>libthrift.lib;libglog.lib;gtest.lib;gflags.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>E:\workspacecpp\glog\vsprojects\libglog\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libglog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\workspacecpp\glog\vsprojects\libglog\Release;F:\workspacecpp\rocksdb\buildwin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libglog.lib;rocksdb.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

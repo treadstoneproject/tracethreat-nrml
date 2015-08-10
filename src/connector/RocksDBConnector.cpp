@@ -1,34 +1,29 @@
 #include <iostream>
 #include <glog/logging.h>
-#include "connector\RocksDBConnector.hpp"
+
+#include "connector/RocksDBConnector.hpp"
 
 namespace connector{
-
-	
+	 
 
 	bool RocksDBConnector::kDBPath(const char *path){ 
-		path_ = path;
-		if (path_ == NULL){
+		this->path_ = path;
+		if (this->path_ == NULL){
 			return false;
 		}
 		return true;
-	}
+	} 
+	
 	/*
-	rocksdb::Options & RocksDBConnector::option(){
-		
-		return options;
-	}*/
-
-	
-	rocksdb::Status  RocksDBConnector::connection(){
-		rocksdb::Options options;
+	rocksdb::Status  RocksDBConnector::connection(rocksdb::DB *  db){
+		rocksdb::Options  options = rocksdb::Options();
+		options.IncreaseParallelism();
+		options.OptimizeLevelStyleCompaction();
 		options.create_if_missing = true;
-		return  rocksdb::DB::Open(options, path_, &db);
+		LOG(INFO) << " Path : " << path_;
+		return rocksdb::DB::Open(options, path_, &db);
+		 
 	}
-
-	
-	rocksdb::DB * RocksDBConnector::getDB(){
-		return db;
-	}
-	
+	/* */
+	 
 }

@@ -59,18 +59,13 @@ namespace services
 	   //Get path
 	   dbPath = utils::rocksDBPath();
 	   if (dbPath.empty())
-		   return false;
-
-	   //rocksdbConnector.kDBPath(dbPath.c_str());
+		   return false; 
 	    
-
-	   rocksdb::Options options;
-	   options.create_if_missing = true;
-
 	   rocksdb::DB * db;
-
-	   rocksdb::Status status = rocksdb::DB::Open(options, dbPath, &db); 
-
+	   rocksdb::Options  options; 
+	   options.create_if_missing = true;
+	   rocksdb::Status status = rocksdb::DB::Open(options, dbPath.c_str(), &db);
+	    
 	   if (!status.ok()){
 		   LOG(INFO) << " Login cannot connection to database";
 		   LOG(INFO) << " Status result : " << status.code();
@@ -94,9 +89,9 @@ namespace services
 		   LOG(INFO) << " Login success with user : " << userName;
 		   delete db;
 		   return true;
-	   }
+	   } 
 		   
-	    delete db;
+	    delete db; 
 		return false;
 	}//login
 

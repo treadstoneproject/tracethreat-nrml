@@ -34,24 +34,19 @@ namespace connector
 	{
 
 	public:
-
+		
 		RocksDBConnector(){ }
 		 
 		bool kDBPath(const char *path); 
 		
-		rocksdb::Status  RocksDBConnector::connection();
+		//rocksdb::Status  RocksDBConnector::connection(rocksdb::DB *  db);
 		 
-		//rocksdb::Options & RocksDBConnector::option();
-
-		rocksdb::DB *getDB();
-		
 
 	private:  
+		  
+		//rocksdb::Status status;
+		const char *path_; 
 		
-		rocksdb::DB* db;
-		rocksdb::Options options;
-		rocksdb::Status status;
-		const char *path_;
 	};
 
 }

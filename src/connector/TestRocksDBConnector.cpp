@@ -29,6 +29,7 @@
 #include <rocksdb/slice.h>
 #include <rocksdb/options.h>
 
+
 #include "utils/Flags.hpp" 
 #include "connector/RocksDBConnector.hpp"
 
@@ -52,33 +53,15 @@ TEST_F(RocksDBConnectTest, connectionCheck){
 
 	
 	
-	rocksdb::Status status;
-	 
-	//Set simple options.
-	//rocksdbConnector.option();
-	
-	rocksdb::Options options;
-	options.create_if_missing = true;
-
+	rocksdb::Status status;  
 	rocksdb::DB * db;
+	   
 
-	status = rocksdb::DB::Open(options, *dbPath, &db);
+	rocksdb::Options  options; 
+	options.create_if_missing = true; 
+	status = rocksdb::DB::Open(options, dbPath->c_str(), &db);
+
 	EXPECT_EQ(status.ok(), true);
-	
-
-	/*
-	try{
-		//rocksdbConnector.option();
-		//status = rocksdbConnector.connection();
-		//EXPECT_EQ(status.ok(), true);
-	}
-	catch (std::exception ex){
-		LOG(INFO)<<ex.what();
-	}*/
-	
-
-	//Put key-value
-	//rocksdb::DB * db = rocksdbConnector.getDB();
 	
 	status = db->Put(rocksdb::WriteOptions(), "user-authen", "chatsiri@treadstone.systems");
 	EXPECT_EQ(status.ok(), true);
@@ -94,22 +77,22 @@ TEST_F(RocksDBConnectTest, connectionCheck){
 	EXPECT_EQ(value, "chatsiri@treadstone.systems"); 
 	 
 	delete db;
+	 
 }
 
 
 TEST_F(RocksDBConnectTest, testMultipleRecords){
+
+	 
+	rocksdb::DB * db;
 	rocksdb::Status status;
 	 
-	rocksdb::Options options;
+	rocksdb::Options  options; 
 	options.create_if_missing = true;
+	status = rocksdb::DB::Open(options, dbPath->c_str(), &db);
 
-	rocksdb::DB * db;
-
-	status = rocksdb::DB::Open(options, *dbPath, &db);
-	EXPECT_EQ(status.ok(), true);
-
-	 
-
+	EXPECT_EQ(status.ok(), true); 
+	  
 	status = db->Put(rocksdb::WriteOptions(), "user-authen-system-1", "chatsiri@treadstone.systems-1");
 	EXPECT_EQ(status.ok(), true);
 
@@ -142,4 +125,5 @@ TEST_F(RocksDBConnectTest, testMultipleRecords){
 	EXPECT_EQ(mbMessage, "{ ttmat-message-mailbox : [{ subject : Test mailbox , detail: Exception::message cannot access database , status: open, date : 08/08/2015 ] }");
 
 	delete db;
+	
 }
