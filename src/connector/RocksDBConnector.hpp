@@ -39,12 +39,14 @@ namespace connector
 		 
 		bool kDBPath(const char *path); 
 		
-		//rocksdb::Status  RocksDBConnector::connection(rocksdb::DB *  db);
+		rocksdb::Status  RocksDBConnector::connection();
+
+		rocksdb::DB * getDB();
 		 
 
 	private:  
 		  
-		//rocksdb::Status status;
+		rocksdb::DB * db;
 		const char *path_; 
 		
 	};

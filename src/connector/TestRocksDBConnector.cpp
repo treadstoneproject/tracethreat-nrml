@@ -31,7 +31,7 @@
 
 
 #include "utils/Flags.hpp" 
-#include "connector/RocksDBConnector.hpp"
+//#include "connector/RocksDBConnector.hpp"
 
 class RocksDBConnectTest : public ::testing::Test
 {
@@ -53,13 +53,17 @@ TEST_F(RocksDBConnectTest, connectionCheck){
 
 	
 	
-	rocksdb::Status status;  
+	rocksdb::Status status; 
 	rocksdb::DB * db;
 	   
-
+	 
 	rocksdb::Options  options; 
 	options.create_if_missing = true; 
 	status = rocksdb::DB::Open(options, dbPath->c_str(), &db);
+	 
+
+	//rocksdbConnector.connection(); 
+	//db = rocksdbConnector.getDB();
 
 	EXPECT_EQ(status.ok(), true);
 	

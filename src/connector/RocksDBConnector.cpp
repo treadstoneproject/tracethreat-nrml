@@ -14,16 +14,14 @@ namespace connector{
 		return true;
 	} 
 	
-	/*
-	rocksdb::Status  RocksDBConnector::connection(rocksdb::DB *  db){
-		rocksdb::Options  options = rocksdb::Options();
-		options.IncreaseParallelism();
-		options.OptimizeLevelStyleCompaction();
-		options.create_if_missing = true;
-		LOG(INFO) << " Path : " << path_;
-		return rocksdb::DB::Open(options, path_, &db);
-		 
-	}
-	/* */
+ 
+	rocksdb::Status  RocksDBConnector::connection(){
+		rocksdb::Options  options = rocksdb::Options(); 
+		options.create_if_missing = true; 
+		return rocksdb::DB::Open(options, path_, &db); 
+	} 
 	 
+	rocksdb::DB * RocksDBConnector::getDB(){
+		return db;
+	}
 }
