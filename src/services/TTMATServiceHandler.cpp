@@ -20,7 +20,9 @@
 
 #include <rocksdb/db.h>
 #include <rocksdb/slice.h>
-#include <rocksdb/options.h>
+#include <rocksdb/options.h> 
+
+//#include <rapidjson/document.h>
 
 
 #include <glog/logging.h>
@@ -36,6 +38,7 @@ namespace service{
 		const std::string& date){
 
 		LOG(INFO) << "Get message from TT-MAT...";
+		/*
 		//Get path
 		dbPath = utils::rocksDBPath();
 		if (dbPath.empty())
@@ -63,11 +66,17 @@ namespace service{
 			&ttmatMessageError); 
 
 		LOG(INFO) << "Result get mailbox : " << ttmatMessageError; 
-		//[-] Convert message to json.
-		//[-] Convert message to struct.
-
 		//Message format of TTMAT
 		ttmat::MessageTTMAT msgTTMAT;
+		/*[-] Convert message to json.
+		if (!ttmatMessageError.empty()){
+			folly::dynamic jsonTTMATMessageError = ttmatMessageError;
+			std::string subject = jsonTTMATMessageError.at()
+				msgTTMAT.__set_subject
+		}*/
+		//[-] Convert message to struct.
+
+		/*
 	
 		//Push back information to container
 		std::vector<ttmat::MessageTTMAT> messageTTMAT;
@@ -77,6 +86,7 @@ namespace service{
 		mbTTMATReturn.__set_messageTTMAT(messageTTMAT);
 
 		delete db;
+		*/
 
 	}
 }

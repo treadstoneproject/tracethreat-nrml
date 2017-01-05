@@ -32,8 +32,9 @@
 #include <rocksdb/slice.h>
 #include <rocksdb/options.h>
 
+
 #include "utils/Flags.hpp" 
-#include "connector/RocksDBConnector.hpp"
+//#include "connector/RocksDBConnector.hpp"
 
 class RocksDBConnectTest : public ::testing::Test
 {
@@ -55,8 +56,15 @@ TEST_F(RocksDBConnectTest, connectionCheck){
 
 	
 	
-	rocksdb::Status status;
+	rocksdb::Status status; 
+	rocksdb::DB * db;
+	   
 	 
+	rocksdb::Options  options; 
+	options.create_if_missing = true; 
+	status = rocksdb::DB::Open(options, dbPath->c_str(), &db);
+	 
+<<<<<<< HEAD
 	//Set simple options.
 	//rocksdbConnector.option();
 	
@@ -68,26 +76,13 @@ TEST_F(RocksDBConnectTest, connectionCheck){
 
 	status = rocksdb::DB::Open(options, *dbPath, &db);
 =======
+=======
+>>>>>>> elf_structure_asm_feature
 
-	rocksdb::DB * db;
+	//rocksdbConnector.connection(); 
+	//db = rocksdbConnector.getDB();
 
-	status = rocksdb::DB::Open(options, *dbPath, &db);
 	EXPECT_EQ(status.ok(), true);
-	
-
-	/*
-	try{
-		//rocksdbConnector.option();
-		//status = rocksdbConnector.connection();
-		//EXPECT_EQ(status.ok(), true);
-	}
-	catch (std::exception ex){
-		LOG(INFO)<<ex.what();
-	}*/
-	
-
-	//Put key-value
-	//rocksdb::DB * db = rocksdbConnector.getDB();
 	
 	status = db->Put(rocksdb::WriteOptions(), "user-authen", "chatsiri@treadstone.systems");
 	EXPECT_EQ(status.ok(), true);
@@ -103,22 +98,22 @@ TEST_F(RocksDBConnectTest, connectionCheck){
 	EXPECT_EQ(value, "chatsiri@treadstone.systems"); 
 	 
 	delete db;
+	 
 }
 
 
 TEST_F(RocksDBConnectTest, testMultipleRecords){
+
+	 
+	rocksdb::DB * db;
 	rocksdb::Status status;
 	 
-	rocksdb::Options options;
+	rocksdb::Options  options; 
 	options.create_if_missing = true;
+	status = rocksdb::DB::Open(options, dbPath->c_str(), &db);
 
-	rocksdb::DB * db;
-
-	status = rocksdb::DB::Open(options, *dbPath, &db);
-	EXPECT_EQ(status.ok(), true);
-
-	 
-
+	EXPECT_EQ(status.ok(), true); 
+	  
 	status = db->Put(rocksdb::WriteOptions(), "user-authen-system-1", "chatsiri@treadstone.systems-1");
 	EXPECT_EQ(status.ok(), true);
 
@@ -183,4 +178,5 @@ TEST_F(RocksDBConnectTest, testMultipleRecords){
 
 >>>>>>> dev_win32
 	delete db;
+	
 }

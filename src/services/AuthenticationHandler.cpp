@@ -59,6 +59,7 @@ namespace services
 	   //Get path
 	   dbPath = utils::rocksDBPath();
 	   if (dbPath.empty())
+<<<<<<< HEAD
 		   return false;
 
 <<<<<<< HEAD
@@ -81,6 +82,15 @@ namespace services
 >>>>>>> dev_win32
 	   rocksdb::Status status = rocksdb::DB::Open(options, dbPath, &db); 
 
+=======
+		   return false; 
+	    
+	   rocksdb::DB * db;
+	   rocksdb::Options  options; 
+	   options.create_if_missing = true;
+	   rocksdb::Status status = rocksdb::DB::Open(options, dbPath.c_str(), &db);
+	    
+>>>>>>> elf_structure_asm_feature
 	   if (!status.ok()){
 		   LOG(INFO) << " Login cannot connection to database";
 		   LOG(INFO) << " Status result : " << status.code();
@@ -111,9 +121,9 @@ namespace services
 		   LOG(INFO) << " Login success with user : " << userName;
 		   delete db;
 		   return true;
-	   }
+	   } 
 		   
-	    delete db;
+	    delete db; 
 		return false;
 	}//login
 

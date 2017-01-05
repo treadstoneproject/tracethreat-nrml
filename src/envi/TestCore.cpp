@@ -22,6 +22,7 @@
  
 >>>>>>> dev_win32
 #include "services/AuthenticationHandler.hpp"
+
 #include "envi/EnvironmentTest.hpp"
 
 

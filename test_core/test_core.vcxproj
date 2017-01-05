@@ -53,7 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;GOOGLE_GLOG_DLL_DECL=;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>E:\workspacecpp\tracethreat-nrml\src;E:\workspacecpp\gtest-1.7.0_vcpp13\gtest-1.7.0\include;E:\workspacecpp\boost_1_55_0\boost_1_55_0;E:\workspacecpp\thrift\lib\cpp\src\;E:\workspacecpp\thrift\lib\cpp\Debug;E:\workspacecpp\gflags\build\include;E:\workspacecpp\glog\src\windows;F:\workspacecpp\rocksdb\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\workspacecpp\tracethreat-nrml\src;E:\workspacecpp\gtest-1.7.0_vcpp13\gtest-1.7.0\include;E:\workspacecpp\boost_1_55_0\boost_1_55_0;E:\workspacecpp\thrift\lib\cpp\src\;E:\workspacecpp\thrift\lib\cpp\Debug;E:\workspacecpp\gflags\build\include;E:\workspacecpp\glog\src\windows;F:\workspacecpp\rocksdb\include;E:\workspacecpp\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
       <StructMemberAlignment>Default</StructMemberAlignment>
@@ -62,7 +62,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>E:\workspacecpp\tracethreat-nrml\Debug;E:\workspacecpp\gtest-1.7.0_vcpp13\gtest-1.7.0\msvc\gtest\Release;E:\workspacecpp\boost_1_55_0\boost_1_55_0\stage\lib;E:\workspacecpp\glog\vsprojects\libglog\Release\;E:\workspacecpp\thrift\lib\cpp\Debug;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib;E:\workspacecpp\gflags\build\lib\Release;F:\workspacecpp\rocksdb\buildwin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>gtest.lib;gtest_main.lib;libthrift.lib;libglog.lib;gflags.lib;Rpcrt4.lib;ShLwApi.lib;tracethreat-nrml.lib;rocksdb.lib;rocksdblib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtest.lib;gtest_main.lib;libthrift.lib;libglog.lib;gflags.lib;Rpcrt4.lib;ShLwApi.lib;rocksdb.lib;rocksdblib.lib;tracethreat-nrml.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

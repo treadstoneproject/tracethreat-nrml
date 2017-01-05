@@ -1,10 +1,21 @@
 #include <vector>
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
+#include <glog/logging.h>
+
+#include <rapidjson/document.h>
 
 #include "services/TTMATServiceHandler.hpp"
 #include "msg/gen-cpp/Authentication.h"
+
+
+TEST(TTMATServiceHandler, jsonMbTTMAT){ 
+	const char mbTTMAT[] = "{ \"hello\" : \"world\", \"t\" : true , \"f\" : false, \"n\": null, \"i\":123, \"pi\": 3.1416, \"a\":[1, 2, 3, 4] } ";
+	rapidjson::Document document;  
+	EXPECT_EQ(document.Parse(mbTTMAT).HasParseError(), false);
+	EXPECT_EQ(document.HasMember("hello"), true);
+}
 
 TEST(TTMATServiceHandler, getMailboxTTMAT){
 	service::TTMATServiceHandler ttmatServiceHandler;

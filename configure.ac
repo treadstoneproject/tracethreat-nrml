@@ -1,6 +1,6 @@
 AC_INIT([libtracethreat_nrml], 1, rchatsiri@treadstone.systems)
-AC_PREREQ([2.59])
-AM_INIT_AUTOMAKE([1.10 -Wall no-define])
+AC_PREREQ([2.69])
+AM_INIT_AUTOMAKE([1.10 -Wall no-define foreign])
 
 # This is used to help configure check whether the source code is actually present, and
 # that it isn't being run from some random directory.
@@ -11,14 +11,14 @@ AC_CONFIG_MACRO_DIR([m4])
 
 # We're using automake, but we want to turn off complaints about missing README files
 # etc., so we need the "foreign" option.
-AM_INIT_AUTOMAKE([foreign])
+#AM_INIT_AUTOMAKE([foreign])
 
 
 # We need a C compiler
-AC_PROG_CXX([g++-4.8])
+AC_PROG_CXX([g++])
 
 
-LIBS="-lgtest -lglog -lgflags -lfolly -lthrift -lmongoclient -lrocksdb"
+LIBS="-lgtest -lglog -lgflags -lfolly -lthrift -lmongocxx -lbsoncxx -lrocksdb"
 
 LT_INIT([disable-static])
 
