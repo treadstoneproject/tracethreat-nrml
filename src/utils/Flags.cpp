@@ -1,4 +1,4 @@
-#include "utils/flags.hpp"
+#include "utils/Flags.hpp"
 
 namespace utils
 {

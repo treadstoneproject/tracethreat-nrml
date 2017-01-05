@@ -4,13 +4,13 @@ ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS}
 
 lib_LTLIBRARIES = libutils.la
 
-libutils_la_SOURCES = flags.cpp 
+libutils_la_SOURCES = Flags.cpp 
 
-include_HEADERS = flags.hpp
+include_HEADERS = Flags.hpp
 
 check_PROGRAMS = test_utils
 
-test_utils_SOURCES  = $(libutils_la_SOURCES) test_utils.cpp
+test_utils_SOURCES  = $(libutils_la_SOURCES) TestUtils.cpp
 test_utils_CXXFLAGS = $(libutils_la_CXXFLAGS) -g -std=c++11
 test_utils_LDADD    = libutils.la \
                        -lgtest -lrocksdb
