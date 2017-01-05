@@ -39,10 +39,19 @@ namespace connector
 		 
 		bool kDBPath(const char *path); 
 		
+<<<<<<< HEAD
+		//rocksdb::Status  RocksDBConnector::connection();
+		 
+		//rocksdb::Options & RocksDBConnector::option();
+
+		//rocksdb::DB *getDB();
+		
+=======
 		rocksdb::Status  RocksDBConnector::connection();
 
 		rocksdb::DB * getDB();
 		 
+>>>>>>> elf_structure_asm_feature
 
 	private:  
 		  

@@ -39,7 +39,14 @@ namespace services
 		bool pingActive(const int32_t genNum);
 		/* Login user to system.*/
 		bool login(const authentication::User& user);
+<<<<<<< HEAD
+		/* Get mesage from TTMAT */
+		void getMailboxTTMAT(authentication::MailboxTTMAT & mailboxTTMAL, 
+			const authentication::User& user, 
+			const std::string& date);
+=======
 		 
+>>>>>>> dev_win32
 		/* Logout user from system*/
 		bool logout(const authentication::User& user);
 

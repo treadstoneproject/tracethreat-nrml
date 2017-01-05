@@ -22,6 +22,10 @@
 
 #include "utils/flags.hpp"
 
+<<<<<<< HEAD
+#include "connector/RocksDBConnector.hpp"
+=======
+>>>>>>> dev_win32
 
 class SystemTestingEnvironment : public testing::Environment
 {

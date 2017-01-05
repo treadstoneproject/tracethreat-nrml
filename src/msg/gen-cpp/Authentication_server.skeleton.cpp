@@ -37,6 +37,14 @@ class AuthenticationHandler : virtual public AuthenticationIf {
     printf("logout\n");
   }
 
+<<<<<<< HEAD
+  void getMailboxTTMAT(MailboxTTMAT& _return, const User& user, const std::string& date) {
+    // Your implementation goes here
+    printf("getMailboxTTMAT\n");
+  }
+
+=======
+>>>>>>> dev_win32
 };
 
 int main(int argc, char **argv) {

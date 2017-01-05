@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 /*
 * Copyright 2015 Chatsiri Rattana.
 *
@@ -19,6 +21,7 @@
 */
 
 
+>>>>>>> dev_win32
 #include <exception>
 
 #include "gtest/gtest.h"
@@ -61,6 +64,20 @@ TEST_F(RocksDBConnectTest, connectionCheck){
 	options.create_if_missing = true; 
 	status = rocksdb::DB::Open(options, dbPath->c_str(), &db);
 	 
+<<<<<<< HEAD
+	//Set simple options.
+	//rocksdbConnector.option();
+	
+	rocksdb::Options options;
+	options.create_if_missing = true;
+<<<<<<< HEAD
+
+	rocksdb::DB * db;
+
+	status = rocksdb::DB::Open(options, *dbPath, &db);
+=======
+=======
+>>>>>>> elf_structure_asm_feature
 
 	//rocksdbConnector.connection(); 
 	//db = rocksdbConnector.getDB();
@@ -109,8 +126,39 @@ TEST_F(RocksDBConnectTest, testMultipleRecords){
 
 	status = db->Put(rocksdb::WriteOptions(), "ttmat-message-mailbox-08/08/2015-19:01:02",
 		"{ ttmat-message-mailbox : [{ subject : Test mailbox , detail: Exception::message cannot access database , status: open, date : 08/08/2015 ] }");
+>>>>>>> dev_win32
+	EXPECT_EQ(status.ok(), true);
+	
+
+	/*
+	try{
+		//rocksdbConnector.option();
+		//status = rocksdbConnector.connection();
+		//EXPECT_EQ(status.ok(), true);
+	}
+	catch (std::exception ex){
+		LOG(INFO)<<ex.what();
+	}*/
+	
+
+<<<<<<< HEAD
+	//Put key-value
+	//rocksdb::DB * db = rocksdbConnector.getDB();
+	
+	status = db->Put(WriteOptions(), "user-authen", "chatsiri@treadstone.systems");
 	EXPECT_EQ(status.ok(), true);
 
+	status = db->Put(WriteOptions(), "pwd-authen", "12341234");
+	EXPECT_EQ(status.ok(), true);
+	
+
+	std::string value;
+	// get value
+	status = db->Get(ReadOptions(), "user-authen", &value);
+	EXPECT_EQ(status.ok(), true);
+	EXPECT_EQ(value, "chatsiri@treadstone.systems"); 
+	 
+=======
 
 	status = db->Put(rocksdb::WriteOptions(), "pwd-authen", "12341234");
 	EXPECT_EQ(status.ok(), true);
@@ -128,6 +176,7 @@ TEST_F(RocksDBConnectTest, testMultipleRecords){
 	LOG(INFO) << "Result from db : " << mbMessage;
 	EXPECT_EQ(mbMessage, "{ ttmat-message-mailbox : [{ subject : Test mailbox , detail: Exception::message cannot access database , status: open, date : 08/08/2015 ] }");
 
+>>>>>>> dev_win32
 	delete db;
 	
 }

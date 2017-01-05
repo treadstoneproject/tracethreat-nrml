@@ -12,7 +12,33 @@ namespace connector{
 			return false;
 		}
 		return true;
+<<<<<<< HEAD
+	}
+	/*
+	rocksdb::Options & RocksDBConnector::option(){
+<<<<<<< HEAD
+		rocksdb::Options options;
+		options.create_if_missing = true;
+		return options;
+	}*/
+
+	/*
+	rocksdb::Status  RocksDBConnector::connection(){
+		return  rocksdb::DB::Open(options, path_, &db);
+	}*/
+
+	/*
+	rocksdb::DB * RocksDBConnector::getDB(){
+		return db;
+	}*/
+=======
+		
+		return options;
+	}*/
+
+=======
 	} 
+>>>>>>> elf_structure_asm_feature
 	
  
 	rocksdb::Status  RocksDBConnector::connection(){
@@ -24,4 +50,9 @@ namespace connector{
 	rocksdb::DB * RocksDBConnector::getDB(){
 		return db;
 	}
+<<<<<<< HEAD
+>>>>>>> dev_win32
+	
+=======
+>>>>>>> elf_structure_asm_feature
 }

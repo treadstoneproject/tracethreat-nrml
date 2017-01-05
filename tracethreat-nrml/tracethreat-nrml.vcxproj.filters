@@ -75,6 +75,8 @@
     <ClInclude Include="..\src\controller\CredentialAccess.hpp">
       <Filter>Source Files\controller</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
     <ClInclude Include="..\src\msg\gen-cpp\ttmat_internal_constants.h">
       <Filter>Source Files\msg\gen-cpp</Filter>
     </ClInclude>
@@ -87,6 +89,7 @@
     <ClInclude Include="..\src\services\TTMATServiceHandler.hpp">
       <Filter>Source Files\services</Filter>
     </ClInclude>
+>>>>>>> dev_win32
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -125,6 +128,8 @@
     <ClCompile Include="..\src\controller\CredentialAccess.cpp">
       <Filter>Source Files\controller</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
     <ClCompile Include="..\src\msg\gen-cpp\ttmat_internal_constants.cpp">
       <Filter>Source Files\msg\gen-cpp</Filter>
     </ClCompile>
@@ -137,14 +142,18 @@
     <ClCompile Include="..\src\services\TTMATServiceHandler.cpp">
       <Filter>Source Files\services</Filter>
     </ClCompile>
+>>>>>>> dev_win32
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\msg\authenication.thrift">
       <Filter>Source Files\msg</Filter>
     </None>
+<<<<<<< HEAD
+=======
     <None Include="..\src\msg\ttmat_internal.thrift">
       <Filter>Source Files\msg</Filter>
     </None>
+>>>>>>> dev_win32
   </ItemGroup>
   <ItemGroup>
     <Text Include="RREADME.md" />

@@ -59,6 +59,30 @@ namespace services
 	   //Get path
 	   dbPath = utils::rocksDBPath();
 	   if (dbPath.empty())
+<<<<<<< HEAD
+		   return false;
+
+<<<<<<< HEAD
+	   rocksdbConnector.kDBPath(dbPath.c_str());
+=======
+	   //rocksdbConnector.kDBPath(dbPath.c_str());
+>>>>>>> dev_win32
+	    
+
+	   rocksdb::Options options;
+	   options.create_if_missing = true;
+<<<<<<< HEAD
+
+	   rocksdb::DB * db;
+
+=======
+
+	   rocksdb::DB * db;
+
+>>>>>>> dev_win32
+	   rocksdb::Status status = rocksdb::DB::Open(options, dbPath, &db); 
+
+=======
 		   return false; 
 	    
 	   rocksdb::DB * db;
@@ -66,6 +90,7 @@ namespace services
 	   options.create_if_missing = true;
 	   rocksdb::Status status = rocksdb::DB::Open(options, dbPath.c_str(), &db);
 	    
+>>>>>>> elf_structure_asm_feature
 	   if (!status.ok()){
 		   LOG(INFO) << " Login cannot connection to database";
 		   LOG(INFO) << " Status result : " << status.code();
@@ -78,10 +103,17 @@ namespace services
 	   LOG(INFO) << "User login  : " << user.userName << ", Pwd : " << user.password;
 
 	   // get user & pwd.
+<<<<<<< HEAD
+	   status = db->Get(ReadOptions(), std::string("user-authen"), &userName);
+
+	   status = db->Get(ReadOptions(), std::string("pwd-authen"), &password);
+
+=======
 	   status = db->Get(rocksdb::ReadOptions(), std::string("user-authen"), &userName);
 
 	   status = db->Get(rocksdb::ReadOptions(), std::string("pwd-authen"), &password);
 
+>>>>>>> dev_win32
 	 
 	  
 	   if ( (user.userName.compare(userName) == 0) && 
@@ -106,6 +138,51 @@ namespace services
 	{
 		LOG(INFO) << "Logout user service...";
 		return true;
+<<<<<<< HEAD
+	}//logout
+
+
+	void AuthenticationHandler::getMailboxTTMAT(authentication::MailboxTTMAT & mailboxTTMAL,
+		const authentication::User& user,
+		const std::string& date){
+			LOG(INFO) << "Get message from TT-MAT...";
+			//Get path
+			dbPath = utils::rocksDBPath();
+			if (dbPath.empty())
+				//return false;
+
+			rocksdbConnector.kDBPath(dbPath.c_str());
+
+
+			rocksdb::Options options;
+			options.create_if_missing = true;
+
+			rocksdb::DB * db;
+
+			rocksdb::Status status = rocksdb::DB::Open(options, dbPath, &db);
+
+			if (!status.ok()){
+				LOG(INFO) << " Login cannot connection to database";
+				LOG(INFO) << " Status result : " << status.code();
+				//return false;
+			} 
+
+			std::string * ttmatMessageError;
+			// get user & pwd.
+			status = db->Get(ReadOptions(), 
+				std::string("ttmat-message-error-")
+				.append(user.userName) //User name
+				.append("-")
+				.append(date),//Date (Not include time)
+				ttmatMessageError);
+			                                      
+			//[-] Convert message to json.
+		    //[-] Convert message to struct.
+			
+	}
+	 
+=======
 	}//logout 
+>>>>>>> dev_win32
 
 }
