@@ -18,7 +18,7 @@ TARGET_LINK_LIBRARIES(ttnrml_utils PRIVATE folly glog gtest rocksdb)
 ADD_EXECUTABLE(UtilsTest
                TestUtils.cpp)
 
-TARGET_LINK_LIBRARIES(UtilsTest  gtest gtest_main glog gflags)
+TARGET_LINK_LIBRARIES(UtilsTest ttnrml_utils gtest gtest_main glog gflags)
 
 ADD_TEST(UtilsTest UtilsTest)
 
