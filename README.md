@@ -1,8 +1,5 @@
-TraceThreat-NRML
-================
-
-
-## Near Realtime ML processesing.
+TraceThreat-NRML (Near Realtime Machine Learning processesing)
+==============================================================
 
 
 ### Schedule implement
