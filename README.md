@@ -1,4 +1,4 @@
-TraceThreat-NRML (Near Realtime Machine Learning processesing)
+TraceThreat-NRML (Near Realtime Machine Learning)
 ==============================================================
 
 
