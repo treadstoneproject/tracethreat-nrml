@@ -75,3 +75,5 @@ Debug/*
 /tracethreat-nrml/Debug/*
 test_core/Debug/
 test_core/Debug/*
+
+*.elf
