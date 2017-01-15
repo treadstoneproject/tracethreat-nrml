@@ -23,18 +23,26 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
-#include <QtGlobal>
+//#include <QtGlobal>
+#include <folly/FBString.h>
+#include <boost/algorithm/string.hpp>
+#include <folly/Portability.h>
+#include <folly/Conv.h>
+//#include <nc/config.h>
+using namespace folly;
+using namespace std;
 
-QT_BEGIN_NAMESPACE
-class QString;
-QT_END_NAMESPACE
+
+//QT_BEGIN_NAMESPACE
+//class fbstring;
+//QT_END_NAMESPACE
 
 namespace nc {
 
-QString escapeDotString(const QString &string);
-QString escapeCString(const QString &string);
+fbstring escapeDotString(const fbstring &string);
+fbstring escapeCString(const fbstring &string);
 
 } // namespace nc
 

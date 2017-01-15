@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 /* Undefine qt foreach. */
 #ifdef foreach

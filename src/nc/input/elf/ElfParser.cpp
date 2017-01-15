@@ -28,7 +28,7 @@
 #include <QIODevice>
 
 #include <nc/common/Foreach.h>
-#include <nc/common/LogToken.h>
+//#include <nc/common/LogToken.h>
 #include <nc/common/Range.h>
 #include <nc/common/make_unique.h>
 
@@ -164,7 +164,8 @@ private:
         } else if (ehdr_.e_ident[EI_DATA] == ELFDATA2MSB) {
             byteOrder_ = ByteOrder::BigEndian;
         } else {
-            log_.warning(tr("Invalid byte order in ELF file: %1. Assuming host byte order.").arg(ehdr_.e_ident[EI_DATA]));
+            //log_.warning(tr("Invalid byte order in ELF file: %1. Assuming host byte order.").arg(ehdr_.e_ident[EI_DATA]));
+            LOG(INFO)<<"Invalid byte order in ELF file: %1. Assuming host byte order : " << ehdr_.e_ident[EI_DATA];
         }
 
         byteOrder_.convertFrom(ehdr_.e_machine);
@@ -233,15 +234,20 @@ private:
                     auto bytes = source_->read(shdr.sh_size);
 
                     if (bytes.size() != static_cast<int>(shdr.sh_size)) {
+                        /*
                         log_.warning(tr("Could read only 0x%1 bytes of section %2, although its size is 0x%3.")
                                          .arg(bytes.size(), 0, 16)
                                          .arg(section->name())
                                          .arg(shdr.sh_size));
+                          */
+
+                        LOG(INFO)<<""Could read only 0x%1 bytes of section %2, although its size is 0x%3. : ";
                     }
 
                     section->setContent(std::move(bytes));
                 } else {
-                    log_.warning(tr("Could not seek to the data of section %1.").arg(section->name()));
+                    //log_.warning(tr("Could not seek to the data of section %1.").arg(section->name()));
+                    LOG(INFO)<<"Could not seek to the data of section %1. : " << section->name();
                 }
             }
 
@@ -274,7 +280,8 @@ private:
 
         auto strtabIndex = shdrs_[symtabIndex].sh_link;
         if (strtabIndex >= shdrs_.size()) {
-            log_.warning(tr("Symbol table (section number %1) has invalid string table section number %2.").arg(symtabIndex).arg(strtabIndex));
+            //log_.warning(tr("Symbol table (section number %1) has invalid string table section number %2.").arg(symtabIndex).arg(strtabIndex));
+            LOG(INFO)<<"Symbol table (section number %1) has invalid string table section number %2. ";
             return;
         }
 
@@ -345,7 +352,8 @@ private:
 
         std::size_t symIndex = shdrs_[reltabIndex].sh_link;
         if (symIndex >= sections_.size()) {
-            log_.warning(tr("Relocations table %1 uses invalid symbol table %2.").arg(reltabIndex).arg(symIndex));
+            //log_.warning(tr("Relocations table %1 uses invalid symbol table %2.").arg(reltabIndex).arg(symIndex));
+            LOG(INFO)<<"Relocations table %1 uses invalid symbol table %2.";
             return;
         }
 
@@ -371,7 +379,8 @@ private:
                 result.push_back(std::make_unique<core::image::Relocation>(
                     rel.r_offset, symbolTable[symbolIndex].get(), sizeof(typename Elf::Addr), Relocation::addend(rel)));
             } else {
-                log_.warning(tr("Symbol index %1 is out of range: symbol table has only %2 elements.").arg(symbolIndex).arg(symbolTable.size()));
+                //log_.warning(tr("Symbol index %1 is out of range: symbol table has only %2 elements.").arg(symbolIndex).arg(symbolTable.size()));
+                LOG(INFO)<<"Symbol index %1 is out of range: symbol table has only %2 elements.";
             }
         }
     }

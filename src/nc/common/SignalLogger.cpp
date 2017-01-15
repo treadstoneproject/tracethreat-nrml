@@ -2,11 +2,13 @@
 /* See doc/licenses.asciidoc for the licensing information. */
 
 #include "SignalLogger.h"
-
+#include <folly/FBString.h>
 namespace nc {
 
-void SignalLogger::log(LogLevel level, const QString &text) {
-    Q_EMIT onMessage(tr("[%1] %2").arg(level.getName()).arg(text));
+void SignalLogger::log(LogLevel level, const folly::String &text) {
+    //Q_EMIT onMessage(tr("[%1] %2").arg(level.getName()).arg(text));
+    onMessage(tr("[%1] %2").arg(level.getName()).arg(text));
+
 }
 
 } // namespace nc
