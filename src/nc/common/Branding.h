@@ -3,42 +3,46 @@
 
 #pragma once
 
-#include <nc/config.h>
-
-#include <QString>
+#include <folly/FBString.h>
+#include <boost/algorithm/string.hpp>
+#include <folly/Portability.h>
+#include <folly/Conv.h>
+//#include <nc/config.h>
+using namespace folly;
+using namespace std;
 
 namespace nc {
 
 class Branding {
-    QString applicationName_;
-    QString applicationVersion_;
-    QString organizationDomain_;
-    QString organizationName_;
-    QString licenseName_;
-    QString licenseUrl_;
-    QString reportBugsTo_;
+    fbstring applicationName_;
+      fbstring applicationVersion_;
+      fbstring organizationDomain_;
+      fbstring organizationName_;
+      fbstring licenseName_;
+      fbstring licenseUrl_;
+      fbstring reportBugsTo_;
 
 public:
-    const QString &applicationName() const { return applicationName_; }
-    void setApplicationName(QString name) { applicationName_ = std::move(name); }
+    const   fbstring &applicationName() const { return applicationName_; }
+    void setApplicationName(  fbstring name) { applicationName_ = std::move(name); }
 
-    const QString &applicationVersion() const { return applicationVersion_; }
-    void setApplicationVersion(QString version) { applicationVersion_ = std::move(version); }
+    const   fbstring &applicationVersion() const { return applicationVersion_; }
+    void setApplicationVersion(  fbstring version) { applicationVersion_ = std::move(version); }
 
-    const QString &organizationDomain() const { return organizationDomain_; }
-    void setOrganizationDomain(QString domain) { organizationDomain_ = std::move(domain); }
+    const   fbstring &organizationDomain() const { return organizationDomain_; }
+    void setOrganizationDomain(  fbstring domain) { organizationDomain_ = std::move(domain); }
 
-    const QString &organizationName() const { return organizationName_; }
-    void setOrganizationName(QString name) { organizationName_ = std::move(name); }
+    const   fbstring &organizationName() const { return organizationName_; }
+    void setOrganizationName(  fbstring name) { organizationName_ = std::move(name); }
 
-    const QString &licenseName() const { return licenseName_; }
-    void setLicenseName(QString name) { licenseName_ = std::move(name); }
+    const   fbstring &licenseName() const { return licenseName_; }
+    void setLicenseName(  fbstring name) { licenseName_ = std::move(name); }
 
-    const QString &licenseUrl() const { return licenseUrl_; }
-    void setLicenseUrl(QString url) { licenseUrl_ = std::move(url); }
+    const   fbstring &licenseUrl() const { return licenseUrl_; }
+    void setLicenseUrl(  fbstring url) { licenseUrl_ = std::move(url); }
 
-    const QString &reportBugsTo() const { return reportBugsTo_; }
-    void setReportBugsTo(QString reportBugsTo) { reportBugsTo_ = reportBugsTo; }
+    const   fbstring &reportBugsTo() const { return reportBugsTo_; }
+    void setReportBugsTo(  fbstring reportBugsTo) { reportBugsTo_ = reportBugsTo; }
 };
 
 /**

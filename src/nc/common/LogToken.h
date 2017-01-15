@@ -25,6 +25,8 @@
 
 #include <nc/config.h>
 
+#inclcde <folly/FBString.h>
+
 #include <cassert>
 #include <memory>
 
@@ -64,7 +66,7 @@ public:
      * \param[in] level Log level of the message.
      * \param[in] text  Text of the message.
      */
-    void log(LogLevel level, const QString &text) const {
+    void log(LogLevel level, const folly::String &text) const {
         if (logger_) {
             logger_->log(level, text);
         }
@@ -75,28 +77,28 @@ public:
      *
      * \param[in] text Text of the message.
      */
-    void debug(const QString &text) const { log(LogLevel::DEBUG, text); }
+    void debug(const String &text) const { log(LogLevel::DEBUG, text); }
 
     /**
      * Logs a message with the info level.
      *
      * \param[in] text Text of the message.
      */
-    void info(const QString &text) const { log(LogLevel::INFO, text); }
+    void info(const String &text) const { log(LogLevel::INFO, text); }
 
     /**
      * Logs a message with the warning level.
      *
      * \param[in] text Text of the message.
      */
-    void warning(const QString &text) const { log(LogLevel::WARNING, text); }
+    void warning(const String &text) const { log(LogLevel::WARNING, text); }
 
     /**
      * Logs a message with the error level.
      *
      * \param[in] text Text of the message.
      */
-    void error(const QString &text) const { log(LogLevel::ERROR, text); }
+    void error(const String &text) const { log(LogLevel::ERROR, text); }
 };
 
 } // namespace nc

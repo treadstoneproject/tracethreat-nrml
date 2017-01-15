@@ -16,9 +16,9 @@ namespace nc {
  * Logger printing messages to a stream.
  */
 class StreamLogger: public nc::Logger {
-    Q_DECLARE_TR_FUNCTIONS(StreamLogger)
+//    Q_DECLARE_TR_FUNCTIONS(StreamLogger)
 
-    QTextStream &stream_;
+//    QTextStream &stream_;
 
 public:
     /**
@@ -26,7 +26,7 @@ public:
      *
      * \param stream Reference to the stream to print messages to.
      */
-    StreamLogger(QTextStream &stream): stream_(stream) {}
+//    StreamLogger(QTextStream &stream): stream_(stream) {}
 
     void log(LogLevel level, const QString &text) override;
 };

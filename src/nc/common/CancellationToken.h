@@ -23,11 +23,11 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <memory> /* std::shared_ptr */
 
-#include <QCoreApplication>
+//#include <QCoreApplication>
 
 #include "Exception.h"
 
@@ -37,7 +37,7 @@ namespace nc {
  * Exception thrown when cancellation was requested.
  */
 class CancellationException: public nc::Exception {
-    Q_DECLARE_TR_FUNCTIONS(CancellationException)
+//    Q_DECLARE_TR_FUNCTIONS(CancellationException)
 
 public:
     /**

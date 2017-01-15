@@ -26,23 +26,23 @@
 
 namespace nc {
 
-Exception::Exception(const QString &message) {
+Exception::Exception(const folly::fbstring &message) {
     *this << ExceptionMessage(message);
 }
 
 Exception::~Exception() noexcept {}
 
-QString Exception::unicodeWhat() const noexcept {
-    if (const QString *result = boost::get_error_info<ExceptionMessage>(*this)) {
+folly::fbstring Exception::unicodeWhat() const noexcept {
+    if (const folly::fbstring *result = boost::get_error_info<ExceptionMessage>(*this)) {
         return *result;
     } else {
-        return QString();
+        return folly::fbstring();
     }
 }
 
 const char *Exception::what() const noexcept {
-    if (mCachedWhat.isNull()) {
-        mCachedWhat = unicodeWhat().toLocal8Bit();
+    if (mCachedWhat.size() == 0) {
+        //mCachedWhat = unicodeWhat().toLocal8Bit();
     }
     return mCachedWhat.data();
 }

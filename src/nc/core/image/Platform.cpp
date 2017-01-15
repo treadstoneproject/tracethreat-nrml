@@ -3,6 +3,8 @@
 
 #include "Platform.h"
 
+#include "folly/FBString.h"
+
 #include <climits>
 #include <nc/core/arch/ArchitectureRepository.h>
 
@@ -14,7 +16,7 @@ Platform::Platform():
     intSize_(sizeof(int) * CHAR_BIT)
 {}
 
-void Platform::setArchitecture(const QString &name) {
+void Platform::setArchitecture(const folly::String &name) {
     setArchitecture(arch::ArchitectureRepository::instance()->getArchitecture(name));
 }
 

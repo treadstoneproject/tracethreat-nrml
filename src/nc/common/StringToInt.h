@@ -3,11 +3,13 @@
 
 #pragma once
 
-#include <nc/config.h>
+#include <folly/FBString.h>
+
+//#include <nc/config.h>
 
 #include <boost/optional.hpp>
 
-#include <QString>
+//#include <QString>
 
 namespace nc {
 
@@ -22,7 +24,7 @@ namespace nc {
  */
 template<class T>
 boost::optional<T>
-stringToInt(const QString &s, int base = 10);
+stringToInt(const folly::fbstring &s, int base = 10);
 
 } // namespace nc
 

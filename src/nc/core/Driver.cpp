@@ -3,7 +3,7 @@
 
 #include "Driver.h"
 
-#include <QFile>
+//#include <QFile>
 
 #include <nc/common/Foreach.h>
 #include <nc/common/Exception.h>
@@ -24,19 +24,24 @@
 namespace nc {
 namespace core {
 
-void Driver::parse(Context &context, const QString &filename) {
+void Driver::parse(Context &context, const folly::String &filename) {
     QFile source(filename);
 
     if (!source.open(QIODevice::ReadOnly)) {
         throw nc::Exception(tr("Could not open file \"%1\" for reading.").arg(filename));
     }
 
-    context.logToken().info(tr("Choosing a parser for %1...").arg(filename));
+    //context.logToken().info(tr("Choosing a parser for %1...").arg(filename));
+    LOG(INFO)<<"Choosing a parser for %1... : " << filename ;
 
     const input::Parser *suitableParser = nullptr;
 
     foreach(const input::Parser *parser, input::ParserRepository::instance()->parsers()) {
-        context.logToken().info(tr("Trying %1 parser...").arg(parser->name()));
+
+        //context.logToken().info(tr("Trying %1 parser...").arg(parser->name()));
+
+        LOG(INFO)<<"Trying %1 parser... : " << parser->name();
+
         if (parser->canParse(&source)) {
             suitableParser = parser;
             break;
@@ -44,20 +49,24 @@ void Driver::parse(Context &context, const QString &filename) {
     }
 
     if (!suitableParser) {
-        context.logToken().error(tr("No suitable parser found."));
+        LOG(INFO)<<"No suitable parser found";
+
+//        context.logToken().error(tr("No suitable parser found."));
         throw nc::Exception(tr("File %1 has unknown format.").arg(filename));
     }
 
-    context.logToken().info(tr("Parsing using %1 parser...").arg(suitableParser->name()));
+//    context.logToken().info(tr("Parsing using %1 parser...").arg(suitableParser->name()));
+    LOG(INFO)<<"Parsing using %1 parser... : "<<suitableParser->name();
 
     suitableParser->parse(&source, context.image().get(), context.logToken());
 
-    context.logToken().info(tr("Parsing completed."));
+//    context.logToken().info(tr("Parsing completed."));
+    LOG(INFO)<<"Parsing completed.";
 }
 
 void Driver::disassemble(Context &context) {
-    context.logToken().info(tr("Disassemble code sections."));
-
+//    context.logToken().info(tr("Disassemble code sections."));
+    LOG(INFO)<<"Disassemble code sections.";
     foreach (auto section, context.image()->sections()) {
         if (section->isCode()) {
             disassemble(context, section);
@@ -68,16 +77,16 @@ void Driver::disassemble(Context &context) {
 void Driver::disassemble(Context &context, const image::Section *section) {
     assert(section != nullptr);
 
-    context.logToken().info(tr("Disassemble section %1...").arg(section->name()));
-
+    //context.logToken().info(tr("Disassemble section %1...").arg(section->name()));
+    LOG(INFO)<<"Disassemble section %1... : "<<section->name();
     disassemble(context, section, section->addr(), section->endAddr());
 }
 
 void Driver::disassemble(Context &context, const image::ByteSource *source, ByteAddr begin, ByteAddr end) {
     assert(source != nullptr);
 
-    context.logToken().info(tr("Disassemble addresses from 0x%2 to 0x%3...").arg(begin, 0, 16).arg(end, 0, 16));
-
+    //context.logToken().info(tr("Disassemble addresses from 0x%2 to 0x%3...").arg(begin, 0, 16).arg(end, 0, 16));
+    //LOG(INFO)<<"Disassemble addresses from 0x%2 to 0x%3... : " << 
     try {
         auto newInstructions = std::make_shared<arch::Instructions>(*context.instructions());
 
@@ -91,9 +100,11 @@ void Driver::disassemble(Context &context, const image::ByteSource *source, Byte
 
         context.setInstructions(newInstructions);
 
-        context.logToken().info(tr("Disassembly completed."));
+        //context.logToken().info(tr("Disassembly completed."));
+        LOG(INFO)<<"Disassembly completed.";
     } catch (const CancellationException &) {
-        context.logToken().info(tr("Disassembly canceled."));
+        //context.logToken().info(tr("Disassembly canceled."));
+        LOG(INFO)<<"Disassembly canceled.";
     }
 }
 
@@ -101,7 +112,8 @@ void Driver::decompile(Context &context) {
     try {
         context.image()->platform().architecture()->masterAnalyzer()->decompile(context);
     } catch (const CancellationException &) {
-        context.logToken().info(tr("Decompilation canceled."));
+        //context.logToken().info(tr("Decompilation canceled."));
+        LOG(INFO)<<"Decompilation canceled.";
         throw;
     }
 }

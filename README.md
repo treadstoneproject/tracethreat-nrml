@@ -1,6 +1,10 @@
 TraceThreat-NRML (Near Realtime Machine Learning)
 ==============================================================
 
+### License
+
+GNU dependency license under SmartDec decompiler.
+Apache 2.0 license under TraceThreat-NRML.
 
 ### Schedule implement
 

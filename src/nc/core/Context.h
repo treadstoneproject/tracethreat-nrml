@@ -27,10 +27,10 @@
 
 #include <memory> /* For std::unique_ptr. */
 
-#include <QObject>
+//#include <QObject>
 
 #include <nc/common/CancellationToken.h>
-#include <nc/common/LogToken.h>
+//#include <nc/common/LogToken.h>
 
 namespace nc {
 namespace core {
@@ -77,8 +77,8 @@ namespace likec {
 /**
  * This class stores all the information that is required and produced during decompilation.
  */
-class Context: public QObject {
-    Q_OBJECT
+class Context /*: public QObject*/ {
+    //Q_OBJECT
 
     std::shared_ptr<image::Image> image_; ///< Executable image being decompiled.
     std::shared_ptr<const arch::Instructions> instructions_; ///< Instructions being decompiled.
@@ -310,12 +310,12 @@ public:
      *
      * \param token log token.
      */
-    void setLogToken(const LogToken &token) { logToken_ = token; }
+    //void setLogToken(const LogToken &token) { logToken_ = token; }
 
     /**
      * \return Log token.
      */
-    const LogToken &logToken() const { return logToken_; }
+    //const LogToken &logToken() const { return logToken_; }
 
     Q_SIGNALS:
 

@@ -24,18 +24,19 @@
 
 #include "Escaping.h"
 
-#include <nc/common/Foreach.h>
+#include <Foreach.h>
 
-#include <QString>
+//#include <Qfbstring>
 
 namespace nc {
 
-QString escapeDotString(const QString &string) {
-    QString result;
+fbstring escapeDotString(const fbstring &string) {
+    fbstring result;
     result.reserve(string.size());
 
-    foreach (QChar c, string) {
-        switch (c.toLatin1()) {
+    foreach (char c, string) {
+        //toLatin1()
+        switch (c) {
             case '\\':
                 result += "\\\\";
                 break;
@@ -54,12 +55,12 @@ QString escapeDotString(const QString &string) {
     return result;
 }
 
-QString escapeCString(const QString &string) {
-    QString result;
+fbstring escapeCString(const fbstring &string) {
+    fbstring result;
     result.reserve(string.size());
 
-    foreach (QChar c, string) {
-        switch (c.toLatin1()) {
+    foreach (char c, string) {
+        switch (c) {
             case '\\':
                 result += "\\\\";
                 break;

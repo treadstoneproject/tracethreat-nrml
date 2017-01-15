@@ -23,19 +23,21 @@
 
 #pragma once
 
-#include <nc/config.h>
+
 
 #include <stdexcept>
 
 #include <boost/exception/all.hpp>
 
-#include <QString>
-#include <QByteArray>
+#include <folly/FBString.h>
+
+#include <vector>
+//#include <QByteArray>
 
 namespace nc {
 
 /** Error info structure for the error message.  */
-typedef boost::error_info<struct MessageTag, QString> ExceptionMessage;
+typedef boost::error_info<struct MessageTag, folly::fbstring> ExceptionMessage;
 
 /**
  * Base exception class for all nocode exceptions.
@@ -55,7 +57,7 @@ public:
      * \param message Exception message.
      */
     explicit
-    Exception(const QString &message);
+    Exception(const folly::fbstring &message);
 
     /**
      * Virtual destructor.
@@ -65,7 +67,7 @@ public:
     /**
      * \return A Unicode string containing a generic description of the exception.
      */
-    virtual QString unicodeWhat() const noexcept;
+    virtual folly::fbstring unicodeWhat() const noexcept;
 
     /**
      * \return A null terminated string containing a generic description of the exception.
@@ -73,7 +75,7 @@ public:
     virtual const char *what() const noexcept override;
 
 private:
-    mutable QByteArray mCachedWhat;
+    std::vector<char> mCachedWhat;
 };
 
 } // namespace nc
