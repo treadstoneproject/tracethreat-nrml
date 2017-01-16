@@ -1,7 +1,7 @@
 #set(MOC_HEADERS
 #    SignalLogger.h
 #)
-INCLUDE_DIRECTORIES(/usr/local/include/ .)
+INCLUDE_DIRECTORIES(/usr/local/include/ ../../ .)
 
 
 MESSAGE( STATUS "PROJECT_SOURCE_DIR : " ${PROJECT_SOURCE_DIR} )

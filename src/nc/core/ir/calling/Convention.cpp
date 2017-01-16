@@ -36,7 +36,7 @@ namespace core {
 namespace ir {
 namespace calling {
 
-Convention::Convention(QString name):
+Convention::Convention(folly::fbstring name):
     name_(std::move(name)),
     firstArgumentOffset_(0),
     argumentAlignment_(0),

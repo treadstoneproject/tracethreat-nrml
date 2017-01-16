@@ -3,9 +3,9 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
-#include <nc/core/arch/Architecture.h>
+#include <../core/arch/Architecture.h>
 
 namespace nc {
 namespace arch {

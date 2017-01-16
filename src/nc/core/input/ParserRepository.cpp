@@ -30,8 +30,10 @@
 #include <nc/common/make_unique.h>
 
 #include <nc/input/elf/ElfParser.h>
-#include <nc/input/mach-o/MachOParser.h>
-#include <nc/input/pe/PeParser.h>
+//#include <nc/input/mach-o/MachOParser.h>
+//#include <nc/input/pe/PeParser.h>
+
+#include <folly/FBString.h>
 
 #include "Parser.h"
 
@@ -42,8 +44,8 @@ namespace {
 ParserRepository *createInstance() {
     static ParserRepository result;
     result.registerParser(std::make_unique<nc::input::elf::ElfParser>());
-    result.registerParser(std::make_unique<nc::input::mach_o::MachOParser>());
-    result.registerParser(std::make_unique<nc::input::pe::PeParser>());
+//    result.registerParser(std::make_unique<nc::input::mach_o::MachOParser>());
+//    result.registerParser(std::make_unique<nc::input::pe::PeParser>());
     return &result;
 }
 
@@ -61,7 +63,7 @@ void ParserRepository::registerParser(std::unique_ptr<Parser> parser) {
     parsers_.push_back(std::move(parser));
 }
 
-const Parser *ParserRepository::getParser(const QString &name) const {
+const Parser *ParserRepository::getParser(const folly::fbstring &name) const {
     foreach (auto parser, parsers()) {
         if (parser->name() == name) {
             return parser;

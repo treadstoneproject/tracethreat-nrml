@@ -22,10 +22,11 @@
  */
 
 #pragma once
+#include <glog/logging.h>
+#include<folly/FBString.h>
+//#include <nc/config.h>
 
-#include <nc/config.h>
-
-#include <QTextStream>
+//#include <QTextStream>
 
 namespace nc {
 
@@ -45,21 +46,22 @@ class PrintableBase {
      *
      * \param out Output stream.
      */
-    void print(QTextStream &out) const {
-        static_cast<const T *>(this)->print(out);
+    void print(folly::fbstring &out) const {
+        //static_cast<const T *>(this)->print(out);
+        LOG(INFO)<<out;
     }
 
     /**
      * \return String representation of the object.
-     */
-    QString toString() const {
-        QString result;
-        QTextStream stream(&result);
+     *
+    folly::fbstring toString() const {
+       // QString result;
+       // QTextStream stream(&result);
 
-        print(stream);
+        //print(stream);
 
         return result;
-    }
+    }*/
 };
 
 /**
@@ -75,7 +77,7 @@ class Printable: public PrintableBase<Printable> {
      *
      * \param out Output stream.
      */
-    virtual void print(QTextStream &out) const = 0;
+    virtual void print(folly::fbstring &out) const = 0;
 
     /**
      * Virtual destructor.
@@ -90,12 +92,12 @@ class Printable: public PrintableBase<Printable> {
  * \param[in] entity Object to be printed.
  *
  * \return The output stream.
- */
+ *
 template<class T>
 inline QTextStream &operator<<(QTextStream &out, const PrintableBase<T> &entity) {
     entity.print(out);
     return out;
-}
+}*/
 
 } // namespace nc
 

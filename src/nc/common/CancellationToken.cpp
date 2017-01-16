@@ -24,7 +24,7 @@
 
 #include "CancellationToken.h"
 
-#include <QCoreApplication>
+//#include <QCoreApplication>
 
 namespace nc {
 
@@ -34,9 +34,9 @@ CancellationException::CancellationException():
 
 #ifndef NC_USE_THREADS
 bool CancellationToken::cancellationRequested() const {
-    if (qApp) {
-        qApp->processEvents();
-    }
+  //  if (qApp) {
+   //     qApp->processEvents();
+   // }
 
     return *cancellationRequested_;
 }

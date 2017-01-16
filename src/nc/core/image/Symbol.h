@@ -3,13 +3,13 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <boost/optional.hpp>
 
-#include <QCoreApplication>
-#include <QString>
-
+//#include <QCoreApplication>
+//#include <folly::fbstring>
+#include <folly/FBString.h>
 #include <nc/common/Types.h>
 
 namespace nc {
@@ -22,7 +22,7 @@ class Section;
  * Symbol type.
  */
 class SymbolType {
-    Q_DECLARE_TR_FUNCTIONS(SymbolType)
+//    Q_DECLARE_TR_FUNCTIONS(SymbolType)
 
 public:
     /**
@@ -52,12 +52,12 @@ public:
      *
      * \return Name of the given symbol type.
      */
-    static QString getName(Type type);
+    static folly::fbstring getName(Type type);
 
     /**
      * \return Name of the symbol type.
      */
-    QString getName() const { return getName(type_); }
+    folly::fbstring getName() const { return getName(type_); }
 
 private:
     Type type_;
@@ -66,7 +66,7 @@ private:
 class Symbol {
 private:
     SymbolType type_; ///< Type of the symbol.
-    QString name_; ///< Name of the symbol.
+    folly::fbstring name_; ///< Name of the symbol.
     boost::optional<ConstantValue> value_; ///< Value of the symbol.
     const Section *section_; ///< Section referenced by the symbol.
 
@@ -79,7 +79,7 @@ public:
      * \param value Value of the symbol.
      * \param section Pointer to the section referenced by the symbol.
      */
-    Symbol(SymbolType type, QString name, const boost::optional<ConstantValue> &value, const Section *section = nullptr):
+    Symbol(SymbolType type, folly::fbstring name, const boost::optional<ConstantValue> &value, const Section *section = nullptr):
         type_(type), name_(std::move(name)), value_(value), section_(section)
     {}
 
@@ -91,7 +91,7 @@ public:
     /**
      * \return Name of the symbol.
      */
-    QString name() const { return name_; }
+    folly::fbstring name() const { return name_; }
 
     /**
      * \return Value of the symbol.

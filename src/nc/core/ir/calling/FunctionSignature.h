@@ -23,12 +23,12 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <memory>
 #include <vector>
 
-#include <QString>
+//#include <QString>
 
 #include <nc/core/ir/Term.h>
 

@@ -24,6 +24,8 @@
 
 #include "Architecture.h"
 
+#include <folly/FBString.h>
+
 #include <nc/common/Foreach.h>
 
 #include <nc/core/ir/MemoryLocation.h>
@@ -42,9 +44,9 @@ Architecture::Architecture():
 
 Architecture::~Architecture() {}
 
-void Architecture::setName(QString name) {
-    assert(mName.isEmpty() && "Name must be non-empty.");
-    assert(!name.isEmpty() && "Name cannot be reset.");
+void Architecture::setName(folly::fbstring name) {
+    assert(mName.empty() && "Name must be non-empty.");
+    assert(!name.empty() && "Name cannot be reset.");
 
     mName = std::move(name);
 }
@@ -89,7 +91,7 @@ void Architecture::addCallingConvention(std::unique_ptr<ir::calling::Convention>
     conventions_.push_back(std::move(convention));
 }
 
-const ir::calling::Convention *Architecture::getCallingConvention(const QString &name) const {
+const ir::calling::Convention *Architecture::getCallingConvention(const folly::fbstring &name) const {
     foreach (auto convention, conventions()) {
         if (convention->name() == name) {
             return convention;

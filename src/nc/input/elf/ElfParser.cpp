@@ -24,8 +24,8 @@
 
 #include "ElfParser.h"
 
-#include <QCoreApplication> /* For Q_DECLARE_TR_FUNCTIONS. */
-#include <QIODevice>
+//#include <QCoreApplication> /* For Q_DECLARE_TR_FUNCTIONS. */
+//#include <QIODevice>
 
 #include <nc/common/Foreach.h>
 //#include <nc/common/LogToken.h>
@@ -104,11 +104,12 @@ public:
 
 template<class Elf>
 class ElfParserImpl {
-    Q_DECLARE_TR_FUNCTIONS(ElfParserImpl)
+//    Q_DECLARE_TR_FUNCTIONS(ElfParserImpl)
 
-    QIODevice *source_;
+    //QIODevice *source_;
+    std::ofstream *source_;
     core::image::Image *image_;
-    const LogToken &log_;
+    //const LogToken &log_;
 
     typename Elf::Ehdr ehdr_;
     ByteOrder byteOrder_;
@@ -118,8 +119,8 @@ class ElfParserImpl {
     boost::unordered_map<std::size_t, std::vector<std::unique_ptr<core::image::Relocation>>> relocationTables_;
 
 public:
-    ElfParserImpl(QIODevice *source, core::image::Image *image, const LogToken &log):
-        source_(source), image_(image), log_(log), byteOrder_(ByteOrder::Current)
+    ElfParserImpl(QIODevice *source, core::image::Image *image):
+        source_(source), image_(image),  byteOrder_(ByteOrder::Current)
     {}
 
     void parse() {

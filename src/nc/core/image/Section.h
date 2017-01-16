@@ -23,16 +23,19 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <memory> /* std::unique_ptr */
-
-#include <QByteArray>
-#include <QString>
-
+#include <vector>
+//#include <QByteArray>
+//#include <folly::fbstring>
+#include <vector>
 #include <nc/common/Types.h>
 
 #include "ByteSource.h"
+
+#include <folly/FBString.h>
+
 
 namespace nc {
 namespace core {
@@ -42,7 +45,7 @@ namespace image {
  * Section of an executable file.
  */
 class Section: public ByteSource {
-    QString name_; ///< Name of the section.
+    folly::fbstring name_; ///< Name of the section.
 
     ByteAddr addr_; ///< Linear address of section start.
     ByteSize size_; ///< Size of the section.
@@ -57,7 +60,7 @@ class Section: public ByteSource {
     bool isData_; ///< True if the section contains data.
     bool isBss_; ///< True if the section is bss.
 
-    QByteArray content_; ///< Data contained in the section.
+    std::vector<unsigned char> content_; ///< Data contained in the section.
     std::unique_ptr<ByteSource> externalByteSource_; ///< External source of this section's bytes.
 
 public:
@@ -68,19 +71,19 @@ public:
      * \param[in] addr  Linear address of the section's start.
      * \param[in] size  Size of the section.
      */
-    Section(const QString &name, ByteAddr addr, ByteSize size);
+    Section(const folly::fbstring &name, ByteAddr addr, ByteSize size);
 
     /**
      * \return Name of the section.
      */
-    const QString &name() const { return name_; }
+    const folly::fbstring &name() const { return name_; }
 
     /**
      * Sets name of the section.
      *
      * \param name New name of the section.
      */
-    void setName(const QString &name) { name_ = name; }
+    void setName(const folly::fbstring &name) { name_ = name; }
 
     /**
      * \return Virtual address of the section's start.
@@ -210,7 +213,7 @@ public:
      *
      * \param content New content.
      */
-    void setContent(QByteArray content) { content_ = std::move(content); }
+    void setContent(std::vector<unsigned char> content) { content_ = std::move(content); }
 
     /**
      * Sets the external byte source with the content of the section.

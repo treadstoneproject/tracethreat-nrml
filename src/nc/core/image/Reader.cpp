@@ -24,7 +24,7 @@
 
 #include "Reader.h"
 
-#include <QString>
+//#include <folly::fbstring>
 
 namespace nc {
 namespace core {
@@ -34,11 +34,11 @@ ByteSize Reader::readBytes(ByteAddr addr, void *buf, ByteSize size) const {
     return externalByteSource_->readBytes(addr, buf, size);
 }
 
-QString Reader::readAsciizString(ByteAddr addr, ByteSize maxSize) const {
+folly::fbstring Reader::readAsciizString(ByteAddr addr, ByteSize maxSize) const {
     assert(maxSize >= 0);
 
     if (maxSize == 0) {
-        return QString();
+        return folly::fbstring();
     }
 
     std::unique_ptr<char[]> buf(new char[maxSize + 1]);
@@ -47,10 +47,10 @@ QString Reader::readAsciizString(ByteAddr addr, ByteSize maxSize) const {
     assert(size <= maxSize);
 
     if (size == 0) {
-        return QString();
+        return folly::fbstring();
     } else {
         buf.get()[size] = '\0';
-        return QString::fromLatin1(buf.get());
+        return folly::fbstring(buf.get());//::fromLatin1(buf.get());
     }
 }
 

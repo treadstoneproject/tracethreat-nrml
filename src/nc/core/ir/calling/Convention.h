@@ -23,12 +23,13 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <memory>
 #include <vector>
 
-#include <QString>
+#include <folly/FBString.h>
+//#include <folly::fbstring>
 
 #include <nc/common/ilist.h>
 
@@ -51,7 +52,7 @@ public:
     typedef nc::ilist<Statement> Statements;
 
 private:
-    QString name_; ///< Name of the calling convention.
+    folly::fbstring name_; ///< Name of the calling convention.
 
     MemoryLocation stackPointer_; ///< Memory location of stack pointer register.
 
@@ -71,7 +72,7 @@ public:
      *
      * \param name Name of the calling convention.
      */
-    Convention(QString name);
+    Convention(folly::fbstring name);
 
     /**
      * Destructor.
@@ -81,7 +82,7 @@ public:
     /**
      * \return Name of the calling convention.
      */
-    const QString &name() const { return name_; }
+    const folly::fbstring &name() const { return name_; }
 
     /**
      * \return MemoryLocation of stack pointer register.

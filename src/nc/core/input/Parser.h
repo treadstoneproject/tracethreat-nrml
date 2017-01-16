@@ -23,14 +23,18 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
-#include <QObject>
-#include <QString>
+#include <folly/FBString.h>
 
-QT_BEGIN_NAMESPACE
-class QIODevice;
-QT_END_NAMESPACE
+#include <fstream>
+
+//#include <QObject>
+//#include <folly::fbstring>
+
+//QT_BEGIN_NAMESPACE
+//class QIODevice;
+//QT_END_NAMESPACE
 
 namespace nc {
 
@@ -63,8 +67,8 @@ namespace input {
  * threads. In general, single instance of a concrete input parser should be
  * enough for the whole application.
  */
-class Parser: public QObject {
-    QString name_; ///< Name of this parser.
+class Parser /*: public QObject*/ {
+    folly::fbstring name_; ///< Name of this parser.
 
 public:
     /**
@@ -72,7 +76,7 @@ public:
      * 
      * \param[in] name Name of this parser.
      */
-    Parser(QString name): name_(std::move(name)) {}
+    Parser(folly::fbstring name): name_(std::move(name)) {}
 
     /**
      * Virtual destructor.
@@ -82,7 +86,7 @@ public:
     /**
      * \returns Name of this parser.
      */
-    const QString &name() const { return name_; }
+    const folly::fbstring &name() const { return name_; }
 
     /**
      * \param[in] source Valid pointer to the data source.
@@ -90,8 +94,8 @@ public:
      * \returns Whether the data at source looks like
      *          something that can be parsed with this parser.
      */
-    bool canParse(QIODevice *source) const;
-
+    //bool canParse(QIODevice *source) const;
+    bool canParse(std::ofstream * source) const;
     /**
      * Parse executable image from the given IO device.
      *
@@ -99,7 +103,8 @@ public:
      * \param[out] image Valid pointer to the image.
      * \param[in] log Log token.
      */
-    void parse(QIODevice *source, image::Image *image, const LogToken &log) const;
+    //void parse(QIODevice *source, image::Image *image, const LogToken &log) const;
+    void parse(std::ofstream *source, image::Image *image) const;
 
 protected:
     /**
@@ -108,7 +113,8 @@ protected:
      * \returns Whether the data at source looks like
      *          something that can be parsed with this parser.
      */
-    virtual bool doCanParse(QIODevice *source) const = 0;
+    //virtual bool doCanParse(QIODevice *source) const = 0;
+    virtual bool doCanParse(std::ofstream *source) const = 0;
 
     /**
      * Actually parses executable image from the given IO device.
@@ -117,7 +123,9 @@ protected:
      * \param[out] image Valid pointer to the image.
      * \param[in] log Log token.
      */
-    virtual void doParse(QIODevice *source, image::Image *image, const LogToken &log) const = 0;
+    //virtual void doParse(QIODevice *source, image::Image *image) const = 0;
+    virtual void doParse(std::ofstream *source, image::Image *image) const = 0;
+
 };
 
 }}} // namespace nc::core::input

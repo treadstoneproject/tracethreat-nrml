@@ -56,7 +56,7 @@ const Section *Image::getSectionContainingAddress(ByteAddr addr) const {
     return nullptr;
 }
 
-const Section *Image::getSectionByName(const QString &name) const {
+const Section *Image::getSectionByName(const folly::fbstring &name) const {
     foreach (auto section, sections()) {
         if (section->name() == name) {
             return section;

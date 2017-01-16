@@ -3,11 +3,8 @@
 
 #pragma once
 
-#include <nc/config.h>
-
+#include <folly/FBString.h>
 #include <nc/common/Types.h>
-
-#include <QCoreApplication> /* For Q_DECLARE_TR_FUNCTIONS. */
 
 namespace nc {
 namespace core {
@@ -23,7 +20,6 @@ class Context;
  * Relatively high-level interface for running analyses in the right order.
  */
 class Driver {
-    Q_DECLARE_TR_FUNCTIONS(Driver)
 
 public:
     /**
@@ -32,7 +28,7 @@ public:
      * \param context Context.
      * \param filename Name of the file to parse.
      */
-    static void parse(Context &context, const QString &filename);
+    static void parse(Context &context, const folly::fbstring &filename);
 
     /**
      * Disassembles all code sections.
@@ -65,7 +61,7 @@ public:
      *
      * \param context Context.
      */
-    static void decompile(Context &context);
+    //static void decompile(Context &context);
 };
 
 } // namespace core

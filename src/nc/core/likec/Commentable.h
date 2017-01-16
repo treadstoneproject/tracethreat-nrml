@@ -23,9 +23,10 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
-#include <QString>
+//#include <QString>
+#include <folly/FBString.h>
 
 namespace nc {
 namespace core {
@@ -37,7 +38,7 @@ namespace likec {
  * Use it as the second base class for the tree nodes that can be commented.
  */
 class Commentable {
-    QString comment_; ///< Comment.
+    folly::fbstring comment_; ///< Comment.
 
 public:
     /**
@@ -45,7 +46,7 @@ public:
      *
      * \param[in] comment Comment.
      */
-    explicit Commentable(const QString &comment = QString()): comment_(comment) {}
+    explicit Commentable(const folly::fbstring &comment = folly::fbstring()): comment_(comment) {}
 
     /**
      * Virtual destructor.
@@ -55,14 +56,14 @@ public:
     /**
      * \return Comments.
      */
-    const QString &comment() const { return comment_; }
+    const folly::fbstring &comment() const { return comment_; }
 
     /**
      * Sets the comment.
      *
      * \param[in] comment New comment value.
      */
-    void setComment(const QString &comment) { comment_ = comment; }
+    void setComment(const folly::fbstring &comment) { comment_ = comment; }
 };
 
 } // namespace likec

@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include "Demangler.h"
 
@@ -17,7 +17,7 @@ namespace mangling {
  */
 class DefaultDemangler: public Demangler {
 public:
-    QString demangle(const QString &symbol) const override;
+    folly::fbstring demangle(const folly::fbstring &symbol) const override;
 };
 
 }}} // namespace nc::core::mangling

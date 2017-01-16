@@ -3,8 +3,6 @@
 
 #include "Driver.h"
 
-//#include <QFile>
-
 #include <nc/common/Foreach.h>
 #include <nc/common/Exception.h>
 
@@ -15,24 +13,28 @@
 #include <nc/core/image/Section.h>
 #include <nc/core/input/Parser.h>
 #include <nc/core/input/ParserRepository.h>
-#include <nc/core/ir/Function.h>
-#include <nc/core/ir/Functions.h>
 
 #include "Context.h"
-#include "MasterAnalyzer.h"
+
+
+#include <fstream>
 
 namespace nc {
 namespace core {
 
-void Driver::parse(Context &context, const folly::String &filename) {
-    QFile source(filename);
-
-    if (!source.open(QIODevice::ReadOnly)) {
-        throw nc::Exception(tr("Could not open file \"%1\" for reading.").arg(filename));
+void Driver::parse(Context &context, const folly::fbstring &filename) {
+    //QFile source(filename);
+    std::ofstream source;
+    source.open(filename.c_str());
+    if (source.is_open()) {
+        //throw nc::Exception(tr("Could not open file \"%1\" for reading.").arg(filename));
+        LOG(INFO)<<"Open file";
+    }else{
+        LOG(INFO)<<"Could not open file";
     }
 
     //context.logToken().info(tr("Choosing a parser for %1...").arg(filename));
-    LOG(INFO)<<"Choosing a parser for %1... : " << filename ;
+    LOG(INFO)<<"Choosing a parser for ... : " << filename ;
 
     const input::Parser *suitableParser = nullptr;
 
@@ -40,7 +42,7 @@ void Driver::parse(Context &context, const folly::String &filename) {
 
         //context.logToken().info(tr("Trying %1 parser...").arg(parser->name()));
 
-        LOG(INFO)<<"Trying %1 parser... : " << parser->name();
+        LOG(INFO)<<"Trying :  "<< parser->name() <<" parser... : ";
 
         if (parser->canParse(&source)) {
             suitableParser = parser;
@@ -52,13 +54,13 @@ void Driver::parse(Context &context, const folly::String &filename) {
         LOG(INFO)<<"No suitable parser found";
 
 //        context.logToken().error(tr("No suitable parser found."));
-        throw nc::Exception(tr("File %1 has unknown format.").arg(filename));
+        //throw nc::Exception(tr("File %1 has unknown format.").arg(filename));
     }
 
 //    context.logToken().info(tr("Parsing using %1 parser...").arg(suitableParser->name()));
     LOG(INFO)<<"Parsing using %1 parser... : "<<suitableParser->name();
 
-    suitableParser->parse(&source, context.image().get(), context.logToken());
+    suitableParser->parse(&source, context.image().get());//, context.logToken());
 
 //    context.logToken().info(tr("Parsing completed."));
     LOG(INFO)<<"Parsing completed.";
@@ -87,7 +89,7 @@ void Driver::disassemble(Context &context, const image::ByteSource *source, Byte
 
     //context.logToken().info(tr("Disassemble addresses from 0x%2 to 0x%3...").arg(begin, 0, 16).arg(end, 0, 16));
     //LOG(INFO)<<"Disassemble addresses from 0x%2 to 0x%3... : " << 
-    try {
+    //try {
         auto newInstructions = std::make_shared<arch::Instructions>(*context.instructions());
 
         context.image()->platform().architecture()->createDisassembler()->disassemble(
@@ -102,12 +104,12 @@ void Driver::disassemble(Context &context, const image::ByteSource *source, Byte
 
         //context.logToken().info(tr("Disassembly completed."));
         LOG(INFO)<<"Disassembly completed.";
-    } catch (const CancellationException &) {
+    //} catch (const CancellationException &) {
         //context.logToken().info(tr("Disassembly canceled."));
-        LOG(INFO)<<"Disassembly canceled.";
-    }
+        //LOG(INFO)<<"Disassembly canceled.";
+    //}
 }
-
+/*
 void Driver::decompile(Context &context) {
     try {
         context.image()->platform().architecture()->masterAnalyzer()->decompile(context);
@@ -117,7 +119,7 @@ void Driver::decompile(Context &context) {
         throw;
     }
 }
-
+*/
 } // namespace core
 } // namespace nc
 

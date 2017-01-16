@@ -16,7 +16,7 @@ Platform::Platform():
     intSize_(sizeof(int) * CHAR_BIT)
 {}
 
-void Platform::setArchitecture(const folly::String &name) {
+void Platform::setArchitecture(const folly::fbstring &name) {
     setArchitecture(arch::ArchitectureRepository::instance()->getArchitecture(name));
 }
 

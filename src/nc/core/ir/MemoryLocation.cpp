@@ -24,13 +24,13 @@
 
 #include "MemoryLocation.h"
 
-#include <QTextStream>
+//#include <QTextStream>
 
 namespace nc {
 namespace core {
 namespace ir {
 
-void MemoryLocation::print(QTextStream &out) const {
+void MemoryLocation::print(folly::fbstring &out) const {
     out << "<" << domain_ << ":" << addr_ << ".." << (addr_ + size_ - 1) << ">";
 }
 

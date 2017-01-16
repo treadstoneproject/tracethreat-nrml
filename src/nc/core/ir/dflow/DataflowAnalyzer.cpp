@@ -26,7 +26,7 @@
 
 #include <boost/unordered_map.hpp>
 
-#include <nc/common/CancellationToken.h>
+//#include <nc/common/CancellationToken.h>
 #include <nc/common/Foreach.h>
 #include <nc/common/Unreachable.h>
 
