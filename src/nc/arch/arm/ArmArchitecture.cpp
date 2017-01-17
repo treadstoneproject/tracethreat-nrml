@@ -11,7 +11,7 @@
 
 #include "ArmDisassembler.h"
 #include "ArmInstruction.h"
-#include "ArmInstructionAnalyzer.h"
+//#include "ArmInstructionAnalyzer.h"
 #include "ArmRegisters.h"
 #include "CallingConventions.h"
 
@@ -32,8 +32,8 @@ ArmArchitecture::ArmArchitecture(ByteOrder byteOrder):
 
     setRegisters(ArmRegisters::instance());
 
-    static core::MasterAnalyzer masterAnalyzer;
-    setMasterAnalyzer(&masterAnalyzer);
+    //static core::MasterAnalyzer masterAnalyzer;
+    //setMasterAnalyzer(&masterAnalyzer);
 
     addCallingConvention(std::make_unique<DefaultCallingConvention>());
 }
@@ -54,9 +54,10 @@ std::unique_ptr<core::arch::Disassembler> ArmArchitecture::createDisassembler() 
     return std::make_unique<ArmDisassembler>(this);
 }
 
+/*
 std::unique_ptr<core::irgen::InstructionAnalyzer> ArmArchitecture::createInstructionAnalyzer() const {
     return std::make_unique<ArmInstructionAnalyzer>(this);
-}
+}*/
 
 }}} // namespace nc::arch::arm
 

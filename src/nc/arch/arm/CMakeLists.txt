@@ -29,7 +29,7 @@ set(SOURCES
 
 ADD_LIBRARY(ttnrml-nc-arch-arm SHARED ${SOURCES})
 
-TARGET_LINK_LIBRARIES(ttnrml-nc-arch-arm ttnrml-nc-common capstone)
+TARGET_LINK_LIBRARIES(ttnrml-nc-arch-arm ttnrml-nc-core ttnrml-nc-common capstone)
 
 
 

@@ -24,7 +24,7 @@
 
 #include "Terms.h"
 
-#include <QTextStream>
+#include <folly/FBString.h>
 
 #include <nc/common/Unreachable.h>
 #include <nc/common/make_unique.h>
@@ -39,8 +39,8 @@ std::unique_ptr<Term> Constant::doClone() const {
 
 void Constant::doCallOnChildren(const std::function<void(Term *)> &) {}
 
-void Constant::print(QTextStream &out) const {
-    out << QString(QLatin1String("0x%1")).arg(value().value(), 0, 16);
+void Constant::print(folly::fbstring &out) const {
+    //out << QString(QLatin1String("0x%1")).arg(value().value(), 0, 16);
 }
 
 std::unique_ptr<Term> Intrinsic::doClone() const {
@@ -49,8 +49,8 @@ std::unique_ptr<Term> Intrinsic::doClone() const {
 
 void Intrinsic::doCallOnChildren(const std::function<void(Term *)> &) {}
 
-void Intrinsic::print(QTextStream &out) const {
-    out << "intrinsic(" << intrinsicKind() << ")";
+void Intrinsic::print(folly::fbstring &out) const {
+    //out << "intrinsic(" << intrinsicKind() << ")";
 }
 
 MemoryLocationAccess::MemoryLocationAccess(const MemoryLocation &memoryLocation):
@@ -63,8 +63,8 @@ std::unique_ptr<Term> MemoryLocationAccess::doClone() const {
 
 void MemoryLocationAccess::doCallOnChildren(const std::function<void(Term *)> &) {}
 
-void MemoryLocationAccess::print(QTextStream &out) const {
-    out << memoryLocation_;
+void MemoryLocationAccess::print(folly::fbstring &out) const {
+    //out << memoryLocation_;
 }
 
 Dereference::Dereference(std::unique_ptr<Term> address, Domain domain, SmallBitSize size):
@@ -79,8 +79,8 @@ void Dereference::doCallOnChildren(const std::function<void(Term *)> &fun) {
     fun(address());
 }
 
-void Dereference::print(QTextStream &out) const {
-    out << "[" << *address() << "]";
+void Dereference::print(folly::fbstring &out) const {
+    //out << "[" << *address() << "]";
 }
 
 UnaryOperator::UnaryOperator(int operatorKind, std::unique_ptr<Term> operand, SmallBitSize size):
@@ -111,28 +111,28 @@ void UnaryOperator::doCallOnChildren(const std::function<void(Term *)> &fun) {
     fun(operand());
 }
 
-void UnaryOperator::print(QTextStream &out) const {
+void UnaryOperator::print(folly::fbstring &out) const {
     switch (operatorKind()) {
         case NOT:
-            out << '~';
+            out.append("~");
             break;
         case NEGATION:
-            out << '-';
+            out.append("-");
             break;
         case SIGN_EXTEND:
-            out << "sign_extend ";
+            out.append("sign_extend ");
             break;
         case ZERO_EXTEND:
-            out << "zero_extend ";
+            out.append("zero_extend ");
             break;
         case TRUNCATE:
-            out << "truncate ";
+            out.append("truncate ");
             break;
         default:
             unreachable();
             break;
     }
-    out << *operand();
+    //out << *operand();
 }
 
 BinaryOperator::BinaryOperator(int operatorKind, std::unique_ptr<Term> left, std::unique_ptr<Term> right, SmallBitSize size):
@@ -172,68 +172,88 @@ void BinaryOperator::doCallOnChildren(const std::function<void(Term *)> &fun) {
     fun(right());
 }
 
-void BinaryOperator::print(QTextStream &out) const {
-    out << '(' << *left() << ' ';
+void BinaryOperator::print(folly::fbstring &out) const {
+    std::ostringstream leftStr;
+    leftStr << left();
+    out.append(folly::fbstring("(")).append(leftStr.str()).append(folly::fbstring(" "));
     switch (operatorKind()) {
         case AND:
-            out << '&';
+            out.append(folly::fbstring("&"));
             break;
         case OR:
-            out << '|';
+            out.append(folly::fbstring("|"));
             break;
         case XOR:
-            out << '^';
+            //out << '^';
+            out.append(folly::fbstring("^"));
             break;
         case SHL:
-            out << "<<";
+            //out << "<<";
+            out.append(folly::fbstring("<<"));
             break;
         case SHR:
-            out << ">>>";
+            //out << ">>>";
+            out.append(folly::fbstring(">>>"));
             break;
         case SAR:
-            out << ">>";
+            //out << ">>";
+            out.append(folly::fbstring(">>"));
             break;
         case ADD:
-            out << '+';
+            //out << '+';
+            out.append(folly::fbstring("+"));
             break;
         case SUB:
-            out << '-';
+            //out << '-';
+            out.append(folly::fbstring("-"));
             break;
         case MUL:
-            out << '*';
+            //out << '*';
+            out.append(folly::fbstring("*"));
             break;
         case SIGNED_DIV:
-            out << "(signed)/";
+            //out << "(signed)/";
+            out.append(folly::fbstring("(signed)/"));
             break;
         case SIGNED_REM:
-            out << "(signed)%";
+            //out << "(signed)%";
+            out.append(folly::fbstring("(signed)%"));
             break;
         case UNSIGNED_DIV:
-            out << "(unsigned)/";
+            out.append(folly::fbstring("(unsigned)/"));
+            //out << "(unsigned)/";
             break;
         case UNSIGNED_REM:
-            out << "(unsigned)%";
+            //out << "(unsigned)%";
+             out.append(folly::fbstring("(unsigned)%"));
             break;
         case EQUAL:
-            out << "==";
+            //out << "==";
+             out.append(folly::fbstring("=="));
             break;
         case SIGNED_LESS:
-            out << "(signed)<";
+            out.append(folly::fbstring("(signed)<"));
+            //out << "(signed)<";
             break;
         case SIGNED_LESS_OR_EQUAL:
-            out << "(signed)<=";
+             out.append(folly::fbstring("(signed)<="));
+            //out << "(signed)<=";
             break;
         case UNSIGNED_LESS:
-            out << "(unsigned)<";
+            out.append(folly::fbstring("(unsigned)<"));
+            //out << "(unsigned)<";
             break;
         case UNSIGNED_LESS_OR_EQUAL:
-            out << "(unsigned)<=";
+            //out << "(unsigned)<=";
+            out.append(folly::fbstring("(unsigned)<="));
             break;
         default:
             unreachable();
             break;
     }
-    out << ' ' << *right() << ')';
+    std::ostringstream rightStr;
+    rightStr << right();
+    out.append(" ").append(rightStr.str()).append(")");
 }
 
 } // namespace ir

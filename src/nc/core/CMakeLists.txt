@@ -53,9 +53,19 @@ set(SOURCES
     input/ParserRepository.cpp
     input/ParserRepository.h
     input/Utils.h
+    ir/calling/Convention.h
+    ir/calling/Convention.cpp
+    ir/Statements.h
+    ir/Statements.cpp
+    ir/Terms.h
+    ir/Terms.cpp
+    ir/Term.h
+    ir/Term.cpp
     mangling/DefaultDemangler.cpp
     mangling/DefaultDemangler.h
     mangling/Demangler.h
+    undname/undname.h
+    undname/undname.c
     ${MOC_HEADERS}
 )
 

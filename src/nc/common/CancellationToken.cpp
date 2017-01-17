@@ -23,13 +23,13 @@
 //
 
 #include "CancellationToken.h"
-
+#include <folly/FBString.h>
 //#include <QCoreApplication>
 
 namespace nc {
 
 CancellationException::CancellationException():
-    Exception(tr("Cancellation requested"))
+    Exception(folly::fbstring("Cancellation requested"))
 {}
 
 #ifndef NC_USE_THREADS

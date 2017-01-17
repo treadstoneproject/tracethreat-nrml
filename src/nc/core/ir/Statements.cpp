@@ -27,6 +27,7 @@
 //#include <folly::fbstring>
 
 #include <folly/FBString.h>
+#include <folly/Conv.h>
 
 #include <nc/common/Unreachable.h>
 #include <nc/common/make_unique.h>
@@ -42,11 +43,14 @@ std::unique_ptr<Statement> InlineAssembly::doClone() const {
 }
 
 void InlineAssembly::print(folly::fbstring &out) const {
-    out << "asm { ";
+    out.append( "asm { ");
     if (instruction()) {
-        out << *instruction();
+        std::ostringstream ostr;
+        ostr<<instruction();
+        out.append(ostr.str());
+        //out.append(folly::to<folly::fbstring>(*instruction()));
     }
-    out << " }" << endl;
+    out.append(" }");
 }
 
 Assignment::Assignment(std::unique_ptr<Term> left, std::unique_ptr<Term> right):
@@ -65,7 +69,11 @@ std::unique_ptr<Statement> Assignment::doClone() const {
 }
 
 void Assignment::print(folly::fbstring &out) const {
-    out << *left_ << " = " << *right_ << endl;
+     std::ostringstream leftStr_;
+     leftStr_ << &left_;
+     std::ostringstream rightStr_;
+     rightStr_ << &right_;
+    out.append(folly::to<folly::fbstring>(leftStr_.str())).append( " = ").append(folly::to<folly::fbstring>(rightStr_.str()));
 }
 
 Touch::Touch(std::unique_ptr<Term> term, Term::AccessType accessType):
@@ -83,15 +91,17 @@ std::unique_ptr<Statement> Touch::doClone() const {
 void Touch::print(folly::fbstring &out) const {
     switch (term()->accessType()) {
         case Term::READ:
-            out << "read";
+            out.append( "read");
             break;
         case Term::WRITE:
-            out << "write";
+            out.append("write");
             break;
         default:
             unreachable();
     }
-    out << "(" << *term_ << ")" << endl;
+    std::ostringstream termStr_;
+    termStr_ << &term_;
+    out.append( "(" ).append(folly::to<folly::fbstring>(termStr_.str())).append( ")"); //<< endl;
 }
 
 Call::Call(std::unique_ptr<Term> target):
@@ -108,7 +118,10 @@ std::unique_ptr<Statement> Call::doClone() const {
 }
 
 void Call::print(folly::fbstring &out) const {
-    out << "call " << *target_ << endl;
+    //out << "call " << *target_ << endl;
+     std::ostringstream  targetStr_;
+    targetStr_ << &target_;
+    out.append("call ").append(folly::to<folly::fbstring>(targetStr_.str()));
 }
 
 std::unique_ptr<Statement> Halt::doClone() const {
@@ -116,7 +129,8 @@ std::unique_ptr<Statement> Halt::doClone() const {
 }
 
 void Halt::print(folly::fbstring &out) const {
-    out << "halt" << endl;
+    //out << "halt" << endl;
+    out.append("halt");
 }
 
 std::unique_ptr<Statement> Callback::doClone() const {
@@ -124,7 +138,8 @@ std::unique_ptr<Statement> Callback::doClone() const {
 }
 
 void Callback::print(folly::fbstring &out) const {
-    out << "callback" << endl;
+    //out << "callback" << endl;
+    out.append("callback");
 }
 
 std::unique_ptr<Statement> RememberReachingDefinitions::doClone() const {
@@ -132,7 +147,8 @@ std::unique_ptr<Statement> RememberReachingDefinitions::doClone() const {
 }
 
 void RememberReachingDefinitions::print(folly::fbstring &out) const {
-    out << "remember_reaching_definitions" << endl;
+    //out << "remember_reaching_definitions" << endl;
+    out.append("remember_reaching_definitions");
 }
 
 } // namespace ir

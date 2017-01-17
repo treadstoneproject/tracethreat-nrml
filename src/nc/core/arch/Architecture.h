@@ -96,12 +96,12 @@ public:
     /**
      * \returns Valid pointer to the instruction analyzer for this architecture.
      */
-    virtual std::unique_ptr<irgen::InstructionAnalyzer> createInstructionAnalyzer() const = 0;
+    //virtual std::unique_ptr<irgen::InstructionAnalyzer> createInstructionAnalyzer() const = 0;
 
     /**
      * \returns Valid pointer to the universal analyzer for this architecture.
      */
-    const MasterAnalyzer *masterAnalyzer() const { return mMasterAnalyzer; }
+    //const MasterAnalyzer *masterAnalyzer() const { return mMasterAnalyzer; }
 
     /**
      * \returns Valid pointer to the register container for this architecture.
@@ -160,7 +160,7 @@ protected:
     /**
      * \param masterAnalyzer Valid pointer to the master analyzer for this architecture.
      */
-    void setMasterAnalyzer(const MasterAnalyzer *masterAnalyzer);
+    //void setMasterAnalyzer(const MasterAnalyzer *masterAnalyzer);
 
     /**
      * \param registers Valid pointer to the registers container for this architecture.
@@ -186,7 +186,7 @@ private:
     SmallBitSize mMaxInstructionSize;
 
     /** Master analyzer for this architecture. */
-    const MasterAnalyzer *mMasterAnalyzer;
+    //const MasterAnalyzer *mMasterAnalyzer;
 
     /** Register container for this architecture. */
     Registers *mRegisters;

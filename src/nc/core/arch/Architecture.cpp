@@ -38,7 +38,7 @@ namespace arch {
 Architecture::Architecture():
     mBitness(0),
     mMaxInstructionSize(0),
-    mMasterAnalyzer(nullptr),
+    //mMasterAnalyzer(nullptr),
     mRegisters(nullptr)
 {}
 
@@ -64,13 +64,13 @@ void Architecture::setMaxInstructionSize(SmallBitSize size) {
 
     mMaxInstructionSize = size;
 }
-
+/*
 void Architecture::setMasterAnalyzer(const MasterAnalyzer *masterAnalyzer) {
     assert(masterAnalyzer != nullptr);
     assert(mMasterAnalyzer == nullptr && "Master analyzer is already set.");
 
     mMasterAnalyzer = masterAnalyzer;
-}
+}*/
 
 void Architecture::setRegisters(Registers *registers) {
     assert(registers != nullptr);
