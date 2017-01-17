@@ -95,7 +95,7 @@ public:
      *          something that can be parsed with this parser.
      */
     //bool canParse(QIODevice *source) const;
-    bool canParse(std::ofstream * source) const;
+    bool canParse(std::ifstream * source) const;
     /**
      * Parse executable image from the given IO device.
      *
@@ -104,7 +104,7 @@ public:
      * \param[in] log Log token.
      */
     //void parse(QIODevice *source, image::Image *image, const LogToken &log) const;
-    void parse(std::ofstream *source, image::Image *image) const;
+    void parse(std::ifstream *source, image::Image *image) const;
 
 protected:
     /**
@@ -114,7 +114,7 @@ protected:
      *          something that can be parsed with this parser.
      */
     //virtual bool doCanParse(QIODevice *source) const = 0;
-    virtual bool doCanParse(std::ofstream *source) const = 0;
+    virtual bool doCanParse(std::ifstream *source) const = 0;
 
     /**
      * Actually parses executable image from the given IO device.
@@ -124,7 +124,7 @@ protected:
      * \param[in] log Log token.
      */
     //virtual void doParse(QIODevice *source, image::Image *image) const = 0;
-    virtual void doParse(std::ofstream *source, image::Image *image) const = 0;
+    virtual void doParse(std::ifstream *source, image::Image *image) const = 0;
 
 };
 

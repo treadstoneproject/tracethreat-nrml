@@ -17,6 +17,7 @@
 #include "Context.h"
 
 
+//#include <fstream>
 #include <fstream>
 
 namespace nc {
@@ -24,8 +25,8 @@ namespace core {
 
 void Driver::parse(Context &context, const folly::fbstring &filename) {
     //QFile source(filename);
-    std::ofstream source;
-    source.open(filename.c_str());
+    std::ifstream source;//(filename, std::ifstream::binary);
+    source.open(filename.c_str(), std::ifstream::binary);
     if (source.is_open()) {
         //throw nc::Exception(tr("Could not open file \"%1\" for reading.").arg(filename));
         LOG(INFO)<<"Open file";

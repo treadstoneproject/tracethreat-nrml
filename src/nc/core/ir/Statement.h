@@ -23,14 +23,15 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <cassert>
 #include <memory>
 
 #include <boost/noncopyable.hpp>
 
-#include <QString>
+#include <folly/FBString.h>
+//#include <QString>
 
 #include <nc/common/Printable.h>
 #include <nc/common/Subclass.h>

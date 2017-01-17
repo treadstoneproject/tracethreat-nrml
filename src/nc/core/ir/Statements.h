@@ -23,12 +23,15 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <memory>
 #include <vector>
 
-#include <QString>
+//#include <folly::fbstring>
+
+#include <folly/FBString.h>
+
 
 #include "Statement.h"
 #include "Term.h"
@@ -41,7 +44,7 @@ class InlineAssembly: public Statement {
 public:
     InlineAssembly(): Statement(INLINE_ASSEMBLY) {}
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Statement> doClone() const override;
@@ -83,7 +86,7 @@ public:
      */
     const Term *right() const { return right_.get(); }
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Statement> doClone() const override;
@@ -113,7 +116,7 @@ public:
      */
     Term::AccessType accessType() const { return accessType_; }
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Statement> doClone() const override;
@@ -142,7 +145,7 @@ public:
      */
     const Term *target() const { return target_.get(); }
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Statement> doClone() const override;
@@ -155,7 +158,7 @@ class Halt: public Statement {
 public:
     Halt(): Statement(HALT) {}
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Statement> doClone() const override;
@@ -184,7 +187,7 @@ public:
      */
     const std::function<void()> &function() const { return function_; }
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Statement> doClone() const override;
@@ -197,7 +200,7 @@ class RememberReachingDefinitions: public Statement {
 public:
     RememberReachingDefinitions(): Statement(REMEMBER_REACHING_DEFINITIONS) {}
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Statement> doClone() const override;

@@ -3,7 +3,7 @@
 
 #include "ArmInstructionAnalyzer.h"
 
-#include <QCoreApplication>
+//#include <QCoreApplication>
 
 #include <boost/range/size.hpp>
 

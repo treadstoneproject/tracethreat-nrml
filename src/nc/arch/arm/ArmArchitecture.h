@@ -5,7 +5,9 @@
 
 //#include <nc/config.h>
 
-#include <../core/arch/Architecture.h>
+//#include <nc/core/arch/Registers.h>
+
+#include <nc/core/arch/Architecture.h>
 
 namespace nc {
 namespace arch {

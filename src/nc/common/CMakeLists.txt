@@ -71,7 +71,9 @@ set(SOURCES
 #configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Version.cpp.in" "${CMAKE_CURRENT_BINARY_DIR}/Version.cpp" @ONLY)
 #list(APPEND SOURCES "${CMAKE_CURRENT_BINARY_DIR}/Version.cpp")
 
-add_library(nc-common ${SOURCES})
-target_link_libraries(nc-common folly ${Boost_LIBRARIES}) 
+ADD_LIBRARY(ttnrml-nc-common SHARED ${SOURCES})
+
+TARGET_LINK_LIBRARIES(ttnrml-nc-common folly)
+#target_link_libraries(nc-common folly ${Boost_LIBRARIES}) 
 
 # vim:set et sts=4 sw=4 nospell:

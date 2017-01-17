@@ -10,12 +10,14 @@
 #include "ArmArchitecture.h"
 #include "ArmRegisters.h"
 
+#include <folly/FBString.h>
+
 namespace nc {
 namespace arch {
 namespace arm {
 
 DefaultCallingConvention::DefaultCallingConvention():
-    core::ir::calling::Convention(QLatin1String("Default"))
+    core::ir::calling::Convention(folly::fbstring("Default"))
 {
     setStackPointer(ArmRegisters::sp()->memoryLocation());
 

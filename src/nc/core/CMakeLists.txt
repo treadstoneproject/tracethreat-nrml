@@ -1,7 +1,7 @@
 INCLUDE_DIRECTORIES(/usr/local/include/ ${PROJECT_SOURCE_DIR}/../../ .)
 
 
-MESSAGE( STATUS "PROJECT_SOURCE_DIR : " ${PROJECT_SOURCE_DIR} )
+MESSAGE( STATUS "PROJECT_SOURCE_DIR : " ${PROJECT_SOURCE_DIR}/../../ )
 
 set (CMAKE_CXX_FLAGS "-fPIC")
 
@@ -61,11 +61,13 @@ set(SOURCES
 
 #qt4_wrap_cpp(SOURCES ${MOC_HEADERS} OPTIONS -DQ_MOC_RUN)
 
-add_library(nc-core ${SOURCES})
+ADD_LIBRARY(ttnrml-nc-core SHARED ${SOURCES})
 #target_link_libraries(nc-core nc-common nc-arch-arm nc-arch-x86 nc-input-elf nc-input-mach-o nc-input-pe
 #    ${Boost_LIBRARIES} ${QT_LIBRARIES} iberty undname)
 
-target_link_libraries(nc-core nc-common nc-arch-arm nc-arch-x86 nc-input-elf glog)
+# target_link_libraries(nc-core nc-common nc-arch-arm nc-arch-x86 nc-input-elf glog)
+
+TARGET_LINK_LIBRARIES(ttnrml-nc-core ttnrml-nc-common ttnrml-nc-arch-arm ttnrml-nc-input-elf glog)
 
 
 # vim:set et sts=4 sw=4 nospell:

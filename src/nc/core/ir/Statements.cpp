@@ -24,7 +24,9 @@
 
 #include "Statements.h"
 
-#include <QTextStream>
+//#include <folly::fbstring>
+
+#include <folly/FBString.h>
 
 #include <nc/common/Unreachable.h>
 #include <nc/common/make_unique.h>
@@ -39,7 +41,7 @@ std::unique_ptr<Statement> InlineAssembly::doClone() const {
     return std::make_unique<InlineAssembly>();
 }
 
-void InlineAssembly::print(QTextStream &out) const {
+void InlineAssembly::print(folly::fbstring &out) const {
     out << "asm { ";
     if (instruction()) {
         out << *instruction();
@@ -62,7 +64,7 @@ std::unique_ptr<Statement> Assignment::doClone() const {
     return std::make_unique<Assignment>(left()->clone(), right()->clone());
 }
 
-void Assignment::print(QTextStream &out) const {
+void Assignment::print(folly::fbstring &out) const {
     out << *left_ << " = " << *right_ << endl;
 }
 
@@ -78,7 +80,7 @@ std::unique_ptr<Statement> Touch::doClone() const {
     return std::make_unique<Touch>(term()->clone(), term()->accessType());
 }
 
-void Touch::print(QTextStream &out) const {
+void Touch::print(folly::fbstring &out) const {
     switch (term()->accessType()) {
         case Term::READ:
             out << "read";
@@ -105,7 +107,7 @@ std::unique_ptr<Statement> Call::doClone() const {
     return std::make_unique<Call>(target()->clone());
 }
 
-void Call::print(QTextStream &out) const {
+void Call::print(folly::fbstring &out) const {
     out << "call " << *target_ << endl;
 }
 
@@ -113,7 +115,7 @@ std::unique_ptr<Statement> Halt::doClone() const {
     return std::make_unique<Halt>();
 }
 
-void Halt::print(QTextStream &out) const {
+void Halt::print(folly::fbstring &out) const {
     out << "halt" << endl;
 }
 
@@ -121,7 +123,7 @@ std::unique_ptr<Statement> Callback::doClone() const {
     return std::make_unique<Callback>(function());
 }
 
-void Callback::print(QTextStream &out) const {
+void Callback::print(folly::fbstring &out) const {
     out << "callback" << endl;
 }
 
@@ -129,7 +131,7 @@ std::unique_ptr<Statement> RememberReachingDefinitions::doClone() const {
     return std::make_unique<RememberReachingDefinitions>();
 }
 
-void RememberReachingDefinitions::print(QTextStream &out) const {
+void RememberReachingDefinitions::print(folly::fbstring &out) const {
     out << "remember_reaching_definitions" << endl;
 }
 

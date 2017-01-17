@@ -33,25 +33,25 @@
 
 namespace nc { namespace core { namespace input {
 
-bool Parser::canParse(std::ofstream *source) const {
+bool Parser::canParse(std::ifstream *source) const {
     assert(source != nullptr);
 
-    source->seekp(0);
+    source->seekg(0);
     return doCanParse(source);
 }
 
-void Parser::parse(std::ofstream *source, image::Image *image) const {
+void Parser::parse(std::ifstream *source, image::Image *image) const {
     assert(source != nullptr);
     assert(image != nullptr);
 
     try {
         //source->seek(0);
-        source->seekp(0);
+        source->seekg(0);
         doParse(source, image);
     } catch (nc::Exception &e) {
         if (!boost::get_error_info<ErrorOffset>(e)) {
             //e << ErrorOffset(source->pos());
-            e <<  ErrorOffset(source->tellp());
+            e <<  ErrorOffset(source->tellg());
         }
         throw;
     }

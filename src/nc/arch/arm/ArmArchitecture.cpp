@@ -7,6 +7,8 @@
 
 #include <nc/core/MasterAnalyzer.h>
 
+#include <folly/FBString.h>
+
 #include "ArmDisassembler.h"
 #include "ArmInstruction.h"
 #include "ArmInstructionAnalyzer.h"
@@ -21,9 +23,9 @@ ArmArchitecture::ArmArchitecture(ByteOrder byteOrder):
     byteOrder_(byteOrder)
 {
     if (byteOrder == ByteOrder::LittleEndian) {
-        setName(QLatin1String("arm-le"));
+        setName(folly::fbstring("arm-le"));
     } else {
-        setName(QLatin1String("arm-be"));
+        setName(folly::fbstring("arm-be"));
     }
     setBitness(32);
     setMaxInstructionSize(ArmInstruction::maxSize());

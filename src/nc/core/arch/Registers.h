@@ -23,15 +23,16 @@
 
 #pragma once 
 
-#include <nc/config.h>
+//#include <nc/config.h>
 #include <nc/common/Foreach.h>
 #include <nc/core/ir/MemoryLocation.h>
 
 #include <vector>
+#include <folly/FBString.h>
 
-#include <QString>
-#include <QHash>
-
+//#include <folly::fbstring>
+//#include <QHash>
+#include <boost/unordered_map.hpp>
 #include "Register.h"
 
 namespace nc { namespace core { namespace arch {
@@ -81,7 +82,8 @@ public:
      *                                 or nullptr if there is no such register.
      */
     const Register *getRegister(const ir::MemoryLocation &location) const {
-        return mRegisterByLocation.value(location, nullptr);
+        //return mRegisterByLocation.value(location, nullptr);
+        return mRegisterByLocation.at(location);
     }
 
 protected:
@@ -113,7 +115,8 @@ private:
     std::vector<Register *> mRegisterByNumber;
 
     /** Map from memory location to register. */
-    QHash<ir::MemoryLocation, Register *> mRegisterByLocation;
+    //QHash<ir::MemoryLocation, Register *> mRegisterByLocation;
+    boost::unordered_map<ir::MemoryLocation, Register *> mRegisterByLocation;
 };
 
 

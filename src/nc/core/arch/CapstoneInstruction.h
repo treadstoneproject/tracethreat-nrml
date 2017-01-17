@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include "Instruction.h"
 
@@ -11,6 +11,8 @@
 #include <cassert>
 
 #include <capstone/capstone.h>
+#include <folly/FBString.h>
+#include <folly/Conv.h>
 
 namespace nc {
 namespace core {
@@ -62,11 +64,13 @@ public:
      */
     const uint8_t *bytes() const { return &bytes_[0]; }
 
-    void print(QTextStream &out) const override {
+    void print(folly::fbstring  &out) const override {
         auto instr = Capstone(csArchitecture_, csMode_).disassemble(addr(), &bytes_[0], size(), 1);
         assert(instr != nullptr);
-
-        out << instr->mnemonic << " " << instr->op_str;
+        folly::fbstring mnemonic = folly::to<folly::fbstring>(instr->mnemonic);
+        folly::fbstring op_str   = folly::to<folly::fbstring>(instr->op_str);
+        //out << mnemonic << " " << instr->op_str;
+        out.append(mnemonic).append(" ").append(op_str);
     }
 };
 
