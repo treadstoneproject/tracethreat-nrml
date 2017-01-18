@@ -29,17 +29,6 @@
 #include <nc/core/arch/Architecture.h>
 #include <nc/core/arch/Instructions.h>
 #include <nc/core/image/Image.h>
-#include <nc/core/ir/Functions.h>
-#include <nc/core/ir/Program.h>
-#include <nc/core/ir/calling/Conventions.h>
-#include <nc/core/ir/calling/Hooks.h>
-#include <nc/core/ir/calling/Signatures.h>
-#include <nc/core/ir/cflow/Graphs.h>
-#include <nc/core/ir/dflow/Dataflows.h>
-#include <nc/core/ir/liveness/Livenesses.h>
-#include <nc/core/ir/types/Types.h>
-#include <nc/core/ir/vars/Variables.h>
-#include <nc/core/likec/Tree.h>
 
 namespace nc {
 namespace core {
@@ -57,9 +46,9 @@ void Context::setImage(const std::shared_ptr<image::Image> &image) {
 
 void Context::setInstructions(const std::shared_ptr<const arch::Instructions> &instructions) {
     instructions_ = instructions;
-    Q_EMIT instructionsChanged();
+    //Q_EMIT instructionsChanged();
 }
-
+/*
 void Context::setProgram(std::unique_ptr<ir::Program> program) {
     program_ = std::move(program);
 }
@@ -102,9 +91,9 @@ void Context::setTypes(std::unique_ptr<ir::types::Types> types) {
 
 void Context::setTree(std::unique_ptr<likec::Tree> tree) {
     tree_ = std::move(tree);
-    Q_EMIT treeChanged();
+    //Q_EMIT treeChanged();
 }
-
+*/
 } // namespace core
 } // namespace nc
 

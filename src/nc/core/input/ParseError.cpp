@@ -24,21 +24,25 @@
 
 #include "ParseError.h"
 
+#include <folly/Conv.h>
+
 namespace nc { namespace core { namespace input {
 
-QString ParseError::unicodeWhat() const noexcept {
+folly::fbstring ParseError::unicodeWhat() const noexcept {
         const int *line = boost::get_error_info<ErrorLine>(*this);
         const int *column = boost::get_error_info<ErrorColumn>(*this);
 
         if (line && column) {
-            return tr("%1:%2: %3").arg(*line).arg(*column).arg(Exception::unicodeWhat());
+            //return tr("%1:%2: %3").arg(*line).arg(*column).arg(Exception::unicodeWhat());
+            return folly::fbstring(folly::to<folly::fbstring>(*line)).append(":").append(folly::to<folly::fbstring>(*column)).append(":").append(Exception::unicodeWhat());
         }
 
         if (const ByteSize *offset = boost::get_error_info<ErrorOffset>(*this)) {
-            return tr("offset 0x%1: %2").arg(*offset, 0, 16).arg(Exception::unicodeWhat());
+            //return tr("offset 0x%1: %2").arg(*offset, 0, 16).arg(Exception::unicodeWhat());
+            return   folly::fbstring(folly::to<folly::fbstring>(*offset)).append(Exception::unicodeWhat());
         }
 
-        return Exception::unicodeWhat();
+        return folly::fbstring(Exception::unicodeWhat());
 }
 
 }}} // namespace nc::core::input

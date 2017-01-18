@@ -3,24 +3,26 @@
 
 #include "Symbol.h"
 
-#include <QObject>
+//#include <QObject>
 
 #include <nc/common/Unreachable.h>
+
+#include <folly/FBString.h>
 
 namespace nc {
 namespace core {
 namespace image {
 
-QString SymbolType::getName(Type type) {
+folly::fbstring SymbolType::getName(Type type) {
     switch (type) {
         case NOTYPE:
-            return tr("None");
+            return folly::fbstring("None");
         case FUNCTION:
-            return tr("Function");
+            return folly::fbstring("Function");
         case OBJECT:
-            return tr("Object");
+            return folly::fbstring("Object");
         case SECTION:
-            return tr("Section");
+            return folly::fbstring("Section");
     }
     unreachable();
 }

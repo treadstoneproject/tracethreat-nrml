@@ -29,7 +29,7 @@
  * For motivation, refer to http://herbsutter.com/gotw/_102/
  */
 
-#include <nc/config.h>
+//#include <nc/config.h>
 #include <boost/config.hpp>
 #include <memory>
 

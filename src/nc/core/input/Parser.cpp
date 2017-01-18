@@ -26,30 +26,32 @@
 
 #include <cassert>
 
-#include <QIODevice>
+//#include <QIODevice>
 
 #include <nc/core/image/Image.h>
 #include <nc/core/input/ParseError.h>
 
 namespace nc { namespace core { namespace input {
 
-bool Parser::canParse(QIODevice *source) const {
+bool Parser::canParse(std::ifstream *source) const {
     assert(source != nullptr);
 
-    source->seek(0);
+    source->seekg(0);
     return doCanParse(source);
 }
 
-void Parser::parse(QIODevice *source, image::Image *image, const LogToken &log) const {
+void Parser::parse(std::ifstream *source, image::Image *image) const {
     assert(source != nullptr);
     assert(image != nullptr);
 
     try {
-        source->seek(0);
-        doParse(source, image, log);
+        //source->seek(0);
+        source->seekg(0);
+        doParse(source, image);
     } catch (nc::Exception &e) {
         if (!boost::get_error_info<ErrorOffset>(e)) {
-            e << ErrorOffset(source->pos());
+            //e << ErrorOffset(source->pos());
+            e <<  ErrorOffset(source->tellg());
         }
         throw;
     }

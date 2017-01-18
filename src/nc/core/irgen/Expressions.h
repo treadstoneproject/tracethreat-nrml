@@ -23,9 +23,9 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
-#include <QCoreApplication> /* For Q_DECLARE_TR_FUNCTIONS. */
+//#include <QCoreApplication> /* For Q_DECLARE_TR_FUNCTIONS. */
 
 #include <algorithm> /* std::max */
 #include <type_traits>
@@ -832,7 +832,7 @@ operator,(L first, R second) {
  */
 template<class Derived>
 class ExpressionFactory {
-    Q_DECLARE_TR_FUNCTIONS(ExpressionFactory)
+    //Q_DECLARE_TR_FUNCTIONS(ExpressionFactory)
 public:
     explicit
     ExpressionFactory(const arch::Architecture *architecture):

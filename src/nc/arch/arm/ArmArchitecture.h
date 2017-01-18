@@ -3,7 +3,9 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
+
+//#include <nc/core/arch/Registers.h>
 
 #include <nc/core/arch/Architecture.h>
 
@@ -35,7 +37,7 @@ public:
 
     ByteOrder getByteOrder(core::ir::Domain domain) const override;
     std::unique_ptr<core::arch::Disassembler> createDisassembler() const override;
-    std::unique_ptr<core::irgen::InstructionAnalyzer> createInstructionAnalyzer() const override;
+    //std::unique_ptr<core::irgen::InstructionAnalyzer> createInstructionAnalyzer() const override;
 };
 
 }}} // namespace nc::arch::arm

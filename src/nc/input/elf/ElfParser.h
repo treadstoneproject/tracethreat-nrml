@@ -23,8 +23,6 @@
 
 #pragma once
 
-#include <nc/config.h>
-
 #include <nc/core/input/Parser.h>
 
 namespace nc {
@@ -42,8 +40,8 @@ public:
     ElfParser();
 
 protected:
-    virtual bool doCanParse(QIODevice *source) const override;
-    virtual void doParse(QIODevice *source, core::image::Image *image, const LogToken &logToken) const override;
+    virtual bool doCanParse(std::ifstream *source) const override;
+    virtual void doParse(std::ifstream *source, core::image::Image *image) const override;
 };
 
 } // namespace elf

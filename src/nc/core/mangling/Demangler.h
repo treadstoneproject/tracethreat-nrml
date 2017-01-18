@@ -23,11 +23,12 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <nc/common/Unused.h>
 
-#include <QString>
+//#include <folly::fbstring>
+#include <folly/FBString.h>
 
 namespace nc {
 namespace core {
@@ -45,9 +46,9 @@ public:
      *
      * \param[in] symbol Symbol.
      *
-     * \return Demangled name, or QString() in case of failure.
+     * \return Demangled name, or folly::fbstring() in case of failure.
      */
-    virtual QString demangle(const QString &symbol) const { NC_UNUSED(symbol); return QString(); }
+    virtual folly::fbstring demangle(const folly::fbstring &symbol) const { NC_UNUSED(symbol); return folly::fbstring(); }
 };
 
 }}} // namespace nc::core::mangling

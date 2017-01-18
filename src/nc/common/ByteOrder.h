@@ -3,12 +3,12 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <algorithm>
 #include <cassert>
 
-#include <QSysInfo>
+//#include <QSysInfo>
 
 #include <nc/common/Types.h>
 
@@ -24,9 +24,9 @@ public:
      */
     enum Type {
         Unknown      = -1,                     ///< Unknown/undefined.
-        BigEndian    = QSysInfo::BigEndian,    ///< Highest byte first.
-        LittleEndian = QSysInfo::LittleEndian, ///< Lowest byte first.
-        Current      = QSysInfo::ByteOrder     ///< Host byte order.
+        BigEndian    = 0, //QSysInfo::BigEndian,    ///< Highest byte first.
+        LittleEndian = 1,//QSysInfo::LittleEndian, ///< Lowest byte first.
+        Current      = 2//,QSysInfo::ByteOrder     ///< Host byte order.
     };
 
     /**

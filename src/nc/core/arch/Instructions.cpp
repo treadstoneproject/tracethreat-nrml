@@ -24,7 +24,10 @@
 
 #include "Instructions.h"
 
-#include <QTextStream>
+
+#include <folly/FBString.h>
+#include <folly/Conv.h>
+//#include <QTextStream>
 
 #include <nc/common/Foreach.h>
 
@@ -65,7 +68,7 @@ bool Instructions::remove(const Instruction *instruction) {
     }
 }
 
-void Instructions::print(QTextStream &out, PrintCallback<const Instruction *> *callback) const {
+void Instructions::print(folly::fbstring &out, PrintCallback<const Instruction *> *callback) const {
     if (all().empty()) {
         return;
     }
@@ -74,7 +77,7 @@ void Instructions::print(QTextStream &out, PrintCallback<const Instruction *> *c
 
     foreach (const auto &instr, all()) {
         if (instr->addr() != successorAddress) {
-            out << endl;
+           LOG(INFO)<< out; //<< std::endl;
         }
         successorAddress = instr->endAddr();
 
@@ -82,17 +85,19 @@ void Instructions::print(QTextStream &out, PrintCallback<const Instruction *> *c
             callback->onStartPrinting(instr.get());
         }
 
-        int integerBase = out.integerBase();
-        hex(out) << instr->addr() << ":\t";
-        out.setIntegerBase(integerBase);
+        int integerBase = folly::to<int>(out);//.integerBase();
+        //hex(out) << instr->addr() << ":\t";
+        LOG(INFO)<<"Hex : "<<out<<", "<< instr->addr();
+        out.append(folly::to<folly::fbstring>(integerBase));
 
-        out << *instr;
+        //out << *instr;
+        //out.append(folly::to<folly::fbstring>(*instr));
 
         if (callback) {
             callback->onEndPrinting(instr.get());
         }
 
-        out << endl;
+        //out << std::endl;
     }
 }
 

@@ -23,7 +23,7 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 /*
  * There is no standard implementation of a hash for tuples, and it's a pain to

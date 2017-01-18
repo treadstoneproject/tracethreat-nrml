@@ -22,3 +22,19 @@ We have mapreduce section file of ELF to find system call.
 |        Details                      |  Status       |
 |-------------------------------------|---------------|
 | `ELF section of systemcall`         |  Implementing |
+
+
+### Directory structure
+
+|       Details                       |   Meaning          |
+|-------------------------------------|--------------------|
+| `nc`                                | Diassembly ELF support|
+| `filestructure`                     | Read file from system  |
+
+
+### Command line support build TT-NRML
+
+* Build debug libraries with command line.
+	`cmake -DCMAKE_BUILD_TYPE=Debug ..`
+* Build release libraries with command line.
+        `cmake -DCMAKE_BUILD_TYPE=Release ..`

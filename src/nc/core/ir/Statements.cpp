@@ -24,7 +24,10 @@
 
 #include "Statements.h"
 
-#include <QTextStream>
+//#include <folly::fbstring>
+
+#include <folly/FBString.h>
+#include <folly/Conv.h>
 
 #include <nc/common/Unreachable.h>
 #include <nc/common/make_unique.h>
@@ -39,12 +42,15 @@ std::unique_ptr<Statement> InlineAssembly::doClone() const {
     return std::make_unique<InlineAssembly>();
 }
 
-void InlineAssembly::print(QTextStream &out) const {
-    out << "asm { ";
+void InlineAssembly::print(folly::fbstring &out) const {
+    out.append( "asm { ");
     if (instruction()) {
-        out << *instruction();
+        std::ostringstream ostr;
+        ostr<<instruction();
+        out.append(ostr.str());
+        //out.append(folly::to<folly::fbstring>(*instruction()));
     }
-    out << " }" << endl;
+    out.append(" }");
 }
 
 Assignment::Assignment(std::unique_ptr<Term> left, std::unique_ptr<Term> right):
@@ -62,8 +68,12 @@ std::unique_ptr<Statement> Assignment::doClone() const {
     return std::make_unique<Assignment>(left()->clone(), right()->clone());
 }
 
-void Assignment::print(QTextStream &out) const {
-    out << *left_ << " = " << *right_ << endl;
+void Assignment::print(folly::fbstring &out) const {
+     std::ostringstream leftStr_;
+     leftStr_ << &left_;
+     std::ostringstream rightStr_;
+     rightStr_ << &right_;
+    out.append(folly::to<folly::fbstring>(leftStr_.str())).append( " = ").append(folly::to<folly::fbstring>(rightStr_.str()));
 }
 
 Touch::Touch(std::unique_ptr<Term> term, Term::AccessType accessType):
@@ -78,18 +88,20 @@ std::unique_ptr<Statement> Touch::doClone() const {
     return std::make_unique<Touch>(term()->clone(), term()->accessType());
 }
 
-void Touch::print(QTextStream &out) const {
+void Touch::print(folly::fbstring &out) const {
     switch (term()->accessType()) {
         case Term::READ:
-            out << "read";
+            out.append( "read");
             break;
         case Term::WRITE:
-            out << "write";
+            out.append("write");
             break;
         default:
             unreachable();
     }
-    out << "(" << *term_ << ")" << endl;
+    std::ostringstream termStr_;
+    termStr_ << &term_;
+    out.append( "(" ).append(folly::to<folly::fbstring>(termStr_.str())).append( ")"); //<< endl;
 }
 
 Call::Call(std::unique_ptr<Term> target):
@@ -105,32 +117,38 @@ std::unique_ptr<Statement> Call::doClone() const {
     return std::make_unique<Call>(target()->clone());
 }
 
-void Call::print(QTextStream &out) const {
-    out << "call " << *target_ << endl;
+void Call::print(folly::fbstring &out) const {
+    //out << "call " << *target_ << endl;
+     std::ostringstream  targetStr_;
+    targetStr_ << &target_;
+    out.append("call ").append(folly::to<folly::fbstring>(targetStr_.str()));
 }
 
 std::unique_ptr<Statement> Halt::doClone() const {
     return std::make_unique<Halt>();
 }
 
-void Halt::print(QTextStream &out) const {
-    out << "halt" << endl;
+void Halt::print(folly::fbstring &out) const {
+    //out << "halt" << endl;
+    out.append("halt");
 }
 
 std::unique_ptr<Statement> Callback::doClone() const {
     return std::make_unique<Callback>(function());
 }
 
-void Callback::print(QTextStream &out) const {
-    out << "callback" << endl;
+void Callback::print(folly::fbstring &out) const {
+    //out << "callback" << endl;
+    out.append("callback");
 }
 
 std::unique_ptr<Statement> RememberReachingDefinitions::doClone() const {
     return std::make_unique<RememberReachingDefinitions>();
 }
 
-void RememberReachingDefinitions::print(QTextStream &out) const {
-    out << "remember_reaching_definitions" << endl;
+void RememberReachingDefinitions::print(folly::fbstring &out) const {
+    //out << "remember_reaching_definitions" << endl;
+    out.append("remember_reaching_definitions");
 }
 
 } // namespace ir

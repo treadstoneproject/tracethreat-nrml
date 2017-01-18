@@ -23,7 +23,7 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <nc/common/SizedValue.h>
 
@@ -59,7 +59,7 @@ public:
      */
     void setValue(ConstantValue value) { value_ = bitTruncate(value, size()); }
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Term> doClone() const override;
@@ -98,7 +98,7 @@ public:
      */
     int intrinsicKind() const { return intrinsicKind_; }
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Term> doClone() const override;
@@ -124,7 +124,7 @@ public:
      */
     const MemoryLocation &memoryLocation() const { return memoryLocation_; }
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Term> doClone() const override;
@@ -163,7 +163,7 @@ public:
      */
     const Term *address() const { return address_.get(); }
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Term> doClone() const override;
@@ -219,7 +219,7 @@ public:
      */
     const Term *operand() const { return operand_.get(); }
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Term> doClone() const override;
@@ -303,7 +303,7 @@ public:
      */
     const Term *right() const { return right_.get(); }
 
-    void print(QTextStream &out) const override;
+    void print(folly::fbstring &out) const override;
 
 protected:
     std::unique_ptr<Term> doClone() const override;

@@ -23,14 +23,15 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <memory>
 #include <vector>
 
 #include <boost/unordered_map.hpp>
 
-#include <QString>
+#include <folly/FBString.h>
+//#include <QString>
 
 #include "ByteSource.h"
 #include "Platform.h"
@@ -120,7 +121,7 @@ public:
      * \return Valid pointer to a section with the given name,
      *         nullptr if there is no such section.
      */
-    const Section *getSectionByName(const QString &name) const;
+    const Section *getSectionByName(const folly::fbstring &name) const;
 
     /**
      * Reads a sequence of bytes from the section containing

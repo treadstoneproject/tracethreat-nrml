@@ -24,11 +24,13 @@
 
 #include "Section.h"
 
+#include <algorithm>
+
 namespace nc {
 namespace core {
 namespace image {
 
-Section::Section(const QString &name, ByteAddr addr, ByteSize size):
+Section::Section(const folly::fbstring &name, ByteAddr addr, ByteSize size):
     name_(name), addr_(addr), size_(size),
     isAllocated_(false),
     isReadable_(false), isWritable_(false), isExecutable_(false),
@@ -47,12 +49,15 @@ ByteSize Section::readBytes(ByteAddr addr, void *buf, ByteSize size) const {
     if (externalByteSource()) {
         return externalByteSource()->readBytes(addr, buf, size);
     } else {
-        auto copiedSize = std::min(size, content_.size() - offset);
+        ByteSize contentSize = content_.size() - offset;
+        auto copiedSize = std::min(size, contentSize);
         if (copiedSize > 0) {
-            memcpy(buf, content_.constData() + offset, copiedSize);
-        }
+            //memcpy(buf, content_.constData() + offset, copiedSize);
+            memcpy(buf, content_.data() + offset, copiedSize);
 
-        auto zeroedSize = std::min(size, offset + size - content_.size());
+        }
+        ByteSize zeroContentSize = offset + size - content_.size();
+        auto zeroedSize = std::min(size, zeroContentSize);
         if (zeroedSize > 0) {
             memset(static_cast<char *>(buf) + size - zeroedSize, 0, zeroedSize);
         }

@@ -3,12 +3,12 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <memory>
 #include <vector>
-
-#include <QString>
+#include <folly/FBString.h>
+//#include <folly::fbstring>
 
 namespace nc { namespace core { namespace arch {
 
@@ -40,7 +40,7 @@ public:
      * \returns Valid pointer to the architecture with the given name,
      *          or nullptr if no such architecture found.
      */
-    const Architecture *getArchitecture(const QString &name) const;
+    const Architecture *getArchitecture(const folly::fbstring &name) const;
 
     /**
      * \returns List of all registered architectures.

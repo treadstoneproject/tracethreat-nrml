@@ -23,7 +23,7 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <map>
 #include <memory> /* std::shared_ptr */
@@ -108,7 +108,7 @@ public:
      * \param out Output stream.
      * \param callback Pointer to the print callback. Can be nullptr.
      */
-    void print(QTextStream &out, PrintCallback<const Instruction *> *callback = nullptr) const;
+    void print(folly::fbstring &out, PrintCallback<const Instruction *> *callback = nullptr) const;
 };
 
 }}} // namespace nc::core::arch

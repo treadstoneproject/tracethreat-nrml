@@ -23,9 +23,9 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
-#include <QCoreApplication>
+//#include <QCoreApplication>
 
 #include <nc/common/CancellationToken.h>
 #include <nc/common/LogToken.h>
@@ -60,12 +60,12 @@ class Value;
  * Implements a dataflow analysis based on abstract interpretation loop.
  */
 class DataflowAnalyzer {
-    Q_DECLARE_TR_FUNCTIONS(DataflowAnalyzer)
+    //Q_DECLARE_TR_FUNCTIONS(DataflowAnalyzer)
 
     Dataflow &dataflow_; ///< Dataflow information.
     const arch::Architecture *architecture_; ///< Valid pointer to architecture description.
     const CancellationToken &canceled_;
-    const LogToken &log_;
+    //const LogToken &log_;
 
 public:
     /**
@@ -77,8 +77,8 @@ public:
      * \param log           Log token.
      */
     DataflowAnalyzer(Dataflow &dataflow, const arch::Architecture *architecture,
-        const CancellationToken &canceled, const LogToken &log):
-        dataflow_(dataflow), architecture_(architecture), canceled_(canceled), log_(log)
+        const CancellationToken &canceled):
+        dataflow_(dataflow), architecture_(architecture), canceled_(canceled)
     {
         assert(architecture != nullptr);
     }

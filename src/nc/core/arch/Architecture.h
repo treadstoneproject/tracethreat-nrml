@@ -23,12 +23,12 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <memory>
 #include <vector>
 
-#include <QString>
+#include <folly/FBString.h>
 
 #include <nc/common/ByteOrder.h>
 #include <nc/common/Types.h>
@@ -76,7 +76,7 @@ public:
     /**
      * \return Name of the architecture.
      */
-    const QString &name() const { return mName; }
+    const folly::fbstring &name() const { return mName; }
 
     /**
      * \returns Architecture's bitness (data pointer size).
@@ -96,12 +96,12 @@ public:
     /**
      * \returns Valid pointer to the instruction analyzer for this architecture.
      */
-    virtual std::unique_ptr<irgen::InstructionAnalyzer> createInstructionAnalyzer() const = 0;
+    //virtual std::unique_ptr<irgen::InstructionAnalyzer> createInstructionAnalyzer() const = 0;
 
     /**
      * \returns Valid pointer to the universal analyzer for this architecture.
      */
-    const MasterAnalyzer *masterAnalyzer() const { return mMasterAnalyzer; }
+    //const MasterAnalyzer *masterAnalyzer() const { return mMasterAnalyzer; }
 
     /**
      * \returns Valid pointer to the register container for this architecture.
@@ -134,7 +134,7 @@ public:
      *
      * \return Pointer to the calling convention with the given name. Can be nullptr.
      */
-    const ir::calling::Convention *getCallingConvention(const QString &name) const;
+    const ir::calling::Convention *getCallingConvention(const folly::fbstring &name) const;
 
 protected:
     /**
@@ -143,7 +143,7 @@ protected:
      *
      * \param name Non-empty new name of the architecture.
      */
-    void setName(QString name);
+    void setName(folly::fbstring name);
 
     /**
      * Sets the architecture's bitness.
@@ -160,7 +160,7 @@ protected:
     /**
      * \param masterAnalyzer Valid pointer to the master analyzer for this architecture.
      */
-    void setMasterAnalyzer(const MasterAnalyzer *masterAnalyzer);
+    //void setMasterAnalyzer(const MasterAnalyzer *masterAnalyzer);
 
     /**
      * \param registers Valid pointer to the registers container for this architecture.
@@ -177,7 +177,7 @@ protected:
 
 private:
     /** Name of the architecture. */
-    QString mName;
+    folly::fbstring mName;
 
     /** Architecture's bitness. */
     SmallBitSize mBitness;
@@ -186,7 +186,7 @@ private:
     SmallBitSize mMaxInstructionSize;
 
     /** Master analyzer for this architecture. */
-    const MasterAnalyzer *mMasterAnalyzer;
+    //const MasterAnalyzer *mMasterAnalyzer;
 
     /** Register container for this architecture. */
     Registers *mRegisters;

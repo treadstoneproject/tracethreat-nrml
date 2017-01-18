@@ -5,6 +5,7 @@
 
 #include <cstdlib>
 #include <memory>
+#include <folly/Conv.h>
 
 #include <undname/undname.h>
 
@@ -25,28 +26,29 @@ struct FreeDeleter {
     }
 };
 
-QString doDemangle(const char *symbol) {
+folly::fbstring doDemangle(const char *symbol) {
     int status;
     if (auto output = std::unique_ptr<char[], FreeDeleter>(__cxa_demangle(symbol, nullptr, nullptr, &status))) {
-        return QLatin1String(output.get());
+        return output.get();// QLatin1String(output.get());
     }
     if (auto output = std::unique_ptr<char[], FreeDeleter>(__unDName(nullptr, symbol, 0, 0))) {
         /* __unDName returns the input string, if fails do demangle. */
         if (strcmp(output.get(), symbol)) {
-            return QLatin1String(output.get());
+            return  output.get();//QLatin1String(output.get());
         }
     }
-    return QString();
+    return folly::fbstring();
 }
 
 } // anonymous namespace
 
-QString DefaultDemangler::demangle(const QString &symbol) const {
-    auto byteArray = symbol.toLatin1();
-    auto result = doDemangle(byteArray.constData());
+folly::fbstring DefaultDemangler::demangle(const folly::fbstring &symbol) const {
+    auto byteArray = symbol;//.toLatin1();
+    auto result = doDemangle(byteArray.data());//constData());
+    std::string frontStr = folly::to<std::string>(symbol.front());
 
-    if (result.isNull() && symbol.startsWith('_')) {
-        result = doDemangle(byteArray.constData() + 1);
+    if (result.empty()/*.isNull() */ && frontStr.compare(std::string("_")) == 0 ) {
+        result = doDemangle(byteArray.data()+1);//.constData() + 1);
     }
 
     return result;

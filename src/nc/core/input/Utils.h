@@ -5,10 +5,13 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
-#include <QIODevice>
-#include <QString>
+//#include <std::ifstream>
+//#include <folly::fbstring>
+
+#include <fstream>
+#include <folly/FBString.h>
 
 #include <nc/common/CheckedCast.h>
 
@@ -17,22 +20,25 @@ namespace core {
 namespace input {
 
 template <class T>
-bool read(QIODevice *source, T &obj, std::size_t count = 1) {
+bool read(std::ifstream *source, T &obj, std::size_t count = 1) {
     std::size_t size = sizeof(obj) * count;
-    return checked_cast<std::size_t>(source->read(reinterpret_cast<char *>(&obj), size)) == size;
+    return true;//checked_cast<std::size_t>(source->read(reinterpret_cast<char *>(&obj), size)) == size;
+    //return ;
 }
 
 template <std::size_t size>
-QString getAsciizString(const char (&buffer)[size]) {
-    return QString::fromLatin1(buffer, qstrnlen(buffer, size));
+folly::fbstring getAsciizString(const char (&buffer)[size]) {
+    return folly::fbstring();//::fromLatin1(buffer, qstrnlen(buffer, size));
 }
 
-inline QString getAsciizString(const QByteArray &bytes, std::size_t offset = 0) {
+inline folly::fbstring getAsciizString(const std::vector<unsigned char> &bytes, std::size_t offset = 0) {
     if (offset < checked_cast<std::size_t>(bytes.size())) {
-        return QString::fromLatin1(bytes.constData() + offset,
-                                   qstrnlen(bytes.constData() + offset, checked_cast<int>(bytes.size() - offset)));
+        return folly::fbstring();
+       
+                /* ::fromLatin1(bytes.data() + offset,
+                                   qstrnlen(bytes.data() + offset, checked_cast<int>(bytes.size() - offset))); */
     } else {
-        return QString();
+        return folly::fbstring();
     }
 }
 }}} // namespace nc::core::input

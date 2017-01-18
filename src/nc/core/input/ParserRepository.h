@@ -23,12 +23,12 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <memory>
 #include <vector>
-
-#include <QString>
+#include <folly/FBString.h>
+//#include <folly::fbstring>
 
 namespace nc { namespace core { namespace input {
 
@@ -60,7 +60,7 @@ public:
      * \returns Valid pointer to the parser with the given name,
      *          or nullptr if no such parser found.
      */
-    const Parser *getParser(const QString &name) const;
+    const Parser *getParser(const folly::fbstring &name) const;
 
     /**
      * \returns List of all registered parsers.

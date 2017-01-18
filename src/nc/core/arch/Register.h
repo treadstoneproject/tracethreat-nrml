@@ -23,10 +23,10 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 #include <cassert>
 #include <boost/noncopyable.hpp>
-#include <QString>
+#include <folly/FBString.h>
 #include <nc/core/ir/MemoryLocation.h>
 
 namespace nc { namespace core { namespace arch {
@@ -45,10 +45,10 @@ public:
      * \param[in] name                 Register name.
      * \param[in] memoryLocation       Corresponding abstract memory location of the register.
      */
-    Register(int number, const QString &name, const ir::MemoryLocation &memoryLocation):
+    Register(int number, const folly::fbstring &name, const ir::MemoryLocation &memoryLocation):
         number_(number),
-        lowercaseName_(name.toLower()),
-        uppercaseName_(name.toUpper()),
+        lowercaseName_(name),
+        uppercaseName_(name),
         memoryLocation_(memoryLocation)
     {
         assert(number >= 0);
@@ -62,12 +62,12 @@ public:
     /**
      * \return                         Register lowercase name.
      */
-    const QString &lowercaseName() const { return lowercaseName_; }
+    const folly::fbstring &lowercaseName() const { return lowercaseName_; }
 
     /**
      * \return                         Register uppercase name.
      */
-    const QString &uppercaseName() const { return uppercaseName_; }
+    const folly::fbstring &uppercaseName() const { return uppercaseName_; }
 
     /**
      * \return                         Corresponding abstract memory location of the register.
@@ -81,8 +81,8 @@ public:
 
 private:
     int number_; ///< Register number.
-    QString lowercaseName_; ///< Lowercase register name.
-    QString uppercaseName_; ///< Uppercase register name.
+    folly::fbstring lowercaseName_; ///< Lowercase register name.
+    folly::fbstring uppercaseName_; ///< Uppercase register name.
     ir::MemoryLocation memoryLocation_; ///< Corresponding abstract memory location of the register.
 };
 

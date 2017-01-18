@@ -22,10 +22,10 @@
  */
 
 #pragma once
+#include <folly/FBString.h>
+//#include <nc/config.h>
 
-#include <nc/config.h>
-
-#include <QCoreApplication> /* For Q_DECLARE_TR_FUNCTIONS. */
+//#include <QCoreApplication> /* For Q_DECLARE_TR_FUNCTIONS. */
 
 namespace nc {
 namespace core {
@@ -52,7 +52,7 @@ class Context;
  * Therefore, they all are const.
  */
 class MasterAnalyzer {
-    Q_DECLARE_TR_FUNCTIONS(MasterAnalyzer)
+ //   Q_DECLARE_TR_FUNCTIONS(MasterAnalyzer)
 
 public:
     /**
@@ -178,7 +178,7 @@ protected:
      *
      * \return Name of the function that can be shown to the user.
      */
-    virtual QString getFunctionName(Context &context, const ir::Function *function) const;
+    virtual folly::fbstring getFunctionName(Context &context, const ir::Function *function) const;
 };
 
 } // namespace core

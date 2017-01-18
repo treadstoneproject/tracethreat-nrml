@@ -23,9 +23,9 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
-#include <QCoreApplication>
+//#include <QCoreApplication>
 
 #include <nc/common/LogToken.h>
 
@@ -74,7 +74,7 @@ class Liveness;
  * although they are live in the classical sense.
  */
 class LivenessAnalyzer {
-    Q_DECLARE_TR_FUNCTIONS(LivenessAnalyzer)
+//    Q_DECLARE_TR_FUNCTIONS(LivenessAnalyzer)
 
     Liveness &liveness_;
     const Function *function_;

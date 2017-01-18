@@ -23,7 +23,7 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <cassert>
 #include <functional> /* For std::hash. */
@@ -103,7 +103,8 @@ public:
      *
      * \param[in] out Output stream.
      */
-    void print(QTextStream &out) const;
+    //void print(QTextStream &out) const;
+    void print(folly::fbstring &out) const;
 
     /**
      * \param offset Offset in bits.

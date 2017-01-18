@@ -23,7 +23,7 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
 #include <algorithm>
 #include <cassert>
@@ -36,9 +36,10 @@
 
 #include "ByteSource.h"
 
-QT_BEGIN_NAMESPACE
-class QString;
-QT_END_NAMESPACE
+#include <folly/FBString.h>
+//QT_BEGIN_NAMESPACE
+//class folly::fbstring;
+//QT_END_NAMESPACE
 
 namespace nc {
 namespace core {
@@ -114,7 +115,7 @@ public:
      *
      * \return ASCIIZ string without zero char terminator on success, nullptr string on failure.
      */
-    QString readAsciizString(ByteAddr addr, ByteSize maxSize) const;
+    folly::fbstring readAsciizString(ByteAddr addr, ByteSize maxSize) const;
 };
 
 } // namespace image

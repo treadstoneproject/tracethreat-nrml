@@ -1,13 +1,27 @@
+INCLUDE_DIRECTORIES(/usr/local/include/ ${PROJECT_SOURCE_DIR}/../../ .)
+
+
+MESSAGE( STATUS "PROJECT_SOURCE_DIR : " ${PROJECT_SOURCE_DIR}/../../ )
+
+set (CMAKE_CXX_FLAGS "-fPIC")
+
+LINK_DIRECTORIES(/usr/local/lib /usr/lib)
+
+SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
+
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++0x")
+
 set(MOC_HEADERS
     Context.h
 )
+
+#    MasterAnalyzer.cpp
+#    MasterAnalyzer.h
 
 set(SOURCES
     Context.cpp
     Driver.cpp
     Driver.h
-    MasterAnalyzer.cpp
-    MasterAnalyzer.h
     arch/Architecture.cpp
     arch/Architecture.h
     arch/ArchitectureRepository.cpp
@@ -41,204 +55,31 @@ set(SOURCES
     input/ParserRepository.cpp
     input/ParserRepository.h
     input/Utils.h
-    ir/BasicBlock.cpp
-    ir/BasicBlock.h
-    ir/CFG.cpp
-    ir/CFG.h
-    ir/Dominators.cpp
-    ir/Dominators.h
-    ir/Function.cpp
-    ir/Function.h
-    ir/Functions.cpp
-    ir/Functions.h
-    ir/FunctionsGenerator.cpp
-    ir/FunctionsGenerator.h
-    ir/Jump.cpp
-    ir/Jump.h
-    ir/JumpTarget.cpp
-    ir/JumpTarget.h
-    ir/MemoryDomain.h
-    ir/MemoryLocation.cpp
-    ir/MemoryLocation.h
-    ir/Program.cpp
-    ir/Program.h
-    ir/Statement.cpp
-    ir/Statement.h
-    ir/Statements.cpp
-    ir/Statements.h
-    ir/Term.cpp
-    ir/Term.h
-    ir/Terms.cpp
-    ir/Terms.h
-    ir/calling/CallHook.cpp
-    ir/calling/CallHook.h
-    ir/calling/CalleeId.h
-    ir/calling/Convention.cpp
     ir/calling/Convention.h
-    ir/calling/EntryHook.cpp
-    ir/calling/EntryHook.h
-    ir/calling/FunctionSignature.h
-    ir/calling/Hooks.cpp
-    ir/calling/Hooks.h
-    ir/calling/Patch.cpp
-    ir/calling/Patch.h
-    ir/calling/ReturnHook.cpp
-    ir/calling/ReturnHook.h
-    ir/calling/SignatureAnalyzer.cpp
-    ir/calling/SignatureAnalyzer.h
-    ir/cflow/BasicNode.cpp
-    ir/cflow/BasicNode.h
-    ir/cflow/Dfs.cpp
-    ir/cflow/Dfs.h
-    ir/cflow/Edge.cpp
-    ir/cflow/Edge.h
-    ir/cflow/Graph.cpp
-    ir/cflow/Graph.h
-    ir/cflow/GraphBuilder.cpp
-    ir/cflow/GraphBuilder.h
-    ir/cflow/LoopExplorer.cpp
-    ir/cflow/LoopExplorer.h
-    ir/cflow/Node.cpp
-    ir/cflow/Node.h
-    ir/cflow/Region.cpp
-    ir/cflow/Region.h
-    ir/cflow/StructureAnalyzer.cpp
-    ir/cflow/StructureAnalyzer.h
-    ir/cflow/Switch.h
-    ir/cgen/CodeGenerator.cpp
-    ir/cgen/CodeGenerator.h
-    ir/cgen/DeclarationGenerator.cpp
-    ir/cgen/DeclarationGenerator.h
-    ir/cgen/DefinitionGenerator.cpp
-    ir/cgen/DefinitionGenerator.h
-    ir/cgen/NameGenerator.cpp
-    ir/cgen/NameGenerator.h
-    ir/cgen/SwitchContext.h
-    ir/cgen/Utils.cpp
-    ir/cgen/Utils.h
-    ir/dflow/Dataflow.cpp
-    ir/dflow/Dataflow.h
-    ir/dflow/DataflowAnalyzer.cpp
-    ir/dflow/DataflowAnalyzer.h
-    ir/dflow/ReachingDefinitions.cpp
-    ir/dflow/ReachingDefinitions.h
-    ir/dflow/Uses.cpp
-    ir/dflow/Uses.h
-    ir/dflow/Utils.cpp
-    ir/dflow/Utils.h
-    ir/dflow/Value.cpp
-    ir/dflow/Value.h
-    ir/misc/ArrayAccess.h
-    ir/misc/BoundsCheck.h
-    ir/misc/PatternRecognition.cpp
-    ir/misc/PatternRecognition.h
-    ir/types/Type.cpp
-    ir/types/Type.h
-    ir/types/TypeAnalyzer.cpp
-    ir/types/TypeAnalyzer.h
-    ir/types/Types.cpp
-    ir/types/Types.h
-    ir/liveness/Liveness.h
-    ir/liveness/LivenessAnalyzer.cpp
-    ir/liveness/LivenessAnalyzer.h
-    ir/vars/Variable.cpp
-    ir/vars/Variable.h
-    ir/vars/VariableAnalyzer.cpp
-    ir/vars/VariableAnalyzer.h
-    ir/vars/Variables.cpp
-    ir/vars/Variables.h
-    irgen/Expressions.h
-    irgen/IRGenerator.cpp
-    irgen/IRGenerator.h
-    irgen/InstructionAnalyzer.cpp
-    irgen/InstructionAnalyzer.h
-    irgen/InvalidInstructionException.cpp
-    irgen/InvalidInstructionException.h
-    likec/ArgumentDeclaration.h
-    likec/BinaryOperator.cpp
-    likec/BinaryOperator.h
-    likec/Block.cpp
-    likec/Block.h
-    likec/Break.h
-    likec/CallOperator.cpp
-    likec/CallOperator.h
-    likec/CaseLabel.h
-    likec/Commentable.h
-    likec/CompilationUnit.cpp
-    likec/CompilationUnit.h
-    likec/Continue.h
-    likec/Declaration.h
-    likec/DefaultLabel.h
-    likec/DoWhile.cpp
-    likec/DoWhile.h
-    likec/Expression.h
-    likec/ExpressionStatement.cpp
-    likec/ExpressionStatement.h
-    likec/FunctionDeclaration.cpp
-    likec/FunctionDeclaration.h
-    likec/FunctionDefinition.cpp
-    likec/FunctionDefinition.h
-    likec/FunctionIdentifier.h
-    likec/FunctionPointerType.cpp
-    likec/FunctionPointerType.h
-    likec/Goto.cpp
-    likec/Goto.h
-    likec/If.cpp
-    likec/If.h
-    likec/InlineAssembly.h
-    likec/IntegerConstant.cpp
-    likec/IntegerConstant.h
-    likec/LabelDeclaration.h
-    likec/LabelIdentifier.cpp
-    likec/LabelIdentifier.h
-    likec/LabelStatement.h
-    likec/MemberAccessOperator.cpp
-    likec/MemberAccessOperator.h
-    likec/MemberDeclaration.h
-    likec/Return.cpp
-    likec/Return.h
-    likec/Simplifier.cpp
-    likec/Simplifier.h
-    likec/Statement.h
-    likec/String.h
-    likec/StructType.cpp
-    likec/StructType.h
-    likec/StructTypeDeclaration.h
-    likec/Switch.cpp
-    likec/Switch.h
-    likec/Tree.cpp
-    likec/Tree.h
-    likec/TreeNode.cpp
-    likec/TreeNode.h
-    likec/TreePrinter.cpp
-    likec/TreePrinter.h
-    likec/Type.h
-    likec/TypeCalculator.cpp
-    likec/TypeCalculator.h
-    likec/Typecast.cpp
-    likec/Typecast.h
-    likec/Types.cpp
-    likec/Types.h
-    likec/UnaryOperator.cpp
-    likec/UnaryOperator.h
-    likec/UndeclaredIdentifier.h
-    likec/Utils.cpp
-    likec/Utils.h
-    likec/VariableDeclaration.cpp
-    likec/VariableDeclaration.h
-    likec/VariableIdentifier.h
-    likec/While.cpp
-    likec/While.h
+    ir/calling/Convention.cpp
+    ir/Statements.h
+    ir/Statements.cpp
+    ir/Terms.h
+    ir/Terms.cpp
+    ir/Term.h
+    ir/Term.cpp
     mangling/DefaultDemangler.cpp
     mangling/DefaultDemangler.h
     mangling/Demangler.h
+    undname/undname.h
+    undname/undname.c
     ${MOC_HEADERS}
 )
 
-qt4_wrap_cpp(SOURCES ${MOC_HEADERS} OPTIONS -DQ_MOC_RUN)
+#qt4_wrap_cpp(SOURCES ${MOC_HEADERS} OPTIONS -DQ_MOC_RUN)
 
-add_library(nc-core ${SOURCES})
-target_link_libraries(nc-core nc-common nc-arch-arm nc-arch-x86 nc-input-elf nc-input-mach-o nc-input-pe
-    ${Boost_LIBRARIES} ${QT_LIBRARIES} iberty undname)
+ADD_LIBRARY(ttnrml-nc-core SHARED ${SOURCES})
+#target_link_libraries(nc-core nc-common nc-arch-arm nc-arch-x86 nc-input-elf nc-input-mach-o nc-input-pe
+#    ${Boost_LIBRARIES} ${QT_LIBRARIES} iberty undname)
+
+# target_link_libraries(nc-core nc-common nc-arch-arm nc-arch-x86 nc-input-elf glog)
+
+TARGET_LINK_LIBRARIES(ttnrml-nc-core ttnrml-nc-common ttnrml-nc-arch-arm ttnrml-nc-input-elf glog)
+
 
 # vim:set et sts=4 sw=4 nospell:

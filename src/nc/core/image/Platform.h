@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include <nc/config.h>
+//#include <nc/config.h>
 
-#include <QString>
-
+//#include <QString>
+#include <folly/FBString.h>
 #include <nc/common/Types.h>
 
 namespace nc { namespace core {
@@ -43,7 +43,7 @@ public:
      *
      * \param name Name of the architecture.
      */
-    void setArchitecture(const QString &name);
+    void setArchitecture(const folly::fbstring &name);
 
     /**
      * \return Pointer to the architecture. Can be nullptr.
