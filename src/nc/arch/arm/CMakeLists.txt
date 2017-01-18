@@ -7,6 +7,11 @@ set (CMAKE_CXX_FLAGS "-fPIC")
 
 LINK_DIRECTORIES(/usr/local/lib /usr/lib)
 
+
+SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
+
+#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
+
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++0x")
 
 #    ArmInstructionAnalyzer.cpp
@@ -30,7 +35,5 @@ set(SOURCES
 ADD_LIBRARY(ttnrml-nc-arch-arm SHARED ${SOURCES})
 
 TARGET_LINK_LIBRARIES(ttnrml-nc-arch-arm ttnrml-nc-core ttnrml-nc-common capstone)
-
-
 
 # vim:set et sts=4 sw=4 nospell:
