@@ -12,6 +12,8 @@ LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/../input/elf/build)
 LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/../core/build)
 LINK_DIRECTORIES(/usr/local/lib)
 
+SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
+
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++0x")
 
 SET( nc_test_source_files

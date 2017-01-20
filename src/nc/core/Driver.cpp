@@ -24,9 +24,11 @@ namespace nc {
 namespace core {
 
 void Driver::parse(Context &context, const folly::fbstring &filename) {
+    LOG(INFO)<<"Parse string...";
     //QFile source(filename);
     std::ifstream source;//(filename, std::ifstream::binary);
     source.open(filename.c_str(), std::ifstream::binary);
+
     if (source.is_open()) {
         //throw nc::Exception(tr("Could not open file \"%1\" for reading.").arg(filename));
         LOG(INFO)<<"Open file";
@@ -35,7 +37,7 @@ void Driver::parse(Context &context, const folly::fbstring &filename) {
     }
 
     //context.logToken().info(tr("Choosing a parser for %1...").arg(filename));
-    LOG(INFO)<<"Choosing a parser for ... : " << filename ;
+    LOG(INFO)<<"Choosing a parser for ... : " << filename.c_str();
 
     const input::Parser *suitableParser = nullptr;
 
@@ -56,15 +58,19 @@ void Driver::parse(Context &context, const folly::fbstring &filename) {
 
 //        context.logToken().error(tr("No suitable parser found."));
         //throw nc::Exception(tr("File %1 has unknown format.").arg(filename));
-    }
-
-//    context.logToken().info(tr("Parsing using %1 parser...").arg(suitableParser->name()));
+    }else{
     LOG(INFO)<<"Parsing using %1 parser... : "<<suitableParser->name();
 
     suitableParser->parse(&source, context.image().get());//, context.logToken());
 
 //    context.logToken().info(tr("Parsing completed."));
     LOG(INFO)<<"Parsing completed.";
+
+
+    }
+
+//    context.logToken().info(tr("Parsing using %1 parser...").arg(suitableParser->name()));
+
 }
 
 void Driver::disassemble(Context &context) {

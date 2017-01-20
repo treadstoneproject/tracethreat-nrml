@@ -33,6 +33,8 @@
 //#include <nc/input/mach-o/MachOParser.h>
 //#include <nc/input/pe/PeParser.h>
 
+#include <glog/logging.h>
+
 #include <folly/FBString.h>
 
 #include "Parser.h"
@@ -52,6 +54,7 @@ ParserRepository *createInstance() {
 } // anonymous namespace
 
 ParserRepository *ParserRepository::instance() {
+    LOG(INFO)<<"Instance intial ELF Parser...";
     static auto repository = createInstance();
     return repository;
 }

@@ -14,6 +14,6 @@ class ReadELFTest : public testing::Test
 
 TEST_F(ReadELFTest, simple_read_elf)
 {
-    folly::fbstring filename("/home/rchatsiri/workspacereverseengineer/android-file");
+    folly::fbstring filename("/home/rchatsiri/workspacereverseengineer/android-file/boot.art");
     nc::core::Driver::parse(context, filename);
 }
