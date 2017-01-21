@@ -129,6 +129,7 @@ public:
     {}
 
     void parse() {
+        LOG(INFO)<<"Start parse ELF...";
         parseElfHeader();
         parseSections();
         parseSymbols();
@@ -402,7 +403,16 @@ ElfParser::ElfParser():
 
 bool ElfParser::doCanParse(std::ifstream *source) const {
     Elf32_Ehdr ehdr;
-    return read(source, ehdr) && IS_ELF(ehdr);
+    bool ret = true;
+    uint32_t magic;
+    //source->read(reinterpret_cast<unsigned char*>(&magic), sizeof(magic)); //read(source, ehdr); //&& IS_ELF(ehdr);
+    read(source, ehdr);
+    LOG(INFO)<<"Read magic bytes.";
+    LOG(INFO)<<"Check Bit  0 : " << (ehdr).e_ident[EI_MAG0];
+    LOG(INFO)<<"Check Bits 1 : " << (ehdr).e_ident[EI_MAG1];
+    LOG(INFO)<<"Check Bits 2 : " << (ehdr).e_ident[EI_MAG2];
+    LOG(INFO)<<"Check Bits 3 : " << (ehdr).e_ident[EI_MAG3];
+    return ret;   
 }
 
 void ElfParser::doParse(std::ifstream *source, core::image::Image *image) const {

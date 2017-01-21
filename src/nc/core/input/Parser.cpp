@@ -26,6 +26,10 @@
 
 #include <cassert>
 
+
+#include <glog/logging.h>
+#include <ios>
+#include <iostream>
 //#include <QIODevice>
 
 #include <nc/core/image/Image.h>
@@ -35,8 +39,11 @@ namespace nc { namespace core { namespace input {
 
 bool Parser::canParse(std::ifstream *source) const {
     assert(source != nullptr);
+    source->seekg(0, std::ios::beg);
+    //source->seekg(0);
 
-    source->seekg(0);
+    LOG(INFO)<<"Parse with seekg  in position 0";
+
     return doCanParse(source);
 }
 
@@ -46,7 +53,8 @@ void Parser::parse(std::ifstream *source, image::Image *image) const {
 
     try {
         //source->seek(0);
-        source->seekg(0);
+        //source->seekg(0);
+        source->seekg(0, std::ios::beg);
         doParse(source, image);
     } catch (nc::Exception &e) {
         if (!boost::get_error_info<ErrorOffset>(e)) {
