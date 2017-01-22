@@ -82,6 +82,10 @@ typedef struct {
 #define	ELFMAG		"\177ELF"	/* magic string */
 #define	SELFMAG		4		/* magic string size */
 
+#define ELFMAG_ART0  'a'
+#define ELFMAG_ART1  'r'
+#define ELFMAG_ART2  't'
+
 /* Values for e_ident[EI_VERSION] and e_version. */
 #define	EV_NONE		0
 #define	EV_CURRENT	1
@@ -124,6 +128,11 @@ typedef struct {
 			 (ehdr).e_ident[EI_MAG1] == ELFMAG1 && \
 			 (ehdr).e_ident[EI_MAG2] == ELFMAG2 && \
 			 (ehdr).e_ident[EI_MAG3] == ELFMAG3)
+
+/*e_ident with ART */
+#define IS_ELF_ART(ehdr)    ((ehdr).e_ident[EI_MAG0] == ELFMAG_ART0 && \
+                         (ehdr).e_ident[EI_MAG1] == ELFMAG_ART1 && \
+                         (ehdr).e_ident[EI_MAG2] == ELFMAG_ART2)
 
 /* Values for e_type. */
 #define	ET_NONE		0	/* Unknown type. */

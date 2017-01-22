@@ -404,9 +404,8 @@ ElfParser::ElfParser():
 bool ElfParser::doCanParse(std::ifstream *source) const {
     Elf32_Ehdr ehdr;
     bool ret = true;
-    uint32_t magic;
     //source->read(reinterpret_cast<unsigned char*>(&magic), sizeof(magic)); //read(source, ehdr); //&& IS_ELF(ehdr);
-    read(source, ehdr);
+    ret = read(source, ehdr) && IS_ELF_ART(ehdr);
     LOG(INFO)<<"Read magic bytes.";
     LOG(INFO)<<"Check Bit  0 : " << (ehdr).e_ident[EI_MAG0];
     LOG(INFO)<<"Check Bits 1 : " << (ehdr).e_ident[EI_MAG1];
@@ -418,7 +417,7 @@ bool ElfParser::doCanParse(std::ifstream *source) const {
 void ElfParser::doParse(std::ifstream *source, core::image::Image *image) const {
     Elf32_Ehdr ehdr;
 
-    if (!read(source, ehdr) || !IS_ELF(ehdr)) {
+    if (!read(source, ehdr) || !IS_ELF_ART(ehdr)) {
         throw ParseError(folly::fbstring("ELF signature does not match."));
     }
 

@@ -24,7 +24,7 @@ bool read(std::ifstream *source, T &obj, std::size_t count = 1) {
     std::size_t size = sizeof(obj) * count;
     //return checked_cast<std::size_t>(source->read(reinterpret_cast<char *>(&obj), size)) == size;
     source->read(reinterpret_cast<char*>(&obj), sizeof(obj));
-    return true;    
+    return (sizeof(obj) * count) == size;    
     //return ;
 }
 
