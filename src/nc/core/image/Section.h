@@ -27,7 +27,7 @@
 
 #include <memory> /* std::unique_ptr */
 #include <vector>
-//#include <QByteArray>
+#include <QtCore/QByteArray>
 //#include <folly::fbstring>
 #include <vector>
 #include <nc/common/Types.h>
@@ -60,7 +60,8 @@ class Section: public ByteSource {
     bool isData_; ///< True if the section contains data.
     bool isBss_; ///< True if the section is bss.
 
-    std::vector<unsigned char> content_; ///< Data contained in the section.
+    //std::vector<unsigned char> content_; ///< Data contained in the section.
+    QByteArray content_;
     std::unique_ptr<ByteSource> externalByteSource_; ///< External source of this section's bytes.
 
 public:
@@ -213,7 +214,7 @@ public:
      *
      * \param content New content.
      */
-    void setContent(std::vector<unsigned char> content) { content_ = std::move(content); }
+    void setContent(QByteArray content) { content_ = std::move(content); }
 
     /**
      * Sets the external byte source with the content of the section.

@@ -40,8 +40,8 @@ public:
     ElfParser();
 
 protected:
-    virtual bool doCanParse(std::ifstream *source) const override;
-    virtual void doParse(std::ifstream *source, core::image::Image *image) const override;
+    virtual bool doCanParse(QIODevice *source) const override;
+    virtual void doParse(QIODevice *source, core::image::Image *image) const override;
 };
 
 } // namespace elf

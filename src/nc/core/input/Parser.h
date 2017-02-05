@@ -29,16 +29,16 @@
 
 #include <fstream>
 
-//#include <QObject>
+#include <QtCore/QObject>
 //#include <folly::fbstring>
 
-//QT_BEGIN_NAMESPACE
-//class QIODevice;
-//QT_END_NAMESPACE
+QT_BEGIN_NAMESPACE
+class QIODevice;
+QT_END_NAMESPACE
 
 namespace nc {
 
-class LogToken;
+//class LogToken;
 
 namespace core {
 
@@ -67,7 +67,7 @@ namespace input {
  * threads. In general, single instance of a concrete input parser should be
  * enough for the whole application.
  */
-class Parser /*: public QObject*/ {
+class Parser : public QObject {
     folly::fbstring name_; ///< Name of this parser.
 
 public:
@@ -95,7 +95,7 @@ public:
      *          something that can be parsed with this parser.
      */
     //bool canParse(QIODevice *source) const;
-    bool canParse(std::ifstream * source) const;
+    bool canParse(QIODevice * source) const;
     /**
      * Parse executable image from the given IO device.
      *
@@ -104,7 +104,7 @@ public:
      * \param[in] log Log token.
      */
     //void parse(QIODevice *source, image::Image *image, const LogToken &log) const;
-    void parse(std::ifstream *source, image::Image *image) const;
+    void parse(QIODevice *source, image::Image *image) const;
 
 protected:
     /**
@@ -114,7 +114,7 @@ protected:
      *          something that can be parsed with this parser.
      */
     //virtual bool doCanParse(QIODevice *source) const = 0;
-    virtual bool doCanParse(std::ifstream *source) const = 0;
+    virtual bool doCanParse(QIODevice *source) const = 0;
 
     /**
      * Actually parses executable image from the given IO device.
@@ -124,7 +124,7 @@ protected:
      * \param[in] log Log token.
      */
     //virtual void doParse(QIODevice *source, image::Image *image) const = 0;
-    virtual void doParse(std::ifstream *source, image::Image *image) const = 0;
+    virtual void doParse(QIODevice *source, image::Image *image) const = 0;
 
 };
 

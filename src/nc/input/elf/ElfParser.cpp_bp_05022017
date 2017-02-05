@@ -24,11 +24,11 @@
 
 #include "ElfParser.h"
 
+#include <fstream>
 #include <folly/FBString.h>
 #include <folly/Conv.h>
-
-#include <QtCore/QCoreApplication> /* For Q_DECLARE_TR_FUNCTIONS. */
-#include <QtCore/QIODevice>
+//#include <QCoreApplication> /* For Q_DECLARE_TR_FUNCTIONS. */
+//#include <QIODevice>
 
 #include <nc/common/Foreach.h>
 //#include <nc/common/LogToken.h>
@@ -41,6 +41,8 @@
 #include <nc/core/image/Section.h>
 #include <nc/core/input/ParseError.h>
 #include <nc/core/input/Utils.h>
+
+#include <glog/logging.h>
 
 #include "elf32.h"
 #include "elf64.h"
@@ -107,9 +109,10 @@ public:
 
 template<class Elf>
 class ElfParserImpl {
-    Q_DECLARE_TR_FUNCTIONS(ElfParserImpl)
+//    Q_DECLARE_TR_FUNCTIONS(ElfParserImpl)
 
-    QIODevice *source_;
+    //QIODevice *source_;
+    std::ifstream *source_;
     core::image::Image *image_;
     //const LogToken &log_;
 
@@ -121,11 +124,12 @@ class ElfParserImpl {
     boost::unordered_map<std::size_t, std::vector<std::unique_ptr<core::image::Relocation>>> relocationTables_;
 
 public:
-    ElfParserImpl(QIODevice *source, core::image::Image *image) :
-        source_(source), image_(image), byteOrder_(ByteOrder::Current)
+    ElfParserImpl(std::ifstream *source, core::image::Image *image):
+        source_(source), image_(image),  byteOrder_(ByteOrder::Current)
     {}
 
     void parse() {
+        LOG(INFO)<<"Start parse ELF...";
         parseElfHeader();
         parseSections();
         parseSymbols();
@@ -152,14 +156,14 @@ public:
 
 private:
     void parseElfHeader() {
-        source_->seek(0);
+        source_->seekg(0);
 
         if (!read(source_, ehdr_)) {
-           // throw ParseError(tr("Could not read ELF header."));
+            throw ParseError(folly::fbstring("Could not read ELF header."));
         }
 
         if (ehdr_.e_ident[EI_CLASS] != Elf::elfclass) {
-            //throw ParseError(tr("The instantiation of the parser class does not match the ELF class."));
+            throw ParseError(folly::fbstring("The instantiation of the parser class does not match the ELF class."));
         }
 
         if (ehdr_.e_ident[EI_DATA] == ELFDATA2LSB) {
@@ -167,7 +171,8 @@ private:
         } else if (ehdr_.e_ident[EI_DATA] == ELFDATA2MSB) {
             byteOrder_ = ByteOrder::BigEndian;
         } else {
-            //log_.warning(tr("Invalid byte order in ELF file: %1. Assuming host byte order.").arg(ehdr_.e_ident[EI_DATA]));
+            //log_.warning(folly::fbstring("Invalid byte order in ELF file: %1. Assuming host byte order.").arg(ehdr_.e_ident[EI_DATA]));
+            LOG(INFO)<<"Invalid byte order in ELF file: %1. Assuming host byte order : " << ehdr_.e_ident[EI_DATA];
         }
 
         byteOrder_.convertFrom(ehdr_.e_machine);
@@ -191,20 +196,19 @@ private:
                 }
                 break;
             default:
-                throw ParseError(folly::fbstring("Unknown machine id: ")
-                        .append(folly::to<folly::fbstring>(ehdr_.e_machine)));
+                throw ParseError(folly::fbstring("Unknown machine id: ").append(folly::to<folly::fbstring>(ehdr_.e_machine)));
         }
     }
 
     void parseSections() {
-        source_->seek(ehdr_.e_shoff);
+        source_->seekg(ehdr_.e_shoff);
 
         /*
          * Read section headers.
          */
         shdrs_.resize(ehdr_.e_shnum);
         if (!read(source_, *shdrs_.data(), shdrs_.size())) {
-            //throw ParseError(tr("Cannot read section headers."));
+            throw ParseError(folly::fbstring("Cannot read section headers."));
         }
 
         /*
@@ -233,22 +237,26 @@ private:
             section->setData(section->isAllocated() && !section->isCode() && !section->isBss());
 
             if (!section->isBss()) {
-                if (source_->seek(shdr.sh_offset)) {
-                    auto bytes = source_->read(shdr.sh_size);
-
-                    if (bytes.size() != static_cast<int>(shdr.sh_size)) {
+                if (source_->seekg(shdr.sh_offset)) {
+                    //auto bytes = source_->read(shdr.sh_size);
+                    std::vector<unsigned char> vecBytes(shdr.sh_size);
+                    
+                    //std::copy(
+                    if (vecBytes.size() != static_cast<int>(shdr.sh_size)) {
                         /*
-                        log_.warning(tr("Could read only 0x%1 bytes of section %2, although its size is 0x%3.")
+                        log_.warning(folly::fbstring("Could read only 0x%1 bytes of section %2, although its size is 0x%3.")
                                          .arg(bytes.size(), 0, 16)
                                          .arg(section->name())
-                                         .arg(shdr.sh_size));*/
+                                         .arg(shdr.sh_size));
+                          */
+
+                        LOG(INFO)<<"Could read only 0x%1 bytes of section %2, although its size is 0x%3. : ";
                     }
 
-                    section->setContent(std::move(bytes));
+                    section->setContent(std::move(vecBytes));
                 } else {
-                    /*
-                    log_.warning(tr("Could not seek to the data of section %1.").arg(section->name()));
-                    */
+                    //log_.warning(folly::fbstring("Could not seek to the data of section %1.").arg(section->name()));
+                    LOG(INFO)<<"Could not seek to the data of section %1. : " << section->name();
                 }
             }
 
@@ -281,7 +289,8 @@ private:
 
         auto strtabIndex = shdrs_[symtabIndex].sh_link;
         if (strtabIndex >= shdrs_.size()) {
-            //log_.warning(tr("Symbol table (section number %1) has invalid string table section number %2.").arg(symtabIndex).arg(strtabIndex));
+            //log_.warning(folly::fbstring("Symbol table (section number %1) has invalid string table section number %2.").arg(symtabIndex).arg(strtabIndex));
+            LOG(INFO)<<"Symbol table (section number %1) has invalid string table section number %2. ";
             return;
         }
 
@@ -352,7 +361,8 @@ private:
 
         std::size_t symIndex = shdrs_[reltabIndex].sh_link;
         if (symIndex >= sections_.size()) {
-            //log_.warning(tr("Relocations table %1 uses invalid symbol table %2.").arg(reltabIndex).arg(symIndex));
+            //log_.warning(folly::fbstring("Relocations table %1 uses invalid symbol table %2.").arg(reltabIndex).arg(symIndex));
+            LOG(INFO)<<"Relocations table %1 uses invalid symbol table %2.";
             return;
         }
 
@@ -378,7 +388,8 @@ private:
                 result.push_back(std::make_unique<core::image::Relocation>(
                     rel.r_offset, symbolTable[symbolIndex].get(), sizeof(typename Elf::Addr), Relocation::addend(rel)));
             } else {
-                //log_.warning(tr("Symbol index %1 is out of range: symbol table has only %2 elements.").arg(symbolIndex).arg(symbolTable.size()));
+                //log_.warning(folly::fbstring("Symbol index %1 is out of range: symbol table has only %2 elements.").arg(symbolIndex).arg(symbolTable.size()));
+                LOG(INFO)<<"Symbol index %1 is out of range: symbol table has only %2 elements.";
             }
         }
     }
@@ -390,16 +401,24 @@ ElfParser::ElfParser():
     core::input::Parser(folly::fbstring("ELF"))
 {}
 
-bool ElfParser::doCanParse(QIODevice *source) const {
+bool ElfParser::doCanParse(std::ifstream *source) const {
     Elf32_Ehdr ehdr;
-    return read(source, ehdr) && IS_ELF(ehdr);
+    bool ret = true;
+    //source->read(reinterpret_cast<unsigned char*>(&magic), sizeof(magic)); //read(source, ehdr); //&& IS_ELF(ehdr);
+    ret = read(source, ehdr) && IS_ELF_ART(ehdr);
+    LOG(INFO)<<"Read magic bytes.";
+    LOG(INFO)<<"Check Bit  0 : " << (ehdr).e_ident[EI_MAG0];
+    LOG(INFO)<<"Check Bits 1 : " << (ehdr).e_ident[EI_MAG1];
+    LOG(INFO)<<"Check Bits 2 : " << (ehdr).e_ident[EI_MAG2];
+    LOG(INFO)<<"Check Bits 3 : " << (ehdr).e_ident[EI_MAG3];
+    return ret;   
 }
 
-void ElfParser::doParse(QIODevice *source, core::image::Image *image) const {
+void ElfParser::doParse(std::ifstream *source, core::image::Image *image) const {
     Elf32_Ehdr ehdr;
 
-    if (!read(source, ehdr) || !IS_ELF(ehdr)) {
-       // throw ParseError(tr("ELF signature does not match."));
+    if (!read(source, ehdr) || !IS_ELF_ART(ehdr)) {
+        throw ParseError(folly::fbstring("ELF signature does not match."));
     }
 
     switch (ehdr.e_ident[EI_CLASS]) {
@@ -412,7 +431,7 @@ void ElfParser::doParse(QIODevice *source, core::image::Image *image) const {
             break;
         }
         default: {
-            //throw ParseError(tr("Unknown ELF class: %1.").arg(ehdr.e_ident[EI_CLASS]));
+            throw ParseError(folly::fbstring("Unknown ELF class: %1.").append(folly::to<folly::fbstring>(ehdr.e_ident[EI_CLASS])));
         }
     }
 }

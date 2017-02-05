@@ -5,6 +5,7 @@
 
 #include <folly/FBString.h>
 #include <nc/common/Types.h>
+#include <QtCore/QCoreApplication>
 
 namespace nc {
 namespace core {
@@ -20,7 +21,7 @@ class Context;
  * Relatively high-level interface for running analyses in the right order.
  */
 class Driver {
-
+    Q_DECLARE_TR_FUNCTIONS(Driver)
 public:
     /**
      * Parses a file by the first suitable parser.

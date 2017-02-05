@@ -1,12 +1,15 @@
-INCLUDE_DIRECTORIES(/usr/local/include/ ../../../ .)
+INCLUDE_DIRECTORIES(/usr/local/include/ ../../../ /home/rchatsiri/sdb2/workspacecpp/capstone/ .)
 
 
 MESSAGE( STATUS "PROJECT_SOURCE_DIR : " ${PROJECT_SOURCE_DIR}/../../ )
 
 set (CMAKE_CXX_FLAGS "-fPIC")
 
-LINK_DIRECTORIES(/usr/local/lib /usr/lib)
-
+LINK_DIRECTORIES(/usr/local/lib)
+LINK_DIRECTORIES(/usr/lib)
+LINK_DIRECTORIES(/home/rchatsiri/sdb2/workspacecpp/capstone/build)
+LINK_DIRECTORIES(../../../core/build)
+LINK_DIRECTORIES(../../../common/build)
 
 SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 

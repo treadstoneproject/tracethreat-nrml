@@ -16,7 +16,7 @@
 
 #include "Context.h"
 
-
+#include <QtCore/QFile>
 //#include <fstream>
 #include <fstream>
 
@@ -25,11 +25,12 @@ namespace core {
 
 void Driver::parse(Context &context, const folly::fbstring &filename) {
     LOG(INFO)<<"Parse string...";
-    //QFile source(filename);
-    std::ifstream source;//(filename, std::ifstream::binary);
-    source.open(filename.c_str(), std::ifstream::binary);
+    QString qFilename(filename.c_str());
+    QFile source(qFilename);
+    //std::ifstream source;//(filename, std::ifstream::binary);
+    //source.open(filename.c_str(), std::ifstream::binary);
 
-    if (source.is_open()) {
+    if (!source.open(QIODevice::ReadOnly)) {
         //throw nc::Exception(tr("Could not open file \"%1\" for reading.").arg(filename));
         LOG(INFO)<<"Open file";
     }else{

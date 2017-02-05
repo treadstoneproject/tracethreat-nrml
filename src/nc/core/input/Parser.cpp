@@ -30,36 +30,36 @@
 #include <glog/logging.h>
 #include <ios>
 #include <iostream>
-//#include <QIODevice>
+#include <QtCore/QIODevice>
 
 #include <nc/core/image/Image.h>
 #include <nc/core/input/ParseError.h>
 
 namespace nc { namespace core { namespace input {
 
-bool Parser::canParse(std::ifstream *source) const {
+bool Parser::canParse(QIODevice *source) const {
     assert(source != nullptr);
-    source->seekg(0, std::ios::beg);
-    //source->seekg(0);
+    //source->seekg(0, std::ios::beg);
+    source->seek(0);
 
     LOG(INFO)<<"Parse with seekg  in position 0";
 
     return doCanParse(source);
 }
 
-void Parser::parse(std::ifstream *source, image::Image *image) const {
+void Parser::parse(QIODevice *source, image::Image *image) const {
     assert(source != nullptr);
     assert(image != nullptr);
 
     try {
-        //source->seek(0);
+        source->seek(0);
         //source->seekg(0);
-        source->seekg(0, std::ios::beg);
+        //source->seekg(0, std::ios::beg);
         doParse(source, image);
     } catch (nc::Exception &e) {
         if (!boost::get_error_info<ErrorOffset>(e)) {
-            //e << ErrorOffset(source->pos());
-            e <<  ErrorOffset(source->tellg());
+            e << ErrorOffset(source->pos());
+            //e <<  ErrorOffset(source->tellg());
         }
         throw;
     }
